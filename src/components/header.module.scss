@@ -1,0 +1,19 @@
+@use "../styles/variables.module" as *;
+
+.header {
+  color: $secondary-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3rem;
+}
+
+.logo {
+  height: 3rem;
+  width: auto;
+
+}
+
+.menuIcon {
+  font-size: 1.5rem;
+}

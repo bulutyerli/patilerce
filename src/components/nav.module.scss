@@ -1,0 +1,37 @@
+@import "../styles/variables.module";
+
+.mobileNav {
+  padding: 1rem;
+  position: fixed;
+  left: 5rem;
+  right: 0;
+  top: 5rem;
+  height: 100%;
+  border-top-left-radius: 20px;
+  background-color: $accent-color;
+  z-index: 1;
+  transition: transform 0.3s ease-in-out; 
+  transform: translateX(100%); 
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 1rem;
+  
+    li {
+      list-style: none;
+      text-align: center;
+  
+      a {
+        text-decoration: none;
+        color: $secondary-color;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.showNav {
+  transform: translateX(0); 
+}
+

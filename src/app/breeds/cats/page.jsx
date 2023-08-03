@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import styles from './cats.module.scss';
 
 async function getCats() {
   const response = await fetch('https://api.thecatapi.com/v1/breeds/beng');
@@ -21,13 +22,14 @@ export default async function BreedsPage() {
 
   return (
     <>
-      <h1>Breeds </h1>
+      <h1>Cat Breeds </h1>
       <Image
         src={catImage.url}
-        width={300}
-        height={300}
+        width={150}
+        height={150}
         alt="cat image"
         priority
+        className={styles.catImage}
       ></Image>
       <div>title: {cats.name} </div>
     </>

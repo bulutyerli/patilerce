@@ -43,8 +43,8 @@ function Nav({ isOpen }, ref) {
               <Link href="/breeds/cats">Cats</Link>
             </li>
             <li>
-              <PiDog className={styles.icon} />
               <Link href="/breeds/dogs">Dogs</Link>
+              <PiDog className={styles.icon} />
             </li>
           </ul>
         </li>

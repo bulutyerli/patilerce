@@ -1,0 +1,79 @@
+@import '../styles/variables.module';
+
+.desktopNav {
+  display: none;
+}
+
+@media (min-width: $medium-screen) {
+  .desktopNav {
+    display: block;
+    ul {
+      display: flex;
+      flex-direction: row;
+      gap: 3rem;
+
+      li {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        color: $primary-color;
+
+        a {
+          text-decoration: none;
+          color: $secondary-color;
+          transition: border-color 0.2s ease-in-out;
+        }
+        .login {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+  .breedContainer {
+    position: relative;
+
+    .subMenu {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      left: -1.5rem;
+      top: calc(100% + 1rem);
+      background-color: $gray-2;
+      padding: 0.75rem 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+      gap: 2rem;
+      padding-top: 2rem;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(-2rem);
+      transition:
+        opacity 0.3s ease-in-out,
+        transform 0.3s ease-in-out;
+
+      li {
+        justify-content: space-between;
+        gap: 1.5rem;
+      }
+
+      li:nth-child(2) {
+        border-top: 2px solid $gray-3;
+        padding: 2rem 0;
+      }
+
+      &.showSubMenu {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+    }
+  }
+  .breedsBtn {
+    border: none;
+    color: $secondary-color;
+    cursor: pointer;
+    display: flex;
+    gap: 0.2rem;
+  }
+}

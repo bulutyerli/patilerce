@@ -1,6 +1,6 @@
-@use "../styles/variables.module" as *;
+@use '../styles/variables.module' as *;
 
-.header {
+.navContainer {
   color: $secondary-color;
   display: flex;
   align-items: center;
@@ -11,9 +11,32 @@
 .logo {
   height: 3rem;
   width: auto;
+}
 
+.loginIcon {
+  color: $primary-color;
 }
 
 .menuIcon {
   font-size: 1.5rem;
+
+  @media (min-width: $medium-screen) {
+    display: none;
+  }
+}
+
+.mobileNavContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+@media (min-width: $medium-screen) {
+  .navContainer {
+    height: 4rem;
+  }
+
+  .logo {
+    height: 4rem;
+  }
 }

@@ -1,37 +1,112 @@
-@import "../styles/variables.module";
+@import '../styles/variables.module';
 
 .mobileNav {
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: fixed;
   left: 5rem;
   right: 0;
   top: 5rem;
+  padding-top: 3rem;
   height: 100%;
   border-top-left-radius: 20px;
-  background-color: $accent-color;
+  background-color: $primary-color;
   z-index: 1;
-  transition: transform 0.3s ease-in-out; 
-  transform: translateX(100%); 
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(110%);
+  box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.2);
+
   ul {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding-top: 1rem;
-  
+
     li {
       list-style: none;
       text-align: center;
-  
+      color: $gray-3;
+
       a {
         text-decoration: none;
-        color: $secondary-color;
-        font-weight: 600;
+        color: $gray-3;
+      }
+
+      .login {
+        color: $accent-color;
+        padding: 0 2rem;
+        padding-top: 1rem;
+      }
+    }
+  }
+
+  .backgroundImage {
+    width: 250px;
+    height: 250px;
+    background-image: url('/images/backgroundlogo.png');
+    background-size: cover;
+    opacity: 0.1;
+    align-self: flex-end;
+  }
+  &.showNav {
+    transform: translateX(0);
+  }
+}
+
+.breedContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 0;
+  transition: padding-bottom 0.3s ease-in-out;
+
+  .breedsLink {
+    display: flex;
+    gap: 0.25rem;
+    margin-left: 1.25rem;
+  }
+
+  &.showSubMenu {
+    padding-bottom: 5rem;
+  }
+
+  .breedsSubMenu {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 2rem 0;
+    visibility: visible;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.3s ease-in-out,
+      transform 0.3s ease-in-out;
+
+    &.showSubMenu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    li {
+      display: flex;
+      gap: 0.25rem;
+      align-items: center;
+      border: 2px solid $accent-color;
+      border-radius: 2rem;
+      padding: 0.5rem 1rem;
+
+      a {
+        font-size: 0.8rem;
+      }
+
+      .icon {
+        fill: $accent-color;
+        font-size: 1.5rem;
       }
     }
   }
 }
-
-.showNav {
-  transform: translateX(0); 
-}
-

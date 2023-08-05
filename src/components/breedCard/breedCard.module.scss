@@ -1,0 +1,32 @@
+@import '/src/styles/variables.module';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 1rem;
+  padding-bottom: 3rem;
+  align-items: center;
+  border: 2px solid $gray-3;
+  border-radius: 1rem;
+
+  padding: 1rem;
+
+  h1 {
+    align-self: center;
+    font-size: 1rem;
+  }
+
+  .image {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}

@@ -1,10 +1,10 @@
 'use client';
 import Link from 'next/link';
 import styles from '@/components/nav.module.scss';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useState, useRef, useEffect } from 'react';
 import { PiCat, PiDog, PiCaretDown } from 'react-icons/pi';
 
-function Nav({ isOpen }, ref) {
+function Nav({ isOpen, onLinkClick }, ref) {
   const [breedsSubMenu, setBreedsSubMenu] = useState(false);
 
   const handleSubMenuClick = () => {
@@ -18,10 +18,14 @@ function Nav({ isOpen }, ref) {
     >
       <ul>
         <li>
-          <Link href="/">Home</Link>
+          <Link onClick={onLinkClick} href="/">
+            Home
+          </Link>
         </li>
         <li>
-          <Link href="/adopt">Adopt</Link>
+          <Link onClick={onLinkClick} href="/adopt">
+            Adopt
+          </Link>
         </li>
         <li
           onClick={handleSubMenuClick}
@@ -30,7 +34,7 @@ function Nav({ isOpen }, ref) {
           }`}
         >
           <div className={styles.breedsLink}>
-            <span>Breeds</span> <PiCaretDown />
+            Breeds <PiCaretDown />
           </div>
 
           <ul
@@ -49,10 +53,12 @@ function Nav({ isOpen }, ref) {
           </ul>
         </li>
         <li>
-          <Link href="/community">Community</Link>
+          <Link onClick={onLinkClick} href="/community">
+            Community
+          </Link>
         </li>
         <li>
-          <Link className={styles.login} href="/login">
+          <Link onClick={onLinkClick} className={styles.login} href="/login">
             Login
           </Link>
         </li>

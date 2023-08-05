@@ -1,37 +1,37 @@
-import Image from 'next/image';
-import styles from './cats.module.scss';
+import BreedCard from '@/components/breedCard/breedCard';
+import catImage from 'public/images/catNotFound.svg';
+import styles from './catPage.module.scss';
+
+const apiKey = process.env.CAT_API_KEY;
 
 async function getCats() {
-  const response = await fetch('https://api.thecatapi.com/v1/breeds/beng');
-  const catData = await response.json();
-  return catData;
-}
-
-async function getCatsImage() {
-  const apiKey = process.env.API_KEY;
-  const response = await fetch(`https://api.thecatapi.com/v1/images/search`);
-  const image = await response.json();
-  return image[0];
+  try {
+    const response = await fetch('https://api.thecatapi.com/v1/breeds', {
+      headers: { 'x-api-key': apiKey },
+    });
+    const catData = await response.json();
+    if (!response.ok) {
+      throw new Error('something went wrong');
+    }
+    return catData;
+  } catch (error) {
+    console.log('something went wrong', error);
+  }
 }
 
 export default async function BreedsPage() {
   const cats = await getCats();
-  const catImage = await getCatsImage();
-  console.log(cats);
-  console.log(catImage.url);
+
+  const catCards = cats.map((cat) => {
+    let imageUrl = cat.image?.url || catImage;
+
+    return <BreedCard key={cat.id} image={imageUrl} data={cat} />;
+  });
 
   return (
-    <>
+    <section className={styles.container}>
       <h1>Cat Breeds </h1>
-      <Image
-        src={catImage.url}
-        width={150}
-        height={150}
-        alt="cat image"
-        priority
-        className={styles.catImage}
-      ></Image>
-      <div>title: {cats.name} </div>
-    </>
+      <div className={styles.card}>{catCards}</div>
+    </section>
   );
 }

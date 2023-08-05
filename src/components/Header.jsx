@@ -15,9 +15,13 @@ export default function Header() {
     setMenuOpen(!menuOpen);
   };
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   useEffect(() => {
     function handleClickOutside(event) {
-      if (menu.current && !menu.current.contains(event.target)) {
+      if (menu.current && menuOpen && !menu.current.contains(event.target)) {
         setMenuOpen(false);
       }
     }
@@ -57,7 +61,7 @@ export default function Header() {
           </div>
         </div>
 
-        <Nav ref={menu} isOpen={menuOpen} />
+        <Nav ref={menu} isOpen={menuOpen} onLinkClick={closeMenu} />
         <DesktopNav />
       </nav>
     </header>

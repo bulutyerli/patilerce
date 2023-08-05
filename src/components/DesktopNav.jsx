@@ -11,7 +11,7 @@ import {
   PiDog,
   PiCaretDown,
 } from 'react-icons/pi';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 function DesktopNav() {
   const [showSubMenu, setShowSubMenu] = useState(false);
@@ -19,6 +19,27 @@ function DesktopNav() {
   const handleSubMenuClick = () => {
     setShowSubMenu(!showSubMenu);
   };
+
+  const breedMenu = useRef(null);
+
+  useEffect(() => {
+    const closeDropDown = (e) => {
+      if (
+        breedMenu.current &&
+        showSubMenu &&
+        !breedMenu.current.contains(e.target)
+      ) {
+        setShowSubMenu(false);
+      }
+    };
+    if (showSubMenu) {
+      document.addEventListener('mousedown', closeDropDown);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', closeDropDown);
+    };
+  }, [showSubMenu]);
 
   return (
     <nav className={styles.desktopNav}>
@@ -32,7 +53,7 @@ function DesktopNav() {
             <PiHandHeartDuotone />
             <Link href="/adopt">Adopt</Link>
           </li>
-          <li className={styles.breedContainer}>
+          <li ref={breedMenu} className={styles.breedContainer}>
             <PiPawPrint />
             <button className={styles.breedsBtn} onClick={handleSubMenuClick}>
               Breeds
@@ -44,11 +65,15 @@ function DesktopNav() {
               }`}
             >
               <li>
-                <Link href="/breeds/cats">Cats</Link>
+                <Link onClick={handleSubMenuClick} href="/breeds/cats">
+                  Cats
+                </Link>
                 <PiCat />
               </li>
               <li>
-                <Link href="/breeds/dogs">Dogs</Link>
+                <Link onClick={handleSubMenuClick} href="/breeds/dogs">
+                  Dogs
+                </Link>
                 <PiDog />
               </li>
             </ul>

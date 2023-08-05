@@ -65,6 +65,7 @@
     display: flex;
     gap: 0.25rem;
     margin-left: 1.25rem;
+    cursor: pointer;
   }
 
   &.showSubMenu {
@@ -72,28 +73,18 @@
   }
 
   .breedsSubMenu {
-    display: flex;
     flex-direction: row;
     gap: 0.75rem;
-    visibility: visible;
     position: absolute;
     top: 50%;
     background-color: $gray-3;
     padding: 0.75rem 2rem;
     border-radius: 1rem;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-10px);
-    transition:
-      opacity 0.2s ease-in-out,
-      transform 0.3s ease-in-out;
-
+    display: none;
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
 
     &.showSubMenu {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
+      display: flex;
     }
 
     li {

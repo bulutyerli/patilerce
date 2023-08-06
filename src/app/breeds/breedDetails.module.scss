@@ -1,0 +1,21 @@
+@import '/src/styles/variables.module';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  .cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    list-style: none;
+
+    a {
+      text-decoration: none;
+      color: $secondary-color;
+    }
+  }
+}

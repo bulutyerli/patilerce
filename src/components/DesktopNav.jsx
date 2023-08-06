@@ -65,13 +65,13 @@ function DesktopNav() {
               }`}
             >
               <li>
-                <Link onClick={handleSubMenuClick} href="/breeds/cats">
+                <Link onClick={handleSubMenuClick} href="/breeds/cats/1">
                   Cats
                 </Link>
                 <PiCat />
               </li>
               <li>
-                <Link onClick={handleSubMenuClick} href="/breeds/dogs">
+                <Link onClick={handleSubMenuClick} href="/breeds/dogs/1">
                   Dogs
                 </Link>
                 <PiDog />

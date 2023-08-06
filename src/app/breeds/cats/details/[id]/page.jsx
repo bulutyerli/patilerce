@@ -1,3 +1,3 @@
 export default function CatDetails({ params }) {
-  return <div>Cats: {params.id}</div>;
+  return <div>Cats: {params.details}</div>;
 }

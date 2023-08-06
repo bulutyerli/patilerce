@@ -1,0 +1,19 @@
+@import '/src/styles/_variables.module.scss';
+
+.container {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding: 2rem 0;
+
+  a {
+    text-decoration: none;
+    color: $gray-7;
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .container {
+    gap: 2rem;
+  }
+}

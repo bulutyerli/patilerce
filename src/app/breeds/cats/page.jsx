@@ -1,6 +1,7 @@
 import BreedCard from '@/components/breedCard/breedCard';
-import catImage from 'public/images/catNotFound.svg';
-import styles from './catPage.module.scss';
+import styles from '../breedDetails.module.scss';
+import notFound from 'public/images/catNotFound.png';
+import Link from 'next/link';
 
 const apiKey = process.env.CAT_API_KEY;
 
@@ -22,16 +23,22 @@ async function getCats() {
 export default async function BreedsPage() {
   const cats = await getCats();
 
-  const catCards = cats.map((cat) => {
-    let imageUrl = cat.image?.url || catImage;
-
-    return <BreedCard key={cat.id} image={imageUrl} data={cat} />;
-  });
-
   return (
     <section className={styles.container}>
       <h1>Cat Breeds </h1>
-      <div className={styles.card}>{catCards}</div>
+      <ul className={styles.cardContainer}>
+        {cats.map((cat) => {
+          let imageUrl = cat.image?.url || notFound;
+
+          return (
+            <li key={cat.id}>
+              <Link href={`/breeds/cats/${cat.id}`}>
+                <BreedCard image={imageUrl} data={cat} />
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }

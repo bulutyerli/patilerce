@@ -1,0 +1,11 @@
+@import '/src/styles/variables.module';
+
+.filter {
+  display: flex;
+  gap: 1rem;
+
+  a {
+    text-decoration: none;
+    color: $primary-color;
+  }
+}

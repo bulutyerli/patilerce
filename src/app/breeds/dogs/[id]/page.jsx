@@ -3,23 +3,21 @@ import styles from '@/app/breeds/breeds.module.scss';
 import notFound from 'public/images/dogNotFound.png';
 import Link from 'next/link';
 import Pagination from '@/components/pagination/pagination';
+import LetterFilter from '@/components/letterFilter/letterFilter';
 
-const apiKey = process.env.CAT_API_KEY;
+const apiKey = process.env.DOG_API_KEY;
 
 export async function getDogs() {
   try {
     const response = await fetch('https://api.thedogapi.com/v1/breeds', {
       headers: { 'x-api-key': apiKey },
     });
-    const catData = await response.json();
+    const dogData = await response.json();
     if (!response.ok) {
       throw new Error('something went wrong');
     }
 
-    const totalData = catData.length;
-    const dataPerPage = 15;
-    pageNum: Math.ceil(totalData / dataPerPage);
-    return catData;
+    return dogData;
   } catch (error) {
     console.log('something went wrong', error);
   }
@@ -31,17 +29,18 @@ async function BreedsPage({ params }) {
   const totalData = dogs.length;
   const dataPerPage = 15;
   const totalPages = Math.ceil(totalData / dataPerPage);
-  let currentPage = params.pageNum;
+  let currentPage = params.id;
   const startIndex = (currentPage - 1) * dataPerPage;
   const endIndex = startIndex + dataPerPage;
 
   return (
     <section className={styles.container}>
       <h1>Dog Breeds </h1>
+      <LetterFilter type="dogs" />
       <ul className={styles.cardContainer}>
         {dogs.slice(startIndex, endIndex).map((dog) => {
           let imageUrl = dog.image?.url || notFound;
-          console.log(params.pageNum);
+          console.log(params.id);
 
           return (
             <li key={dog.id}>
@@ -55,10 +54,21 @@ async function BreedsPage({ params }) {
       <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
-        type={'dogs'}
+        type="dogs"
       />
     </section>
   );
 }
 
 export default BreedsPage;
+
+export async function generateStaticParams() {
+  const cards = await getDogs();
+  const totalData = cards.length;
+  const dataPerPage = 15;
+  const totalPages = Math.ceil(totalData / dataPerPage);
+
+  return Array.from({ length: totalPages }, (_, index) => ({
+    id: (index + 1).toString(),
+  }));
+}

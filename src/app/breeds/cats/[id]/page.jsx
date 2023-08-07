@@ -12,12 +12,11 @@ export async function getCats() {
     const response = await fetch('https://api.thecatapi.com/v1/breeds', {
       headers: { 'x-api-key': apiKey },
     });
-    const catData = await response.json();
     if (!response.ok) {
       throw new Error('something went wrong');
     }
 
-    return catData;
+    return response.json();
   } catch (error) {
     console.log('something went wrong', error);
   }
@@ -29,9 +28,13 @@ async function BreedsPage({ params }) {
   const totalData = cats.length;
   const dataPerPage = 15;
   const totalPages = Math.ceil(totalData / dataPerPage);
-  let currentPage = params.id;
+  let currentPage = parseInt(params.id);
   const startIndex = (currentPage - 1) * dataPerPage;
   const endIndex = startIndex + dataPerPage;
+  console.log(typeof params.id);
+  console.log(params.id);
+  console.log(typeof currentPage);
+
   return (
     <section className={styles.container}>
       <h1>Cat Breeds </h1>
@@ -39,7 +42,6 @@ async function BreedsPage({ params }) {
       <ul className={styles.cardContainer}>
         {cats.slice(startIndex, endIndex).map((cat) => {
           let imageUrl = cat.image?.url || notFound;
-          console.log(params.id);
 
           return (
             <li key={cat.id}>

@@ -8,42 +8,50 @@ import {
 } from 'react-icons/md';
 
 export default function Pagination({ totalPages, currentPage, type }) {
-  return (
-    <ul className={styles.container}>
-      <li>
-        <Link href={`/breeds/${type}/1`}>
-          <MdFirstPage />
-        </Link>
-      </li>
-      <li>
-        {currentPage > 1 ? (
-          <Link href={`/breeds/${type}/${+currentPage - 1}`}>
-            <MdNavigateBefore />
-          </Link>
-        ) : (
-          <span>
-            <MdNavigateBefore />
-          </span>
-        )}
-      </li>
+  // Convert currentPage to a number using parseInt()
+  const currentPageNumber = parseInt(currentPage);
 
-      {`${currentPage} / ${totalPages}`}
-      {currentPage < totalPages ? (
+  if (!isNaN(currentPageNumber)) {
+    return (
+      <ul className={styles.container}>
         <li>
-          <Link href={`/breeds/${type}/${+currentPage + 1}`}>
-            <MdNavigateNext />
+          <Link href={`/breeds/${type}/1`}>
+            <MdFirstPage />
           </Link>
         </li>
-      ) : (
-        <span>
-          <MdNavigateNext />
-        </span>
-      )}
-      <li>
-        <Link href={`/breeds/${type}/${totalPages}`}>
-          <MdLastPage />
-        </Link>
-      </li>
-    </ul>
-  );
+        <li>
+          {currentPageNumber > 1 ? (
+            <Link href={`/breeds/${type}/${currentPageNumber - 1}`}>
+              <MdNavigateBefore />
+            </Link>
+          ) : (
+            <span>
+              <MdNavigateBefore />
+            </span>
+          )}
+        </li>
+
+        {`${
+          currentPageNumber > totalPages ? totalPages : currentPageNumber
+        } / ${totalPages}`}
+
+        {currentPageNumber < totalPages ? (
+          <li>
+            <Link href={`/breeds/${type}/${currentPageNumber + 1}`}>
+              <MdNavigateNext />
+            </Link>
+          </li>
+        ) : (
+          <span>
+            <MdNavigateNext />
+          </span>
+        )}
+        <li>
+          <Link href={`/breeds/${type}/${totalPages}`}>
+            <MdLastPage />
+          </Link>
+        </li>
+      </ul>
+    );
+  }
 }

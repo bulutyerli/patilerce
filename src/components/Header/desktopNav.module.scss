@@ -1,4 +1,4 @@
-@import '../styles/variables.module';
+@use '/src/styles/variables.module' as *;
 
 .desktopNav {
   display: none;
@@ -23,6 +23,10 @@
           text-decoration: none;
           color: $secondary-color;
           transition: border-color 0.2s ease-in-out;
+
+          &:hover {
+            border-bottom: 2px solid $accent-color;
+          }
         }
         .login {
           color: $primary-color;
@@ -45,6 +49,7 @@
       box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
       gap: 2rem;
       padding-top: 2rem;
+      z-index: 1;
       pointer-events: none;
       opacity: 0;
       transform: translateY(-2rem);
@@ -55,6 +60,12 @@
       li {
         justify-content: space-between;
         gap: 1.5rem;
+
+        a {
+          &:hover {
+            border-bottom: none;
+          }
+        }
       }
 
       li:nth-child(2) {

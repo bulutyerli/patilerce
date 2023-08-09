@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
-import styles from '@/components/nav.module.scss';
-import { forwardRef, useState, useRef, useEffect } from 'react';
+import styles from './nav.module.scss';
+import { forwardRef, useState } from 'react';
 import { PiCat, PiDog, PiCaretDown } from 'react-icons/pi';
 
 function Nav({ isOpen, onLinkClick }, ref) {

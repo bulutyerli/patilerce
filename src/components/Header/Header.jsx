@@ -45,7 +45,6 @@ export default function Header() {
             width={200}
             height={200}
             alt="logo"
-            priority
           ></Image>
         </Link>
         <div className={styles.mobileNavContainer}>

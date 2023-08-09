@@ -1,4 +1,4 @@
-@import '../styles/variables.module';
+@use '/src/styles/variables.module' as *;
 
 .mobileNav {
   display: flex;

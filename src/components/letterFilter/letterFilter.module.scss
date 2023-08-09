@@ -1,11 +1,19 @@
-@import '/src/styles/variables.module';
+@use '/src/styles/variables.module' as *;
 
 .filter {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
 
   a {
     text-decoration: none;
-    color: $primary-color;
+    color: $secondary-color;
+    font-size: 0.8rem;
+
+    @media (min-width: $medium-screen) {
+      font-size: 1rem;
+    }
   }
 }

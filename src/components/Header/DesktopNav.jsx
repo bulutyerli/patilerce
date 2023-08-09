@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import styles from '@/components/desktopNav.module.scss';
+import styles from './desktopNav.module.scss';
 import {
   PiHouse,
   PiUser,

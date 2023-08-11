@@ -1,4 +1,4 @@
-@import '/src/styles/variables.module';
+@use '/src/styles/variables.module' as *;
 
 .container {
   display: flex;
@@ -11,7 +11,7 @@
   border-radius: 1rem;
   padding: 1rem;
 
-  h1 {
+  h2 {
     align-self: center;
     font-size: 0.7rem;
     text-align: center;

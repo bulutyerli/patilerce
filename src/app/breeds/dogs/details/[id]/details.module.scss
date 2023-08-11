@@ -1,0 +1,49 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  h1 {
+    align-self: center;
+    color: $secondary-color;
+    letter-spacing: 0.1rem;
+  }
+
+  .temperaments {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 15rem;
+
+    .temperament {
+      border: 1px solid $accent-color;
+      background-color: $accent-color;
+      color: $gray-1;
+      border-radius: 2rem;
+      padding: 0.3rem 0.5rem;
+      font-size: 0.7rem;
+    }
+  }
+
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 1rem;
+    align-items: start;
+
+    div {
+      font-size: 0.9rem;
+    }
+
+    span {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+  }
+}

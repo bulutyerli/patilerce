@@ -44,10 +44,14 @@ function Nav({ isOpen, onLinkClick }, ref) {
           >
             <li>
               <PiCat className={styles.icon} />
-              <Link href="/breeds/cats/1">Cats</Link>
+              <Link onClick={onLinkClick} href="/breeds/cats/1">
+                Cats
+              </Link>
             </li>
             <li>
-              <Link href="/breeds/dogs/2">Dogs</Link>
+              <Link onClick={onLinkClick} href="/breeds/dogs/1">
+                Dogs
+              </Link>
               <PiDog className={styles.icon} />
             </li>
           </ul>

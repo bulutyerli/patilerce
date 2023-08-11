@@ -6,6 +6,7 @@ const nextConfig = {
       'api.thecatapi.com',
       'cdn2.thedogapi.com',
       'api.thedogapi.com',
+      'flagcdn.com',
     ],
   },
 };

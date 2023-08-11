@@ -15,6 +15,8 @@ export default function Breeds({ params, breedData, type }) {
   let currentPage = convertNum(params.id);
   const startIndex = (currentPage - 1) * dataPerPage;
   const endIndex = startIndex + dataPerPage;
+
+  // check if alphabetic filter or pagination
   const filteredData =
     typeof currentPage === 'string'
       ? breedData.filter((data) =>
@@ -22,23 +24,26 @@ export default function Breeds({ params, breedData, type }) {
         )
       : breedData.slice(startIndex, endIndex);
 
-  const notFoundImage = `/images/${type}NotFound.png`;
-  console.log(params.id);
-
   return (
     <section className={styles.container}>
       <h1>{type === 'cats' ? 'Cat' : 'Dog'} Breeds </h1>
       <LetterFilter type={type} />
       <ul className={styles.cardContainer}>
         {filteredData.map((data) => {
-          let imageUrl = data.image?.url || notFoundImage;
-          return (
-            <li key={data.id}>
-              <Link href={`/breeds/${type}/details/${data.id}`}>
-                <BreedCard image={imageUrl} name={data.name} />
-              </Link>
-            </li>
-          );
+          // dont render breedcard if there is no image
+          if (data.image) {
+            let imageUrl = data.image.url;
+
+            return (
+              <li key={data.id}>
+                <Link href={`/breeds/${type}/details/${data.id}`}>
+                  <BreedCard image={imageUrl} name={data.name} />
+                </Link>
+              </li>
+            );
+          } else {
+            return null;
+          }
         })}
       </ul>
       <Pagination

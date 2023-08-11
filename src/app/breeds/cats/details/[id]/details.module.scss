@@ -1,0 +1,132 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  h2 {
+    align-self: center;
+    font-size: 0.9rem;
+    color: $gray-7;
+  }
+
+  h1 {
+    color: $secondary-color;
+    letter-spacing: 0.1rem;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .description {
+    hyphens: auto;
+    line-height: 1.4rem;
+    font-size: 0.9rem;
+  }
+
+  .temperaments {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    .temperament {
+      border: 1px solid $accent-color;
+      background-color: $accent-color;
+      color: $gray-1;
+      border-radius: 2rem;
+      padding: 0.3rem 0.5rem;
+      font-size: 0.7rem;
+    }
+  }
+
+  .moreInfo {
+    text-decoration: none;
+    color: $secondary-color;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  span {
+    font-size: 0.8rem;
+  }
+
+  .scores {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    span {
+      padding-bottom: 1rem;
+    }
+    .scoreItem {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+  }
+
+  .star {
+    color: $accent-color;
+  }
+
+  .emptyStar {
+    color: $accent-color;
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(12, auto);
+    justify-items: center;
+
+    .slider {
+      grid-column: 1/2;
+      grid-row: 1/4;
+    }
+
+    .title {
+      grid-column: 2/3;
+      grid-row: 1/2;
+    }
+
+    .description {
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
+
+    span {
+      grid-column: 2/3;
+    }
+    h2 {
+      grid-column: 1/-1;
+      grid-row: 5/6;
+      padding-top: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid $gray-4;
+      text-align: center;
+      width: 70%;
+    }
+
+    .scores {
+      grid-column: 1/-1;
+      flex-direction: row;
+      justify-content: center;
+      gap: 5rem;
+      width: 100%;
+    }
+  }
+}

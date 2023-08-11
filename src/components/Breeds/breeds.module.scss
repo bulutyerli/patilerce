@@ -1,10 +1,14 @@
-@import '/src/styles/variables.module';
+@use '/src/styles/variables.module' as *;
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+
+  h1 {
+    color: $primary-color;
+  }
 
   .cardContainer {
     display: flex;
@@ -15,7 +19,7 @@
 
     a {
       text-decoration: none;
-      color: $secondary-color;
+      color: $gray-8;
     }
   }
 }

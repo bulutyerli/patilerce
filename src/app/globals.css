@@ -9,12 +9,10 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  gap: 2rem;
   background-color: #e9ecef;
   padding: 1rem;
   max-width: 1080px;
   margin: 0 auto;
-  font-family: sans-serif;
 }
 
 footer {

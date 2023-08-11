@@ -12,7 +12,7 @@ export default function BreedCard({ image, name, country }) {
         alt="breed image"
       ></Image>
       <div className={styles.info}>
-        <h1>{name}</h1>
+        <h2>{name}</h2>
       </div>
     </div>
   );

@@ -24,8 +24,9 @@
   }
   .description {
     hyphens: auto;
-    line-height: 1.4rem;
+    line-height: 1.5rem;
     font-size: 0.9rem;
+    font-weight: 300;
   }
 
   .temperaments {
@@ -56,6 +57,7 @@
 
   span {
     font-size: 0.8rem;
+    font-weight: 400;
   }
 
   .scores {

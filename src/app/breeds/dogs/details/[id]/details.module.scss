@@ -47,3 +47,34 @@
     }
   }
 }
+@media (min-width: $medium-screen) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto auto;
+    align-items: start;
+    justify-items: center;
+    align-self: center;
+  }
+
+  .title {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    text-align: center;
+  }
+
+  .slider {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+
+  .infoContainer {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+
+  .temperament {
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+  }
+}

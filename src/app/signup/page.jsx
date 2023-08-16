@@ -2,12 +2,13 @@
 
 import styles from './signup.module.scss';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Button from '@/components/button/button';
 
 export default function SignUpPage() {
+  const router = useRouter();
   const [user, setUser] = useState({
     username: '',
     password: '',
@@ -15,31 +16,48 @@ export default function SignUpPage() {
     email: '',
   });
 
-  const validUsername = user.username.length > 0 && user.username.length < 3;
-  const validPassword = /^(?=.*\d).{6,}$/.test(user.password);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const passwordMatch = user.password === user.reenteredPassword;
+  const onSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      console.log('Sending sign-up request:', user);
+
+      await axios.post('/api/users/signup', user);
+      console.log('Sign-up successful');
+
+      router.push('/login');
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const validUsername = user.username.length >= 3;
+  const validPassword = /^(?=.*\d).{6,}$/.test(user.password);
   const validEmail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(
     user.email
   );
+  const passwordMatch = user.password === user.reenteredPassword;
 
-  const onSignUp = async () => {
+  useEffect(() => {
     if (validUsername && validPassword && passwordMatch && validEmail) {
-      try {
-        const response = await axios.post('/api/signup', {
-          username: user.username,
-          password: user.password,
-          email: user.email,
-        });
-        // Handle successful signup response
-        console.log('Signup successful:', response.data);
-        router.push('/login'); // Redirect to login page
-      } catch (error) {
-        // Handle signup error
-        console.error('Signup error:', error);
-      }
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
     }
-  };
+    console.log(buttonDisabled);
+  }, [
+    buttonDisabled,
+    passwordMatch,
+    user,
+    validEmail,
+    validPassword,
+    validUsername,
+  ]);
+
   return (
     <section className={styles.container}>
       <h2>Sign Up</h2>
@@ -47,7 +65,7 @@ export default function SignUpPage() {
         <div className={styles.formElements}>
           <label htmlFor="username">
             Username
-            {validUsername ? (
+            {user.username.length > 0 && !validUsername ? (
               <span className={styles.criteria}>*must be min 3 characters</span>
             ) : (
               ''
@@ -122,7 +140,12 @@ export default function SignUpPage() {
             placeholder="example@example.com"
           />
         </div>
-        <Button onClick={onSignUp} text="Sign Up" />
+        <Button
+          onClick={onSignUp}
+          disableBtn={buttonDisabled}
+          isLoading={isLoading}
+          text="Sign Up"
+        />
       </form>
       <p>
         Already have an account?{' '}

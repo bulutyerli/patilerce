@@ -3,33 +3,58 @@
 
 import styles from './login.module.scss';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Button from '@/components/button/button';
 
 export default function LogInPage() {
+  const router = useRouter();
   const [user, setUser] = useState({
     username: '',
     password: '',
   });
 
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
   const onLogin = async (e) => {
     e.preventDefault();
-    console.log('success');
+    try {
+      setIsLoading(true);
+      await axios.post('/api/users/login', user);
+      router.push('/profile');
+    } catch (error) {
+      console.log('login failed', error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  const validPassword = /^(?=.*\d).{6,}$/.test(user.password);
+  const validEmail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(
+    user.email
+  );
+
+  useEffect(() => {
+    if (validEmail && validPassword) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user, validEmail, validPassword]);
   return (
     <section className={styles.container}>
       <h2>Log In</h2>
       <form className={styles.form}>
         <div className={styles.formElements}>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Email</label>
           <input
             type="text"
-            id="username"
-            value={user.username}
+            id="email"
+            value={user.email}
             onChange={(e) => {
-              setUser({ ...user, username: e.target.value });
+              setUser({ ...user, email: e.target.value });
             }}
           />
         </div>
@@ -45,7 +70,12 @@ export default function LogInPage() {
           />
         </div>
 
-        <Button onClick={onLogin} text="Log In" />
+        <Button
+          onClick={onLogin}
+          disableBtn={buttonDisabled}
+          isLoading={isLoading}
+          text="Log In"
+        />
       </form>
       <p>
         Don't have an account yet?{' '}

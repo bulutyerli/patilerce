@@ -6,12 +6,12 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import Button from '@/components/button/button';
+import Button from '@/components/Button/Button';
 
 export default function LogInPage() {
   const router = useRouter();
   const [user, setUser] = useState({
-    username: '',
+    email: '',
     password: '',
   });
 

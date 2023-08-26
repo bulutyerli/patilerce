@@ -1,7 +1,5 @@
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import styles from './details.module.scss';
-import Link from 'next/link';
-import Image from 'next/image';
 
 export async function getImages(id) {
   try {
@@ -65,10 +63,7 @@ export default async function DogDetails({ params }) {
         <div>
           <span>Breed Group:</span> {breedInfo.breed_group}
         </div>
-        <div>
-          <span>Origin:</span>{' '}
-          {breedInfo.origin ? breedInfo.origin : breedInfo.country_code}
-        </div>
+
         <div>
           <span>Weight Range:</span> {breedInfo.weight.metric} kg
         </div>

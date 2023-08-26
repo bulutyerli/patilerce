@@ -31,12 +31,6 @@
         text-decoration: none;
         color: $gray-3;
       }
-
-      .login {
-        color: $accent-color;
-        padding: 0 2rem;
-        padding-top: 1rem;
-      }
     }
   }
 
@@ -50,6 +44,22 @@
   }
   &.showNav {
     transform: translateX(0);
+  }
+}
+
+.profileSubMenu {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  gap: 2rem;
+  justify-content: center;
+  .login {
+    color: $accent-color;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  }
+  .signout {
+    color: $gray-5;
   }
 }
 

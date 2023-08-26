@@ -1,0 +1,45 @@
+@use '/src/styles/_variables.module.scss' as *;
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    h1 {
+      color: $primary-color;
+    }
+
+    .profileImage {
+      width: 3rem;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    h2 {
+      color: $gray-8;
+    }
+
+    dl {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      dt {
+        color: $gray-6;
+      }
+      dd {
+        color: $gray-8;
+      }
+    }
+
+    div {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+  }
+}

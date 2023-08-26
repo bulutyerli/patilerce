@@ -1,0 +1,16 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  color: $gray-7;
+
+  .buttons {
+    display: flex;
+    gap: 2rem;
+  }
+}

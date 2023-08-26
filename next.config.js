@@ -7,6 +7,7 @@ const nextConfig = {
       'cdn2.thedogapi.com',
       'api.thedogapi.com',
       'flagcdn.com',
+      'lh3.googleusercontent.com',
     ],
   },
 };

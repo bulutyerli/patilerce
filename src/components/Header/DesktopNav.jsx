@@ -3,31 +3,43 @@ import Link from 'next/link';
 import styles from './desktopNav.module.scss';
 import {
   PiHouse,
-  PiUser,
   PiPawPrint,
   PiHandHeartDuotone,
   PiChatsCircle,
   PiCat,
   PiDog,
   PiCaretDown,
+  PiDotsThreeOutlineVerticalBold,
+  PiBellBold,
+  PiEnvelope,
+  PiSignOut,
+  PiSignIn,
+  PiUser,
 } from 'react-icons/pi';
 import { useState, useRef, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import userNameShort from '@/helpers/userNameShort';
 
 function DesktopNav() {
   const [showSubMenu, setShowSubMenu] = useState(false);
+  const [showProfileSub, setProfileSub] = useState(false);
+  const subMenu = useRef(null);
+  const profileMenu = useRef(null);
 
   const handleSubMenuClick = () => {
     setShowSubMenu(!showSubMenu);
   };
 
-  const breedMenu = useRef(null);
+  const handleProfileMenuClick = () => {
+    setProfileSub(!showProfileSub);
+  };
 
   useEffect(() => {
     const closeDropDown = (e) => {
       if (
-        breedMenu.current &&
+        subMenu.current &&
         showSubMenu &&
-        !breedMenu.current.contains(e.target)
+        !subMenu.current.contains(e.target)
       ) {
         setShowSubMenu(false);
       }
@@ -41,6 +53,27 @@ function DesktopNav() {
     };
   }, [showSubMenu]);
 
+  useEffect(() => {
+    const closeDropDown = (e) => {
+      if (
+        profileMenu.current &&
+        showProfileSub &&
+        !profileMenu.current.contains(e.target)
+      ) {
+        setProfileSub(false);
+      }
+    };
+    if (showProfileSub) {
+      document.addEventListener('mousedown', closeDropDown);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', closeDropDown);
+    };
+  }, [showProfileSub]);
+
+  const { data: session } = useSession();
+
   return (
     <nav className={styles.desktopNav}>
       <ul>
@@ -53,9 +86,9 @@ function DesktopNav() {
             <PiHandHeartDuotone />
             <Link href="/adopt">Adopt</Link>
           </li>
-          <li ref={breedMenu} className={styles.breedContainer}>
+          <li ref={subMenu} className={styles.breedContainer}>
             <PiPawPrint />
-            <button className={styles.breedsBtn} onClick={handleSubMenuClick}>
+            <button className={styles.subMenuBtn} onClick={handleSubMenuClick}>
               Breeds
               <PiCaretDown />
             </button>
@@ -83,12 +116,56 @@ function DesktopNav() {
             <Link href="/community">Community</Link>
           </li>
         </ul>
-        <li>
-          <PiUser />
-          <Link className={styles.login} href="/login">
-            Login / Sign Up
-          </Link>
-        </li>
+        {session && session.user ? (
+          <li ref={profileMenu} className={styles.loginContainer}>
+            <PiBellBold />
+            <button
+              className={styles.subMenuBtn}
+              onClick={handleProfileMenuClick}
+            >
+              <div className={styles.login}>
+                {userNameShort(session.user.name)}
+                <PiDotsThreeOutlineVerticalBold />
+              </div>
+            </button>
+            <ul
+              className={`${styles.profileSubMenu} ${
+                showProfileSub ? styles.showProfileSubMenu : ''
+              }`}
+            >
+              <li>
+                <PiUser />
+                <Link onClick={handleProfileMenuClick} href="/profile">
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <PiEnvelope className={styles.messageIcon} />
+                <Link onClick={handleProfileMenuClick} href="/messages">
+                  Messages
+                </Link>
+              </li>
+
+              <li>
+                <PiSignOut />
+                <Link
+                  className={styles.login}
+                  onClick={handleProfileMenuClick}
+                  href="/signout"
+                >
+                  Sign Out
+                </Link>
+              </li>
+            </ul>
+          </li>
+        ) : (
+          <li>
+            <PiSignIn />
+            <Link className={styles.login} href="/signin">
+              Sign In
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

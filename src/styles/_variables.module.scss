@@ -15,3 +15,34 @@ $gray-9: #212529;
 $medium-screen: 850px;
 $large-screen: 992px;
 $xl-screen: 1200px;
+
+@mixin submenu-styles {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: -1rem;
+  top: calc(100% + 1rem);
+  background-color: $gray-2;
+  padding: 0.75rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+  gap: 2rem;
+  padding-top: 2rem;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-2rem);
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+
+  li {
+    justify-content: space-between;
+
+    a {
+      &:hover {
+        border-bottom: none;
+      }
+    }
+  }
+}

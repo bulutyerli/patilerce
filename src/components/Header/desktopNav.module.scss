@@ -30,6 +30,8 @@
         }
         .login {
           color: $primary-color;
+          display: flex;
+          align-items: center;
         }
       }
     }
@@ -38,35 +40,7 @@
     position: relative;
 
     .subMenu {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      left: -1.5rem;
-      top: calc(100% + 1rem);
-      background-color: $gray-2;
-      padding: 0.75rem 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
-      gap: 2rem;
-      padding-top: 2rem;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateY(-2rem);
-      transition:
-        opacity 0.3s ease-in-out,
-        transform 0.3s ease-in-out;
-
-      li {
-        justify-content: space-between;
-        gap: 1.5rem;
-
-        a {
-          &:hover {
-            border-bottom: none;
-          }
-        }
-      }
+      @include submenu-styles;
 
       li:nth-child(2) {
         border-top: 2px solid $gray-3;
@@ -80,7 +54,37 @@
       }
     }
   }
-  .breedsBtn {
+  .loginContainer {
+    position: relative;
+    gap: 1rem !important;
+
+    .profileSubMenu {
+      @include submenu-styles;
+      gap: 0;
+      left: -3rem;
+
+      li:not(:first-child) {
+        border-top: 2px solid $gray-3;
+      }
+      li {
+        padding: 1rem 0;
+      }
+      li:first-child {
+        padding-top: 0;
+      }
+
+      &.showProfileSubMenu {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .messageIcon {
+        color: $secondary-color;
+      }
+    }
+  }
+  .subMenuBtn {
     border: none;
     color: $secondary-color;
     cursor: pointer;

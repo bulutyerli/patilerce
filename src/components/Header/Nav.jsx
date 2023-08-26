@@ -3,6 +3,8 @@ import Link from 'next/link';
 import styles from './nav.module.scss';
 import { forwardRef, useState } from 'react';
 import { PiCat, PiDog, PiCaretDown } from 'react-icons/pi';
+import { useSession } from 'next-auth/react';
+import userNameShort from '@/helpers/userNameShort';
 
 function Nav({ isOpen, onLinkClick }, ref) {
   const [breedsSubMenu, setBreedsSubMenu] = useState(false);
@@ -10,6 +12,8 @@ function Nav({ isOpen, onLinkClick }, ref) {
   const handleSubMenuClick = () => {
     setBreedsSubMenu(!breedsSubMenu);
   };
+
+  const { data: session } = useSession();
 
   return (
     <nav
@@ -61,11 +65,29 @@ function Nav({ isOpen, onLinkClick }, ref) {
             Community
           </Link>
         </li>
-        <li>
-          <Link onClick={onLinkClick} className={styles.login} href="/login">
-            Login
-          </Link>
-        </li>
+        {session && session.user ? (
+          <li className={styles.profileSubMenu}>
+            <div className={styles.login}>
+              Logged in as {userNameShort(session.user.name)}
+            </div>
+            <Link onClick={onLinkClick} href="/profile">
+              Profile
+            </Link>
+
+            <Link onClick={onLinkClick} href="/messages">
+              Messages
+            </Link>
+            <Link className={styles.signout} href="/signout">
+              Sign Out
+            </Link>
+          </li>
+        ) : (
+          <li>
+            <Link onClick={onLinkClick} className={styles.login} href="/signin">
+              Sign In
+            </Link>
+          </li>
+        )}
       </ul>
       <div className={styles.backgroundImage}></div>
     </nav>

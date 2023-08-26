@@ -1,11 +1,12 @@
 'use client';
 import styles from './header.module.scss';
 import Image from 'next/image';
-import { PiUser, PiList, PiX } from 'react-icons/pi';
+import { PiBellBold, PiList, PiX } from 'react-icons/pi';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Nav from './Nav';
 import DesktopNav from './DesktopNav';
+import { useSession } from 'next-auth/react';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,6 +36,9 @@ export default function Header() {
     };
   }, [menuOpen]);
 
+  const { data: session } = useSession();
+  const authLink = session ? '/profile' : 'signin';
+
   return (
     <header className={styles.header}>
       <nav className={styles.navContainer}>
@@ -48,8 +52,8 @@ export default function Header() {
           ></Image>
         </Link>
         <div className={styles.mobileNavContainer}>
-          <Link className={styles.loginIcon} href="/login">
-            <PiUser className={styles.menuIcon} />
+          <Link className={styles.loginIcon} href={authLink}>
+            <PiBellBold className={styles.menuIcon} />
           </Link>
           <div onClick={menuHandler}>
             {menuOpen ? (

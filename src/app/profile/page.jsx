@@ -1,34 +1,40 @@
-'use client';
-
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { getServerSession } from 'next-auth';
+import styles from './profile.module.scss';
+import Image from 'next/image';
+import userNameShort from '@/helpers/userNameShort';
 import Button from '@/components/Button/Button';
-import { useState } from 'react';
+import Link from 'next/link';
+import ClientSideForm from '@/components/ClientSideForm/ClientSideForm';
 
-export default function ProfilePage() {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const logout = async () => {
-    try {
-      setIsLoading(true);
-      await axios.get('/api/users/logout');
-      router.push('/');
-    } catch (error) {
-      console.log(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+export default async function ProfilePage() {
+  const session = await getServerSession();
+  const image = session?.user?.image;
+
   return (
-    <section>
-      <h1>Profile</h1>
-      <Button
-        onClick={logout}
-        isLoading={isLoading}
-        style="primary"
-        text="Logout"
-      />
-      <h2></h2>
+    <section className={styles.container}>
+      <div className={styles.infoContainer}>
+        <h1>Profile </h1>
+        <div>
+          <Image
+            className={styles.profileImage}
+            src={image}
+            alt="profile image"
+            width={50}
+            height={50}
+          />
+          <h2>Logged in as {userNameShort(session?.user?.name)}</h2>
+        </div>
+        <Link href="/signout">
+          <Button size="small" style="primary" text="Sign Out" />
+        </Link>
+        <dl className={styles.profileInfo}>
+          <div>
+            <dt>E-Mail:</dt>
+            <dd>{session?.user?.email}</dd>
+          </div>
+        </dl>
+      </div>
+      <ClientSideForm />
     </section>
   );
 }

@@ -1,7 +1,7 @@
 import styles from './breedCard.module.scss';
 import Image from 'next/image';
 
-export default function BreedCard({ image, name, country }) {
+export default function BreedCard({ image, name }) {
   return (
     <div className={styles.container}>
       <Image

@@ -2,6 +2,7 @@ import './globals.css';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import { Roboto } from 'next/font/google';
+import { NextAuthProvider } from './Providers';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
   return (
     <html className={roboto.className} lang="en">
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <NextAuthProvider>
+          <Header />
+          {children}
+          <Footer />
+        </NextAuthProvider>
       </body>
     </html>
   );

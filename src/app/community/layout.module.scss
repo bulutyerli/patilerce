@@ -1,0 +1,108 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  h1 {
+    color: $gray-7;
+  }
+
+  .mobileNav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .desktopNav,
+  .desktopAsk {
+    display: none;
+  }
+  .filterContainer {
+    position: relative;
+    .filters {
+      @include submenu-styles;
+      width: 13rem;
+
+      &.showFilters {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+    }
+
+    .communityNav {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      max-width: 100%;
+
+      li {
+        color: $gray-9;
+        font-size: 0.9rem;
+        border-top: 2px solid $gray-3;
+        padding-top: 2rem;
+        padding-bottom: 0.5rem;
+        &:first-child {
+          border-top: none;
+          padding-top: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, auto);
+    justify-items: center;
+
+    h1 {
+      grid-column: 1/-1;
+      grid-row: 1/2;
+      text-align: center;
+    }
+    .filterContainer,
+    .mobileAsk {
+      display: none;
+    }
+    .desktopAsk {
+      display: block;
+      grid-column: 1/4;
+      grid-row: 2/3;
+    }
+
+    .desktopNav {
+      display: block;
+      grid-column: 1/4;
+      grid-row: 3 / 4;
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      max-width: fit-content;
+      padding: 2rem 2rem;
+      border-radius: 2rem;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        padding: 1rem 0;
+        gap: 3rem;
+
+        li {
+          border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+          padding-bottom: 0.5rem;
+          color: $gray-7;
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .questions {
+      grid-column: 4/-1;
+      grid-row: 1 / -1;
+    }
+  }
+}

@@ -1,0 +1,58 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  text-align: center;
+
+  h1 {
+    color: $gray-7;
+  }
+
+  .pageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap-reverse;
+    min-height: 60vh;
+
+    .image {
+      width: 200px;
+      height: auto;
+      padding: 2rem 0;
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      text-align: left;
+      margin-top: 2rem;
+
+      .formGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        label {
+          font-size: 0.8rem;
+        }
+
+        .questionTitle,
+        .textarea {
+          resize: none;
+          border: 2px solid $accent-color;
+          border-radius: 1rem;
+          padding: 1rem;
+          width: 100%;
+        }
+        .questionTitle {
+          height: 2rem;
+        }
+        .textarea {
+          height: 8rem;
+        }
+      }
+      .submitButton {
+        align-self: end;
+      }
+    }
+  }
+}

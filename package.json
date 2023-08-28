@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "embla-carousel-autoplay": "^8.0.0-rc11",
     "embla-carousel-react": "^8.0.0-rc11",
     "eslint": "8.46.0",

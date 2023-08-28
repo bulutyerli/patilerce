@@ -8,6 +8,7 @@ import { FcGoogle } from 'react-icons/fc';
 import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import checkValidEmail from '@/helpers/checkValidEmail';
 
 export default function LogInPage() {
   const [userEmail, setUserEmail] = useState('');
@@ -15,22 +16,18 @@ export default function LogInPage() {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  const validEmail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(
-    userEmail
-  );
-
   const signGoogle = async (e) => {
     e.preventDefault();
     const res = await signIn('google', { callbackUrl: '/' });
   };
 
   useEffect(() => {
-    if (validEmail) {
+    if (checkValidEmail(userEmail)) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [userEmail, validEmail]);
+  }, [userEmail]);
 
   return (
     <section className={styles.container}>
@@ -53,7 +50,6 @@ export default function LogInPage() {
           <Link className={styles.forgotPassword} href="/passwordReset">
             Forgot Password
           </Link>
-
           <Button
             disableBtn={buttonDisabled}
             isLoading={isLoading}
@@ -69,6 +65,7 @@ export default function LogInPage() {
           <div className={styles['or-divider']}>
             <span>or</span>
           </div>
+
           <button onClick={signGoogle} className={styles.loginProvider}>
             <FcGoogle />
             <p>Sign in with Google</p>

@@ -38,10 +38,16 @@
         .questionTitle,
         .textarea {
           resize: none;
-          border: 2px solid $accent-color;
+          border: 1px solid $gray-4;
           border-radius: 1rem;
           padding: 1rem;
           width: 100%;
+          box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+
+          &:focus {
+            outline: none;
+            border: 2px solid $accent-color;
+          }
         }
         .questionTitle {
           height: 2rem;
@@ -52,6 +58,18 @@
       }
       .submitButton {
         align-self: end;
+      }
+    }
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .container {
+    .pageContainer {
+      .image {
+        width: 250px;
+        height: auto;
+        padding: 2rem 0;
       }
     }
   }

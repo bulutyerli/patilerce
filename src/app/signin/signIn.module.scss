@@ -76,13 +76,14 @@
     .signUpText {
       color: $gray-7;
       font-size: 0.9rem;
-    }
-
-    .signupLink {
-      text-decoration: none;
-      color: $secondary-color;
-      &:hover {
-        font-weight: 900;
+      .signupLink {
+        text-decoration: none;
+        color: $primary-color;
+        border-bottom: 1px solid $primary-color;
+        font-size: 0.9rem;
+        &:hover {
+          font-weight: 900;
+        }
       }
     }
 

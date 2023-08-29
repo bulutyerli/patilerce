@@ -10,6 +10,10 @@ export default async function ProfilePage() {
   const session = await getServerSession();
   const image = session?.user?.image;
 
+  const handleFormSubmit = (userData) => {
+    console.log(userData);
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.infoContainer}>

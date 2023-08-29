@@ -12,13 +12,30 @@ import checkValidEmail from '@/helpers/checkValidEmail';
 
 export default function LogInPage() {
   const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   const signGoogle = async (e) => {
     e.preventDefault();
-    const res = await signIn('google', { callbackUrl: '/' });
+    await signIn('google', { callbackUrl: '/' });
+  };
+
+  const signInCredentials = async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      await signIn('credentials', {
+        callbackUrl: '/',
+        email: userEmail,
+        password: userPassword,
+      });
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -45,12 +62,20 @@ export default function LogInPage() {
               }}
             />
             <label htmlFor="password">Password</label>
-            <input type="password" id="password"></input>
+            <input
+              type="password"
+              id="password"
+              value={userPassword}
+              onChange={(e) => {
+                setUserPassword(e.target.value);
+              }}
+            ></input>
           </div>
-          <Link className={styles.forgotPassword} href="/passwordReset">
+          <Link className={styles.forgotPassword} href="/forgotpassword">
             Forgot Password
           </Link>
           <Button
+            onClick={signInCredentials}
             disableBtn={buttonDisabled}
             isLoading={isLoading}
             text="Sign in"

@@ -2,6 +2,8 @@ import NextAuth from 'next-auth';
 import connectDB from '@/dbConfig/dbConfig';
 import User from '@/models/userModel';
 import GoogleProvider from 'next-auth/providers/google';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { compare } from 'bcryptjs';
 
 connectDB();
 
@@ -11,26 +13,63 @@ export const authOptions = {
     signIn: '/signin',
     signOut: '/signout',
   },
+  session: {
+    strategy: 'jwt',
+  },
 
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
+    CredentialsProvider({
+      id: 'credentials',
+      name: 'Credentials',
+      credentials: {
+        name: { label: 'Name', type: 'text' },
+        email: { label: 'Email', type: 'text' },
+        password: { label: 'Password', type: 'password' },
+      },
+      async authorize(credentials) {
+        try {
+          await connectDB();
+
+          const user = await User.findOne({ email: credentials?.email }).select(
+            '+password'
+          );
+
+          if (!user) {
+            throw new Error('Invalid credentials');
+          }
+
+          const isPasswordValid = await compare(
+            credentials.password,
+            user.password
+          );
+
+          if (!isPasswordValid) {
+            throw new Error('Invalid credentials');
+          }
+
+          return user;
+        } catch (error) {
+          throw error;
+        }
+      },
+    }),
   ],
 
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       if (account.type === 'oauth') {
-        console.log({ account, profile });
         return await signInWithOAuth(account, profile);
       }
       return true;
     },
-    async jwt({ token, trigger, session }) {
+    async jwt({ token }) {
       const user = await getUserByEmail({ email: token.email });
       token.user = user;
-
+      console.log(token.user.email);
       return token;
     },
     async session({ session, token }) {
@@ -45,7 +84,6 @@ const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
 
 async function signInWithOAuth(account, profile) {
-  // Not destructuring
   if (profile && profile.email) {
     const user = await User.findOne({ email: profile.email });
     if (user) {
@@ -57,6 +95,7 @@ async function signInWithOAuth(account, profile) {
         email: profile.email,
         image: profile.picture,
         provider: account.provider,
+        isVerified: true,
       });
 
       await newUser.save(); // Save the new user to the database

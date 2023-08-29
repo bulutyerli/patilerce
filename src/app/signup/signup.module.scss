@@ -15,7 +15,7 @@
   }
 
   .image {
-    height: 6rem;
+    height: 90px;
     width: auto;
   }
 
@@ -81,7 +81,8 @@
   .container {
     flex-direction: row;
     .image {
-      height: 10rem;
+      height: 160px;
+      width: auto;
     }
   }
 }

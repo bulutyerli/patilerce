@@ -77,7 +77,11 @@ function Nav({ isOpen, onLinkClick }, ref) {
             <Link onClick={onLinkClick} href="/messages">
               Messages
             </Link>
-            <Link className={styles.signout} href="/signout">
+            <Link
+              onClick={onLinkClick}
+              className={styles.signout}
+              href="/signout"
+            >
               Sign Out
             </Link>
           </li>

@@ -4,6 +4,7 @@ import bcryptjs from 'bcryptjs';
 import { NextResponse } from 'next/server';
 import { checkValidPassword } from '@/helpers/checkValidPassword';
 import checkValidEmail from '@/helpers/checkValidEmail';
+import { sendEmail } from '@/helpers/mailer';
 
 export async function POST(request) {
   await connectDB();
@@ -45,6 +46,10 @@ export async function POST(request) {
       });
 
       const savedUser = await newUser.save();
+
+      //Sending verification email
+
+      await sendEmail({ email, emailType: 'VERIFY', userId: savedUser._id });
 
       return NextResponse.json({
         message: 'User created successfully',

@@ -7,8 +7,8 @@
   justify-content: space-around;
 
   .catsImage {
-    width: 220px;
-    height: auto;
+    height: 220px;
+    width: auto;
     opacity: 85%;
     padding: 2rem 0;
   }
@@ -144,8 +144,8 @@
   .container {
     flex-direction: row-reverse;
     .catsImage {
-      width: 300px;
-      height: auto;
+      height: 250px;
+      width: auto;
     }
   }
 }

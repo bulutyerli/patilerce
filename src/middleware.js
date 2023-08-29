@@ -1,3 +1,24 @@
-export { default } from 'next-auth/middleware';
+import { NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
-export const config = { matcher: ['/messages/:path*'] };
+export default async function middleware(req, event) {
+  const token = await getToken({ req });
+  const isAuthenticated = !!token;
+  const pathname = req.nextUrl.pathname;
+
+  if (
+    pathname.startsWith('/signin') ||
+    pathname.startsWith('/signup') ||
+    pathname.startsWith('/verifyemail')
+  ) {
+    if (isAuthenticated) {
+      return NextResponse.redirect(new URL('/profile', req.url));
+    }
+  }
+
+  if (pathname.startsWith('/profile') || pathname.startsWith('/messages')) {
+    if (!isAuthenticated) {
+      return NextResponse.redirect(new URL('/signin', req.url));
+    }
+  }
+}

@@ -37,9 +37,9 @@ export default function CommunityLayout({ children }) {
           </nav>
         </div>
         <div className={styles.mobileAsk}>
-          <Button text="Ask" style="secondary">
-            <Link href="/askquestion"></Link>
-          </Button>{' '}
+          <Link href="/askquestion">
+            <Button text="Ask" style="secondary"></Button>
+          </Link>{' '}
         </div>
       </div>
       <li className={styles.desktopAsk}>

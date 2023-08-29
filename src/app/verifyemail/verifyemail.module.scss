@@ -1,0 +1,31 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  gap: 2rem;
+  height: 60vh;
+
+  .success {
+    color: $secondary-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .image {
+    width: 300px;
+    height: auto;
+  }
+
+  .button {
+    align-self: center;
+  }
+
+  .failed {
+    color: $primary-color;
+  }
+}

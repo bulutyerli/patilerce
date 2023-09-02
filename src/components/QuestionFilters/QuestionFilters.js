@@ -1,11 +1,11 @@
 'use client';
 
-import styles from './layout.module.scss';
+import styles from './QuestionFilters.module.scss';
 import Button from '@/components/Button/Button';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function CommunityLayout({ children }) {
+export default function QuestionFilters() {
   const [showFilters, setShowFilters] = useState(false);
 
   const handleFiltersClick = () => {
@@ -14,7 +14,6 @@ export default function CommunityLayout({ children }) {
 
   return (
     <section className={styles.container}>
-      <h1>Community Q&A</h1>
       <div className={styles.mobileNav}>
         <div className={styles.filterContainer}>
           <Button
@@ -42,20 +41,20 @@ export default function CommunityLayout({ children }) {
           </Link>{' '}
         </div>
       </div>
-      <li className={styles.desktopAsk}>
-        <Link href="/askquestion">
-          <Button text="Ask" style="secondary"></Button>
-        </Link>
-      </li>
+
       <nav className={styles.desktopNav}>
         <ul>
+          <li className={styles.desktopAsk}>
+            <Link href="/askquestion">
+              <Button text="Ask" style="secondary"></Button>
+            </Link>
+          </li>
           <li>All</li>
           <li>My Questions</li>
-          <li>New Ones</li>
-          <li>Waiting for Answer</li>
+          <li>Recently Asked</li>
+          <li>Without Answers</li>
         </ul>
       </nav>
-      <div className={styles.questions}>{children}</div>
     </section>
   );
 }

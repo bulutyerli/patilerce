@@ -61,7 +61,7 @@ export default async function CatDetails({ params }) {
   });
 
   return (
-    <div className={styles.container}>
+    <article className={styles.container}>
       <div className={styles.slider}>
         <ImageSlider imageList={imageList} />
       </div>
@@ -158,6 +158,6 @@ export default async function CatDetails({ params }) {
           </div>
         </div>
       </section>
-    </div>
+    </article>
   );
 }

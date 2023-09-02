@@ -69,7 +69,6 @@ export const authOptions = {
     async jwt({ token }) {
       const user = await getUserByEmail({ email: token.email });
       token.user = user;
-      console.log(token.user.email);
       return token;
     },
     async session({ session, token }) {

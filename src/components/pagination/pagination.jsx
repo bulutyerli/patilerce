@@ -15,13 +15,16 @@ export default function Pagination({ totalPages, currentPage, type }) {
     return (
       <ul className={styles.container}>
         <li>
-          <Link href={`/breeds/${type}/1`}>
+          <Link href={`/breeds/${type}/1`} aria-label="First Page">
             <MdFirstPage />
           </Link>
         </li>
         <li>
           {currentPageNumber > 1 ? (
-            <Link href={`/breeds/${type}/${currentPageNumber - 1}`}>
+            <Link
+              href={`/breeds/${type}/${currentPageNumber - 1}`}
+              aria-label="Previous Page"
+            >
               <MdNavigateBefore />
             </Link>
           ) : (
@@ -37,7 +40,10 @@ export default function Pagination({ totalPages, currentPage, type }) {
 
         {currentPageNumber < totalPages ? (
           <li>
-            <Link href={`/breeds/${type}/${currentPageNumber + 1}`}>
+            <Link
+              href={`/breeds/${type}/${currentPageNumber + 1}`}
+              aria-label="Next Page"
+            >
               <MdNavigateNext />
             </Link>
           </li>
@@ -47,7 +53,7 @@ export default function Pagination({ totalPages, currentPage, type }) {
           </span>
         )}
         <li>
-          <Link href={`/breeds/${type}/${totalPages}`}>
+          <Link href={`/breeds/${type}/${totalPages}`} aria-label="Last Page">
             <MdLastPage />
           </Link>
         </li>

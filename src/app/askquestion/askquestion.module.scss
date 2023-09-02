@@ -35,6 +35,11 @@
           font-size: 0.8rem;
         }
 
+        .textarea {
+          font-family: 'Roboto';
+          font-weight: 500;
+        }
+
         .questionTitle,
         .textarea {
           resize: none;
@@ -59,6 +64,10 @@
       .submitButton {
         align-self: end;
       }
+    }
+    .errorMessage {
+      color: $primary-color;
+      align-self: center;
     }
   }
 }

@@ -7,10 +7,11 @@ import { useState, useEffect } from 'react';
 import styles from './passwordchange.module.scss';
 import Image from 'next/image';
 import { checkValidPassword } from '@/helpers/checkValidPassword';
+import { useRouter } from 'next/navigation';
 
 export default function VerifyEmailPage() {
   const [token, setToken] = useState('');
-  const [verified, setVerified] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [passwordData, setPasswordData] = useState({
     password: '',
@@ -18,9 +19,13 @@ export default function VerifyEmailPage() {
   });
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const urlToken = window.location.search.split('=')[1];
+    if (!urlToken) {
+      router.push('/signin');
+    }
     setToken(urlToken);
   }, []);
 
@@ -28,6 +33,8 @@ export default function VerifyEmailPage() {
     if (checkValidPassword(passwordData.password)) {
       if (passwordData.password === passwordData.reEnteredPassword) {
         setButtonDisabled(false);
+      } else {
+        setButtonDisabled(true);
       }
     }
   }, [passwordData]);
@@ -35,66 +42,34 @@ export default function VerifyEmailPage() {
   const submitForm = async (e) => {
     e.preventDefault();
     const password = passwordData.password;
-    console.log(typeof passwordData.password);
-    console.log(typeof token);
-    const passwordChange = async () => {
+    if (token && token.length > 0) {
       try {
+        setIsLoading(true);
         await axios.post('/api/auth/passwordchange', { token, password });
-        setVerified(true);
+        setSuccess(true);
       } catch (error) {
         setError(true);
-        console.log(error.response.data);
+        setPasswordData({
+          password: '',
+          reEnteredPassword: '',
+        });
+      } finally {
+        setIsLoading(false);
       }
-    };
-    if (token && token.length > 0) {
-      passwordChange();
     }
   };
 
   return (
-    <div className={styles.container}>
-      <h1>Change Your Password</h1>
-      <form className={styles.form}>
-        <div className={styles.formElements}>
-          <label htmlFor="password">New Password</label>
-          <input
-            type="password"
-            id="password"
-            value={passwordData.password}
-            placeholder="6+ chars: letter, num, symbol"
-            onChange={(e) =>
-              setPasswordData((prevUserData) => ({
-                ...prevUserData,
-                password: e.target.value,
-              }))
-            }
-          ></input>
-          <label htmlFor="password">Re-enter Your New Password</label>
-          <input
-            type="password"
-            id="reEnteredPassword"
-            value={passwordData.reEnteredPassword}
-            onChange={(e) =>
-              setPasswordData((prevUserData) => ({
-                ...prevUserData,
-                reEnteredPassword: e.target.value,
-              }))
-            }
-          ></input>
-        </div>
+    <>
+      {success ? (
+        <div className={styles.successContainer}>
+          <div className={styles.header}>
+            <h1 className={styles.success}>Your password has been changed</h1>
 
-        <Button
-          onClick={submitForm}
-          disableBtn={buttonDisabled}
-          isLoading={isLoading}
-          text="Change"
-        />
-      </form>
-      {verified && (
-        <>
-          <h1 className={styles.success}>
-            <p>Your password has been changed</p>
-          </h1>
+            <Link className={styles.button} href="/signin">
+              <Button style="secondary" text="Sign In" />
+            </Link>
+          </div>
           <Image
             className={styles.image}
             src="/images/verifiedemailDog.png"
@@ -102,14 +77,63 @@ export default function VerifyEmailPage() {
             width={200}
             height={200}
           ></Image>
-          <Link className={styles.button} href="/signin">
-            <Button style="secondary" text="Sign In" />
-          </Link>
-        </>
+        </div>
+      ) : (
+        <div className={styles.container}>
+          <form className={styles.form}>
+            <h1>Change Your Password</h1>
+            <div className={styles.formElements}>
+              <label htmlFor="password">New Password</label>
+              <input
+                type="password"
+                id="password"
+                value={passwordData.password}
+                placeholder="6+ chars: letter, num, symbol"
+                onChange={(e) =>
+                  setPasswordData((prevUserData) => ({
+                    ...prevUserData,
+                    password: e.target.value,
+                  }))
+                }
+              ></input>
+              <label htmlFor="password">Re-enter Your New Password</label>
+              <input
+                type="password"
+                id="reEnteredPassword"
+                value={passwordData.reEnteredPassword}
+                onChange={(e) =>
+                  setPasswordData((prevUserData) => ({
+                    ...prevUserData,
+                    reEnteredPassword: e.target.value,
+                  }))
+                }
+              ></input>
+            </div>
+            <Button
+              className={styles.button}
+              onClick={submitForm}
+              disableBtn={buttonDisabled}
+              isLoading={isLoading}
+              text="Change"
+            />
+            <div>
+              {error && (
+                <h1 className={styles.failed}>
+                  Verification failed. Please try again
+                </h1>
+              )}
+            </div>
+          </form>
+
+          <Image
+            className={styles.image}
+            src="/images/catPassword.png"
+            height={300}
+            width={300}
+            alt="Cat password face"
+          ></Image>
+        </div>
       )}
-      {error && (
-        <h1 className={styles.failed}>Verification failed. Please try again</h1>
-      )}
-    </div>
+    </>
   );
 }

@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 export function htmlEmail(verificationLink) {
-  console.log('received link', verificationLink);
   return `<div style="font-family: Arial, sans-serif;">
         <div
           style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"

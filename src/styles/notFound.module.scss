@@ -1,8 +1,19 @@
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   height: 60vh;
-  gap: 2rem;
+
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .image {
+    width: 300px;
+    height: auto;
+  }
 }

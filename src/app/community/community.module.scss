@@ -1,0 +1,23 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  align-self: center;
+
+  .filters {
+    width: 100%;
+  }
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .container {
+    width: 80%;
+  }
+}

@@ -39,7 +39,7 @@ export default async function DogDetails({ params }) {
   });
 
   return (
-    <div className={styles.container}>
+    <article className={styles.container}>
       <div className={styles.slider}>
         <ImageSlider imageList={imageList} />
       </div>
@@ -71,6 +71,6 @@ export default async function DogDetails({ params }) {
           <span>Height Range:</span> {breedInfo.height.metric} cm
         </div>
       </section>
-    </div>
+    </article>
   );
 }

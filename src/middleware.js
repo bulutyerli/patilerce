@@ -16,7 +16,11 @@ export default async function middleware(req, event) {
     }
   }
 
-  if (pathname.startsWith('/profile') || pathname.startsWith('/messages')) {
+  if (
+    pathname.startsWith('/profile') ||
+    pathname.startsWith('/messages') ||
+    pathname.startsWith('/askquestion')
+  ) {
     if (!isAuthenticated) {
       return NextResponse.redirect(new URL('/signin', req.url));
     }

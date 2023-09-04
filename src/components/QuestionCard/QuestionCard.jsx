@@ -2,21 +2,25 @@ import styles from './questioncard.module.scss';
 import Image from 'next/image';
 import catImage from 'public/images/cat-profile.svg';
 import { dateConverter } from '@/helpers/dateConverter';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
 
-export default async function QuestionCard({ data, searchParams }) {
+export default async function QuestionCard({ data }) {
   const image = data?.user?.image ?? catImage;
-  const session = await getServerSession(authOptions);
-  const showModal = searchParams?.modal;
+  let longQuestion;
+  let formattedQuestion;
 
-  const isUser = session?.user?._id === data.user.id;
-  console.log(data?.id);
+  if (data.question.split(' ').length < 50) {
+    formattedQuestion = data.question;
+  } else {
+    formattedQuestion = data.question.split(' ').slice(0, 50).join(' ');
+    longQuestion = true;
+  }
 
   return (
     <article className={styles.container}>
-      <h2 className={styles.title}>{data.title}</h2>
+      <h2 className={styles.title}>
+        <Link href={`/community/${data._id}`}>{data.title}</Link>
+      </h2>
       <div className={styles.imageContainer}>
         <Image
           className={styles.image}
@@ -30,7 +34,13 @@ export default async function QuestionCard({ data, searchParams }) {
         <span>{data.user.name}</span> asked{' '}
         <time>{dateConverter(data.createdAt)}</time>
       </div>
-      <p className={styles.question}>{data.question}</p>
+      <p className={styles.question}>
+        {formattedQuestion}
+        <Link className={styles.readMore} href={`/community/${data._id}`}>
+          {longQuestion ? '...Read More' : ''}
+        </Link>
+      </p>
+      <div>Answers:</div>
     </article>
   );
 }

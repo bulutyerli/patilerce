@@ -1,6 +1,8 @@
+@use '/src/styles/variables.module' as *;
+
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
   height: 60vh;
@@ -15,5 +17,11 @@
   .image {
     width: 300px;
     height: auto;
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .container {
+    flex-direction: row;
   }
 }

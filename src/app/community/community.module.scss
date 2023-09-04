@@ -15,6 +15,10 @@
   h1 {
     margin-bottom: 2rem;
   }
+
+  .questionCard {
+    cursor: pointer;
+  }
 }
 
 @media (min-width: $medium-screen) {

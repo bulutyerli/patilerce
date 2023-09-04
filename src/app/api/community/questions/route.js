@@ -2,7 +2,6 @@ import connectDB from '@/dbConfig/dbConfig';
 import User from '@/models/userModel';
 import Question from '@/models/questionsModel';
 import { NextResponse } from 'next/server';
-import mongoose from 'mongoose';
 
 connectDB();
 

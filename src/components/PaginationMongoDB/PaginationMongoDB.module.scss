@@ -1,4 +1,17 @@
+@use '/src/styles/variables.module' as *;
+
 .pagination {
   display: flex;
   gap: 1rem;
+  align-items: center;
+
+  .elements {
+    text-decoration: none;
+    color: $gray-6;
+  }
+
+  .activePage {
+    color: $accent-color;
+    font-size: 1.2rem;
+  }
 }

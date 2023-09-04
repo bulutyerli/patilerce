@@ -7,24 +7,50 @@ import {
   MdNavigateBefore,
 } from 'react-icons/md';
 
-export default function PaginationMongoDB({ totalPages, currentPage }) {
+export default function PaginationMongoDB({ totalPages, currentPage, filter }) {
   const pageNumbers = Array.from(
     { length: totalPages },
     (_, index) => index + 1
   );
+
   return (
     <div className={styles.pagination}>
-      <Link href={`/community/?page=1`}>
+      <Link href={`/community?filter=${filter}&page=1`}>
         <MdFirstPage />
       </Link>
-      <MdNavigateBefore />
+      {parseInt(currentPage) === 1 ? (
+        <MdNavigateBefore />
+      ) : (
+        <Link
+          href={`/community?filter=${filter}&page=${parseInt(currentPage) - 1}`}
+        >
+          <MdNavigateBefore />
+        </Link>
+      )}
+
       {pageNumbers.map((pageNumber) => (
-        <Link href={`/community/?page=${pageNumber}`} key={pageNumber}>
+        <Link
+          className={`${styles.elements} ${
+            parseInt(currentPage) === pageNumber ? styles.activePage : ''
+          }`}
+          href={`/community?filter=${filter}&page=${pageNumber}`}
+          key={pageNumber}
+        >
           {pageNumber}
         </Link>
       ))}
-      <MdNavigateNext />
-      <Link href={`/community/?page=${totalPages}`}>
+
+      {parseInt(currentPage) === totalPages ? (
+        <MdNavigateNext />
+      ) : (
+        <Link
+          href={`/community?filter=${filter}&page=${parseInt(currentPage) + 1}`}
+        >
+          <MdNavigateNext />
+        </Link>
+      )}
+
+      <Link href={`/community?filter=${filter}&page=${totalPages}`}>
         <MdLastPage />
       </Link>
     </div>

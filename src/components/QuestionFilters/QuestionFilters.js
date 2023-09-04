@@ -5,12 +5,14 @@ import Button from '@/components/Button/Button';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function QuestionFilters() {
+export default function QuestionFilters({ filter }) {
   const [showFilters, setShowFilters] = useState(false);
 
   const handleFiltersClick = () => {
     setShowFilters(!showFilters);
   };
+
+  const filters = ['all', 'my', 'noanswer'];
 
   return (
     <section className={styles.container}>
@@ -49,10 +51,24 @@ export default function QuestionFilters() {
               <Button text="Ask" style="secondary"></Button>
             </Link>
           </li>
-          <li>All</li>
-          <li>My Questions</li>
-          <li>Recently Asked</li>
-          <li>Without Answers</li>
+          {filters.map((filterName, index) => {
+            return (
+              <li key={index} value={filterName}>
+                <Link
+                  className={`${styles.links} ${
+                    filter === filterName ? styles.active : ''
+                  } `}
+                  href={`/community?filter=${filterName}&page=${parseInt(1)}`}
+                >
+                  {filterName === 'all'
+                    ? 'All Questions'
+                    : filterName === 'my'
+                    ? 'My Questions'
+                    : 'Without Answers'}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </section>

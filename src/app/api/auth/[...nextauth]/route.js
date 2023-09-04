@@ -12,6 +12,7 @@ export const authOptions = {
   pages: {
     signIn: '/signin',
     signOut: '/signout',
+    error: '/signin',
   },
   session: {
     strategy: 'jwt',
@@ -31,30 +32,26 @@ export const authOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        try {
-          await connectDB();
+        await connectDB();
 
-          const user = await User.findOne({ email: credentials?.email }).select(
-            '+password'
-          );
+        const user = await User.findOne({ email: credentials?.email }).select(
+          '+password'
+        );
 
-          if (!user) {
-            throw new Error('Invalid credentials');
-          }
-
-          const isPasswordValid = await compare(
-            credentials.password,
-            user.password
-          );
-
-          if (!isPasswordValid) {
-            throw new Error('Invalid credentials');
-          }
-
-          return user;
-        } catch (error) {
-          throw error;
+        if (!user) {
+          throw new Error('Wrong email or password');
         }
+
+        const isPasswordValid = await compare(
+          credentials.password,
+          user.password
+        );
+
+        if (!isPasswordValid) {
+          throw new Error('Wrong email or password');
+        }
+
+        return user;
       },
     }),
   ],

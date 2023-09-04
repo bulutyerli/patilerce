@@ -81,8 +81,28 @@
           color: $gray-7;
           font-size: 0.9rem;
           cursor: pointer;
-          &:hover {
+          padding-bottom: 0.5rem;
+          :hover {
             border-bottom: 2px solid $accent-color;
+          }
+
+          .links {
+            text-decoration: none;
+            color: $gray-8;
+            padding-bottom: 0.2rem;
+          }
+
+          .active {
+            color: $accent-color;
+
+            padding: 0.5rem;
+            border-bottom: none;
+          }
+        }
+
+        .desktopAsk {
+          :hover {
+            border-bottom: none;
           }
         }
       }

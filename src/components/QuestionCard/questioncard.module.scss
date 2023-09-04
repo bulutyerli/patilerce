@@ -49,8 +49,12 @@
   .delete {
     grid-column: 1/-1;
     grid-row: 11/12;
-    color: $primary-color;
-    font-size: 0.8rem;
     justify-self: end;
+
+    .deleteLink {
+      text-decoration: none;
+      color: $primary-color;
+      font-size: 0.8rem;
+    }
   }
 }

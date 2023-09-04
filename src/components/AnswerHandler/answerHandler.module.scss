@@ -1,0 +1,27 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  .textarea {
+    resize: none;
+    width: 100%;
+    border: 2px solid $gray-4;
+    border-radius: 1rem;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    &:focus {
+      outline: none;
+      border-color: $accent-color;
+    }
+  }
+  .button {
+    align-self: flex-end;
+    margin-top: 0.5rem;
+  }
+  .errorMessage {
+    color: $primary-color;
+  }
+}

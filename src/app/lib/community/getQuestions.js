@@ -6,11 +6,11 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 1;
 
 export async function getQuestions(req, limit) {
-  await connectDB();
   try {
+    await connectDB();
+
     const session = await getServerSession(authOptions);
     const user = session?.user;
     const { page = 1, filter } = req.query;
@@ -31,8 +31,6 @@ export async function getQuestions(req, limit) {
       totalPages = userPages;
     }
 
-    console.log(totalPages);
-
     const questions = await Question.find(query)
       .populate({
         path: 'user',
@@ -46,5 +44,21 @@ export async function getQuestions(req, limit) {
     return { questions, totalPages };
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function getQuestionById(id) {
+  try {
+    await connectDB();
+
+    const question = await Question.findById(id).populate({
+      path: 'user',
+      model: User,
+      select: 'name image',
+    });
+
+    return { question };
+  } catch (error) {
+    throw new Error(error.message);
   }
 }

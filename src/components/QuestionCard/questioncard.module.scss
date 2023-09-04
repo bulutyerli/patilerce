@@ -27,6 +27,11 @@
     grid-column: 2/-1;
     grid-row: 1/3;
     font-weight: 900;
+
+    a {
+      text-decoration: none;
+      color: $gray-9;
+    }
   }
 
   .author {
@@ -45,6 +50,13 @@
     grid-row: 5/11;
     padding-top: 1rem;
     border-top: 2px solid rgba(0, 0, 0, 0.2);
+
+    .readMore {
+      color: $secondary-color;
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration: none;
+    }
   }
   .delete {
     grid-column: 1/-1;

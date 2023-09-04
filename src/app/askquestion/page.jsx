@@ -22,12 +22,13 @@ export default function AddQuestion() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const res = await axios.post('/api/community/questions', {
+      await axios.post('/api/community/questions', {
         title: title,
         question: question,
         userId: userId,
       });
       router.push('/community');
+      router.refresh();
     } catch (error) {
       if (error.response && error.response.data) {
         const errorMsg = error?.response?.data?.error;

@@ -8,7 +8,6 @@ export default async function Community({ searchParams }) {
   try {
     const { page: currentPage = 1, filter: filter = 'all' } = searchParams;
     const limit = 10;
-
     const { questions, totalPages } = await getQuestions(
       {
         query: searchParams,

@@ -3,12 +3,12 @@ import User from '@/models/userModel';
 import Question from '@/models/questionsModel';
 import { NextResponse } from 'next/server';
 
-connectDB();
-
 export async function POST(req) {
+  await connectDB();
+
   try {
     const reqBody = await req.json();
-    const { title, question, userId } = reqBody;
+    const { title, question, userId, answer, questionId } = reqBody;
 
     const user = await User.findById(userId);
 
@@ -46,6 +46,8 @@ export async function POST(req) {
 }
 
 export async function DELETE(req) {
+  await connectDB();
+
   try {
     const reqBody = await req.json();
     const { userId, questionId } = reqBody;
@@ -54,24 +56,26 @@ export async function DELETE(req) {
     const question = await Question.findById(questionId);
 
     if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { error: 400 });
+      console.log('no user');
+      throw new Error('There is no user');
     }
 
     if (!question) {
-      return NextResponse.json({ error: 'Question not found' }, { error: 400 });
+      console.log('no question');
+
+      throw new Error('Question not found');
     }
 
-    if (user._id.toString() !== question.user.toString()) {
-      return NextResponse.json({ error: 'Forbidden' }, { error: 500 });
+    if (user.id.toString() !== question.user._id.toString()) {
+      throw new Error('Forbidden');
     }
 
     await Question.deleteOne({ _id: questionId });
-
     return NextResponse.json(
       { message: 'Question successfully deleted' },
       { success: true }
     );
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error.message });
   }
 }

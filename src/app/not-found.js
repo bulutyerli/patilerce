@@ -12,7 +12,7 @@ export default function NotFound() {
       </div>
       <Image
         className={styles.image}
-        src="/images/not-found-dog.png"
+        src="/images/notfound-dog.png"
         width={300}
         height={300}
         alt="surprised dog"

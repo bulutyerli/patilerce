@@ -28,11 +28,13 @@ export default function Header() {
     }
 
     if (menuOpen) {
+      document.body.style.overflow = 'hidden';
       document.addEventListener('click', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('click', handleClickOutside);
+      document.body.style.overflow = 'unset';
     };
   }, [menuOpen]);
 

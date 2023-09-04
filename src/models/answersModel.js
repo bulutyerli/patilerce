@@ -15,6 +15,10 @@ const answerShema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'user',
     },
+    refQuestion: {
+      type: Schema.Types.ObjectId,
+      ref: 'question',
+    },
   },
 
   { timestamps: true }

@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import checkValidEmail from '@/helpers/checkValidEmail';
+import { useRouter } from 'next/navigation';
 
 export default function LogInPage() {
   const [userEmail, setUserEmail] = useState('');
@@ -16,6 +17,8 @@ export default function LogInPage() {
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
   const signGoogle = async (e) => {
     e.preventDefault();
@@ -24,27 +27,32 @@ export default function LogInPage() {
 
   const signInCredentials = async (e) => {
     e.preventDefault();
-    try {
-      setIsLoading(true);
-      await signIn('credentials', {
-        callbackUrl: '/',
-        email: userEmail,
-        password: userPassword,
-      });
-    } catch (error) {
-      console.error(error.message);
-    } finally {
-      setIsLoading(false);
-    }
+    setIsLoading(true);
+    await signIn('credentials', {
+      callbackUrl: '/',
+      redirect: false,
+      email: userEmail,
+      password: userPassword,
+    }).then((callback) => {
+      if (callback?.error) {
+        setErrorMessage(callback.error);
+        setIsLoading(false);
+        setUserEmail('');
+        setUserPassword('');
+      }
+      if (callback?.ok && !callback?.error) {
+        router.push('/');
+      }
+    });
   };
 
   useEffect(() => {
-    if (checkValidEmail(userEmail)) {
+    if (checkValidEmail(userEmail) && userPassword.length > 5) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [userEmail]);
+  }, [userEmail, userPassword]);
 
   return (
     <section className={styles.container}>
@@ -52,6 +60,7 @@ export default function LogInPage() {
         <h2>Connect with Paws</h2>
         <form className={styles.form}>
           <div className={styles.formElements}>
+            <div className={styles.errorMessage}>{errorMessage}</div>
             <label htmlFor="email">Email</label>
             <input
               type="text"

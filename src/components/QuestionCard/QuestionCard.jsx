@@ -12,6 +12,7 @@ export default async function QuestionCard({ data, searchParams }) {
   const showModal = searchParams?.modal;
 
   const isUser = session?.user?._id === data.user.id;
+  console.log(data?.id);
 
   return (
     <article className={styles.container}>
@@ -30,13 +31,6 @@ export default async function QuestionCard({ data, searchParams }) {
         <time>{dateConverter(data.createdAt)}</time>
       </div>
       <p className={styles.question}>{data.question}</p>
-      {isUser ? (
-        <span className={styles.delete}>
-          <Link href="/community/?modal=true">Delete</Link>
-        </span>
-      ) : (
-        ''
-      )}
     </article>
   );
 }

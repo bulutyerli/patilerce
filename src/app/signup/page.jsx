@@ -87,7 +87,6 @@ export default function SignUpPage() {
               <label htmlFor="name">Name: </label>
               <input
                 type="text"
-                id="name"
                 value={userData.name}
                 placeholder="minumum 4 letters"
                 onChange={(e) =>
@@ -108,8 +107,7 @@ export default function SignUpPage() {
                 )}
               </label>
               <input
-                type="text"
-                id="email"
+                type="email"
                 value={userData.email}
                 placeholder="example@example.com"
                 onChange={(e) =>
@@ -131,7 +129,6 @@ export default function SignUpPage() {
 
               <input
                 type="password"
-                id="password"
                 value={userData.password}
                 placeholder="6+ chars: letter, num, symbol"
                 onChange={(e) =>
@@ -155,7 +152,6 @@ export default function SignUpPage() {
               </label>
               <input
                 type="password"
-                id="reEnteredPassword"
                 value={userData.reEnteredPassword}
                 onChange={(e) =>
                   setUserData((prevUserData) => ({

@@ -11,13 +11,25 @@ export async function POST(req) {
     const question = await Question.findById(refQuestion);
 
     if (!user || !question) {
-      throw new Error('User or question');
+      return NextResponse.json({ message: 'Forbidden' }, { status: 400 });
     }
 
-    const existingAnswer = await Answer.findOne({ answer });
+    /*    const existingAnswer = await Answer.findOne({ answer: answer.trim() });
 
     if (existingAnswer) {
-      throw new Error('Duplicate answer found');
+      return NextResponse.json(
+        { message: 'Oops! It looks like this answer already exists.' },
+        { status: 409 }
+      );
+    }
+ */
+    if (answer.length < 4) {
+      return NextResponse.json(
+        {
+          message: 'Your answer must be longer than 3 letters',
+        },
+        { status: 400 }
+      );
     }
 
     const newAnswer = new Answer({
@@ -33,6 +45,10 @@ export async function POST(req) {
       { status: 200 }
     );
   } catch (error) {
-    throw error;
+    console.log(error.message);
+    return NextResponse.json(
+      { message: 'Something went wrong' },
+      { status: 400 }
+    );
   }
 }

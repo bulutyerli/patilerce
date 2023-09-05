@@ -3,6 +3,8 @@ import Image from 'next/image';
 import catImage from 'public/images/cat-profile.svg';
 import { dateConverter } from '@/helpers/dateConverter';
 import Link from 'next/link';
+import { PiChatCircleBold } from 'react-icons/pi';
+import { getAnswersCount } from '@/app/lib/community/getAnswers';
 
 export default async function QuestionCard({ data }) {
   const image = data?.user?.image ?? catImage;
@@ -15,6 +17,8 @@ export default async function QuestionCard({ data }) {
     formattedQuestion = data.question.split(' ').slice(0, 50).join(' ');
     longQuestion = true;
   }
+
+  const totalAnswers = await getAnswersCount(data?.id);
 
   return (
     <article className={styles.container}>
@@ -34,13 +38,18 @@ export default async function QuestionCard({ data }) {
         <span>{data.user.name}</span> asked{' '}
         <time>{dateConverter(data.createdAt)}</time>
       </div>
-      <p className={styles.question}>
+      <div className={styles.question}>
         {formattedQuestion}
         <Link className={styles.readMore} href={`/community/${data._id}`}>
           {longQuestion ? '...Read More' : ''}
         </Link>
-      </p>
-      <div>Answers:</div>
+      </div>{' '}
+      <div className={styles.iconContainer}>
+        <Link href={`/community/${data._id}`}>
+          <PiChatCircleBold className={styles.icon} />
+          <div className={styles.badge}>{totalAnswers}</div>
+        </Link>
+      </div>
     </article>
   );
 }

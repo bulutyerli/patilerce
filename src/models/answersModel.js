@@ -6,6 +6,7 @@ const answerShema = new Schema(
       type: String,
       required: true,
       minLength: [4, 'Answer should be atleast 4 characters long'],
+      unique: false,
     },
     isApproved: {
       type: Boolean,

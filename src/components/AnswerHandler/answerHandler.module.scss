@@ -4,7 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 70%;
+  height: 10rem;
+  width: 100%;
   .textarea {
     resize: none;
     width: 100%;
@@ -23,5 +24,11 @@
   }
   .errorMessage {
     color: $primary-color;
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .container {
+    width: 70%;
   }
 }

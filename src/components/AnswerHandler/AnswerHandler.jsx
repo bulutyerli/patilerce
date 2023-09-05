@@ -4,20 +4,30 @@ import { useState } from 'react';
 import Button from '../Button/Button';
 import styles from './answerHandler.module.scss';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 export default function AnswerHandler({ userId, questionId }) {
   const [answer, setAnswer] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const postHandler = async () => {
     try {
+      setIsLoading(true);
       await axios.post('/api/community/answers', {
         answer: answer,
         userId: userId,
         refQuestion: questionId,
       });
+      router.refresh();
+      setAnswer('');
+      setErrorMessage('');
     } catch (error) {
-      setErrorMessage(error.message);
+      console.log(error.response.data.message);
+      setErrorMessage(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -36,7 +46,12 @@ export default function AnswerHandler({ userId, questionId }) {
         placeholder="Would you like to help?"
       ></textarea>
       <div className={styles.button}>
-        <Button onClick={postHandler} style={'secondary'} text={'Send'} />
+        <Button
+          isLoading={isLoading}
+          onClick={postHandler}
+          style={'secondary'}
+          text={'Send'}
+        />
       </div>
       <span className={styles.errorMessage}>{errorMessage}</span>
     </div>

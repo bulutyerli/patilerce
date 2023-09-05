@@ -1,8 +1,9 @@
 import { getQuestions } from '../lib/community/getQuestions';
-import QuestionCard from '@/components/QuestionCard/QuestionCard';
+import QuestionCard from '@/components/CommunityCards/QuestionCard/QuestionCard';
 import QuestionFilters from '@/components/QuestionFilters/QuestionFilters';
 import PaginationMongoDB from '@/components/PaginationMongoDB/PaginationMongoDB';
 import styles from './community.module.scss';
+import { getAnswersCount } from '../lib/community/getAnswers';
 
 export default async function Community({ searchParams }) {
   try {
@@ -18,6 +19,7 @@ export default async function Community({ searchParams }) {
     if (!questions) {
       throw new Error('Could not get the questions, please try again.');
     }
+
     return (
       <section className={styles.container}>
         <h1>Community Q&A</h1>
@@ -26,11 +28,13 @@ export default async function Community({ searchParams }) {
         </div>
         <div className={styles.questionsContainer}>
           {questions &&
-            questions.map((question) => (
-              <div key={question._id}>
-                <QuestionCard data={question} />
-              </div>
-            ))}
+            questions.map((question) => {
+              return (
+                <div key={question._id}>
+                  <QuestionCard data={question} />
+                </div>
+              );
+            })}
         </div>
         <PaginationMongoDB
           totalPages={totalPages}

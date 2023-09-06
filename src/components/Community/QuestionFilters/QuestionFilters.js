@@ -38,7 +38,7 @@ export default function QuestionFilters({ filter }) {
           </nav>
         </div>
         <div className={styles.mobileAsk}>
-          <Link href="/askquestion">
+          <Link href="/community/askquestion">
             <Button text="Ask" style="secondary"></Button>
           </Link>{' '}
         </div>
@@ -47,7 +47,7 @@ export default function QuestionFilters({ filter }) {
       <nav className={styles.desktopNav}>
         <ul>
           <li className={styles.desktopAsk}>
-            <Link href="/askquestion">
+            <Link href="/community/askquestion">
               <Button text="Ask" style="secondary"></Button>
             </Link>
           </li>

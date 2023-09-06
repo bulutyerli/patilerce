@@ -2,7 +2,7 @@ import BreedCard from '@/components/BreedCard/BreedCard';
 import styles from './breeds.module.scss';
 import Link from 'next/link';
 import Pagination from '@/components/Pagination/Pagination';
-import LetterFilter from '@/components/LetterFilter/LetterFilter';
+import LetterFilter from '@/components/Community/LetterFilter/LetterFilter';
 
 export default function Breeds({ params, breedData, type }) {
   const convertNum = (id) => {

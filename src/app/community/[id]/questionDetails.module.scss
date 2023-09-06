@@ -60,21 +60,47 @@
     }
     .delete {
       grid-column: 1/-1;
-      grid-row: 11/12;
+      grid-row: 12/13;
       justify-self: end;
       text-decoration: none;
       color: $primary-color;
       font-size: 0.8rem;
     }
   }
+  .iconContainer {
+    position: relative;
+    display: inline-block;
+    grid-column: 1/2;
+    grid-row: 12/13;
+
+    .icon {
+      width: 1.5rem;
+      height: auto;
+    }
+
+    .badge {
+      position: absolute;
+      top: -0.1rem;
+      right: 2.5rem;
+      background-color: $secondary-color;
+      color: $gray-1;
+      border-radius: 50%;
+      padding: 0.15rem 0.3rem;
+      font-size: 0.6rem;
+    }
+  }
 
   .answersContainer {
     background-color: $gray-3;
     border-radius: 2rem;
-    padding: 2rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    .noAnswerMessage {
+      color: $gray-7;
+    }
   }
 }
 

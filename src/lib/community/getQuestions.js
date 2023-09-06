@@ -4,13 +4,12 @@ import { NextResponse } from 'next/server';
 import User from '@/models/userModel';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getAnswersCount } from './getAnswers';
+connectDB();
 
 export const dynamic = 'force-dynamic';
-
 export async function getQuestions(req, limit) {
   try {
-    await connectDB();
-
     const session = await getServerSession(authOptions);
     const user = session?.user;
     const { page = 1, filter } = req.query;
@@ -31,6 +30,11 @@ export async function getQuestions(req, limit) {
       totalPages = userPages;
     }
 
+    if (filter === 'noanswer') {
+      const questionId = await getQuestionsWithoutAnswers();
+      query = { _id: { $in: questionId } };
+    }
+
     const questions = await Question.find(query)
       .populate({
         path: 'user',
@@ -49,8 +53,6 @@ export async function getQuestions(req, limit) {
 
 export async function getQuestionById(id) {
   try {
-    await connectDB();
-
     const question = await Question.findById(id).populate({
       path: 'user',
       model: User,
@@ -61,4 +63,17 @@ export async function getQuestionById(id) {
   } catch (error) {
     throw new Error(error.message);
   }
+}
+
+export async function getQuestionsWithoutAnswers() {
+  const questions = await Question.find({});
+  const questionsWithoutAnswers = [];
+
+  for (const question of questions) {
+    const answersCount = await getAnswersCount(question.id);
+    if (answersCount === 0) {
+      questionsWithoutAnswers.push(question.id);
+    }
+  }
+  return questionsWithoutAnswers;
 }

@@ -1,10 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Button from '../../../components/Button/Button';
-import styles from './deletePosts.module.scss';
+import Button from '../../components/Button/Button';
+import styles from './deletePostsModal.module.scss';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export function DeletePosts({ userId, questionId }) {
   const router = useRouter();
@@ -22,6 +23,7 @@ export function DeletePosts({ userId, questionId }) {
           questionId: questionId,
         },
       });
+      toast.success('Your question deleted');
       router.push('/community');
       router.refresh();
     } catch (error) {

@@ -2,12 +2,12 @@
 
 import styles from './profile.module.scss';
 import Image from 'next/image';
-import userNameShort from '@/helpers/userNameShort';
-import Button from '@/components/Button/Button';
+import userNameShort from '@/helpers/short-username';
+import CustomButton from '@/components/custom-button/custom-button';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import { checkValidPassword } from '@/helpers/checkValidPassword';
+import { checkValidPassword } from '@/helpers/check-valid-password';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -124,7 +124,7 @@ export default function ProfilePage() {
           <h2>Logged in as {userNameShort(session?.user?.name)}</h2>
         </div>
         <Link href="/signout">
-          <Button size="small" style="primary" text="Sign Out" />
+          <CustomButton size="small" style="primary" text="Sign Out" />
         </Link>
         <dl className={styles.profileInfo}>
           <div>
@@ -153,13 +153,13 @@ export default function ProfilePage() {
           />
         </div>
         <div className={styles.button}>
-          <Button
+          <CustomButton
             onClick={onNameSubmit}
             isLoading={isNameBtnLoading}
             disableBtn={nameBtnDisabled}
             style="secondary"
             text="Submit"
-          ></Button>
+          ></CustomButton>
         </div>
         {nameResMessage && (
           <p
@@ -224,13 +224,13 @@ export default function ProfilePage() {
               />
             </div>
             <div className={styles.button}>
-              <Button
+              <CustomButton
                 onClick={onPasswordSubmit}
                 isLoading={isLoading}
                 disableBtn={buttonDisabled}
                 style="secondary"
                 text="Submit"
-              ></Button>
+              ></CustomButton>
             </div>
 
             {passwordResMessage && (

@@ -1,8 +1,8 @@
 'use client';
 
-import Button from '@/components/Button/Button';
+import CustomButton from '@/components/custom-button/custom-button';
 import axios from 'axios';
-import styles from './deleteAnswer.module.scss';
+import styles from './delete-answer.module.scss';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
@@ -32,19 +32,19 @@ export default function DeleteAnswerPage({ params }) {
       <p>Your answer will be deleted.</p>
       <p>Are You Sure?</p>
       <div className={styles.buttonContainer}>
-        <Button
+        <CustomButton
           onClick={() => {
             router.back();
           }}
           style={'secondary'}
           text={'No'}
-        ></Button>
-        <Button
+        ></CustomButton>
+        <CustomButton
           isLoading={isLoading}
           style={'primary'}
           onClick={deleteHandler}
           text={'Yes'}
-        ></Button>
+        ></CustomButton>
       </div>
     </div>
   );

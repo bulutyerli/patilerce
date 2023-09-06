@@ -1,8 +1,8 @@
 import nodemailer from 'nodemailer';
-import User from '@/models/userModel';
+import User from '@/models/user-model';
 import bcryptjs from 'bcryptjs';
-import { htmlEmail } from './htmlEmail';
-import { htmlPassword } from './htmlPassword';
+import { htmlEmail } from './html-email-verify';
+import { htmlPassword } from './html-password-change';
 
 export const sendEmail = async ({ email, emailType, userId }) => {
   try {

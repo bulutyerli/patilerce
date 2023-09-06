@@ -1,7 +1,7 @@
-import ImageSlider from '@/components/ImageSlider/ImageSlider';
+import ImageSlider from '@/components/image-slider/image-slider';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { FaWikipediaW } from 'react-icons/fa';
-import styles from './details.module.scss';
+import styles from './cat-details.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -39,7 +39,7 @@ const starGenerator = (score) => {
   return totalStars;
 };
 
-export default async function CatDetails({ params }) {
+export default async function CatDetailsPage({ params }) {
   const images = await getImages(params.id);
   const breedInfo = images[0].breeds[0];
   let imageList = [];

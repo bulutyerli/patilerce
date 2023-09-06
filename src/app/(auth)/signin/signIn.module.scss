@@ -82,10 +82,12 @@
         .signupLink {
           text-decoration: none;
           color: $primary-color;
-          border-bottom: 1px solid $primary-color;
           font-size: 0.9rem;
+
           &:hover {
             font-weight: 900;
+            border-bottom: 1px solid $primary-color;
+            padding-bottom: 0.2rem;
           }
         }
       }

@@ -1,9 +1,8 @@
-import { getQuestions } from '../lib/community/getQuestions';
-import QuestionCard from '@/components/CommunityCards/QuestionCard/QuestionCard';
-import QuestionFilters from '@/components/QuestionFilters/QuestionFilters';
-import PaginationMongoDB from '@/components/PaginationMongoDB/PaginationMongoDB';
+import { getQuestions } from '../../lib/community/getQuestions';
+import QuestionCard from '@/components/Community/QuestionCard/QuestionCard';
+import QuestionFilters from '@/components/Community/QuestionFilters/QuestionFilters';
+import PaginationMongoDB from '@/components/Community/PaginationMongoDB/PaginationMongoDB';
 import styles from './community.module.scss';
-import { getAnswersCount } from '../lib/community/getAnswers';
 
 export default async function Community({ searchParams }) {
   try {

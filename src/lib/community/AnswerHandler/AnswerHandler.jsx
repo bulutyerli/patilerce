@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Button from '../Button/Button';
+import Button from '../../../components/Button/Button';
 import styles from './answerHandler.module.scss';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';

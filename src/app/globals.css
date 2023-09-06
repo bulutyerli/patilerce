@@ -1,3 +1,7 @@
+:root {
+  --toastify-color-success: #00798c;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,6 +17,9 @@ body {
   padding: 1rem;
   max-width: 1080px;
   margin: 0 auto;
+  background-image: url('/images/background-image-paws.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 footer {

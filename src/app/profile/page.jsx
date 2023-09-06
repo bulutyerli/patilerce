@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { checkValidPassword } from '@/helpers/checkValidPassword';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 export default function ProfilePage() {
   const { data: session } = useSession();
@@ -28,6 +29,7 @@ export default function ProfilePage() {
   const [passwordResMessage, setPasswordResMessage] = useState('');
   const [nameSuccess, setNameSuccess] = useState(false);
   const [passSuccess, setPassSuccess] = useState(false);
+  const router = useRouter();
 
   const onNameSubmit = async (e) => {
     setNameSuccess(false);
@@ -42,8 +44,10 @@ export default function ProfilePage() {
       if (!response) {
         throw new Error('Something went wrong');
       }
+
       setNameResMessage(response.data.message);
       setNameSuccess(true);
+      router.refresh();
     } catch (error) {
       if (error.response && error.response.data) {
         const errorMsg = error?.response?.data?.error;
@@ -164,10 +168,6 @@ export default function ProfilePage() {
             }`}
           >
             {nameResMessage}
-            <br />
-            {nameSuccess
-              ? 'Please refresh the page to see the updated name.'
-              : ''}
           </p>
         )}
 

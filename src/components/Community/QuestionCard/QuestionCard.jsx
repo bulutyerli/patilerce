@@ -4,7 +4,7 @@ import catImage from 'public/images/cat-profile.svg';
 import { dateConverter } from '@/helpers/dateConverter';
 import Link from 'next/link';
 import { PiChatCircleBold } from 'react-icons/pi';
-import { getAnswersCount } from '@/app/lib/community/getAnswers';
+import { getAnswersCount } from '@/lib/community/getAnswers';
 
 export default async function QuestionCard({ data }) {
   const image = data?.user?.image ?? catImage;

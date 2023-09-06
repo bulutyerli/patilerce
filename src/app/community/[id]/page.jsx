@@ -1,16 +1,17 @@
-import { getQuestionById } from '@/app/lib/community/getQuestions';
-import { getAnswers, getAnswersCount } from '@/app/lib/community/getAnswers';
+import { getQuestionById } from '@/lib/community/getQuestions';
+import { getAnswers, getAnswersCount } from '@/lib/community/getAnswers';
 import styles from './questionDetails.module.scss';
 import Image from 'next/image';
 import catImage from 'public/images/cat-profile.svg';
 import { dateConverter } from '@/helpers/dateConverter';
 import Link from 'next/link';
-import { DeletePosts } from '@/app/lib/deleteposts/DeletePostsModal';
+import { DeletePosts } from '@/lib/deleteposts/DeletePostsModal';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import NotFound from '@/app/not-found';
-import AnswerHandler from '@/components/AnswerHandler/AnswerHandler';
-import AnswerCard from '@/components/CommunityCards/AnswerCard/AnswerCard';
+import AnswerHandler from '@/lib/community/AnswerHandler/AnswerHandler';
+import AnswerCard from '@/components/Community/AnswerCard/AnswerCard';
+import { PiChatCircleBold } from 'react-icons/pi';
 
 export default async function QuestionDetails({ params, searchParams }) {
   try {
@@ -25,7 +26,7 @@ export default async function QuestionDetails({ params, searchParams }) {
     const isUser = userId === questionUserId;
 
     const { answers } = await getAnswers(questionId);
-    const answersCount = await getAnswersCount(questionId);
+    const totalAnswers = await getAnswersCount(questionId);
 
     return (
       <div className={styles.container}>
@@ -45,7 +46,10 @@ export default async function QuestionDetails({ params, searchParams }) {
             <time>{dateConverter(question.createdAt)}</time>
           </div>
           <p className={styles.question}>{question.question}</p>
-          <div>Answers:{answersCount}</div>
+          <div className={styles.iconContainer}>
+            <PiChatCircleBold className={styles.icon} />
+            <div className={styles.badge}>{totalAnswers}</div>
+          </div>
           {isUser && (
             <Link
               className={styles.delete}
@@ -57,11 +61,19 @@ export default async function QuestionDetails({ params, searchParams }) {
           {showModal && <DeletePosts userId={userId} questionId={questionId} />}
         </article>
         <AnswerHandler userId={userId} questionId={questionId} />
-        <div className={styles.answersContainer}>
-          {answers.map((answer) => {
-            return <AnswerCard key={answer.id} data={answer} />;
-          })}
-        </div>
+        {totalAnswers > 0 ? (
+          <div className={styles.answersContainer}>
+            {answers.map((answer) => {
+              return <AnswerCard key={answer.id} answer={answer} />;
+            })}
+          </div>
+        ) : (
+          <div className={styles.answersContainer}>
+            <p className={styles.noAnswerMessage}>
+              Nobody answered yet, be the first.
+            </p>
+          </div>
+        )}
       </div>
     );
   } catch (error) {

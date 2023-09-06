@@ -6,7 +6,6 @@
   align-items: center;
   gap: 1rem;
   align-self: center;
-  min-height: calc(100vh - 96px - 29px);
 
   .filters {
     width: 100%;
@@ -14,10 +13,6 @@
 
   h1 {
     margin-bottom: 2rem;
-  }
-
-  .questionCard {
-    cursor: pointer;
   }
 }
 

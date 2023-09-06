@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-export default function AddQuestion() {
+export default function AskQuestion() {
   const [title, setTitle] = useState('');
   const [question, setQuestion] = useState('');
   const [error, setError] = useState('');

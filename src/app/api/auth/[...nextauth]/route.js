@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
-import connectDB from '@/dbConfig/dbConfig';
-import User from '@/models/userModel';
+import connectDB from '@/db-config/db-config';
+import User from '@/models/user-model';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcryptjs';

@@ -4,7 +4,7 @@ import styles from './nav.module.scss';
 import { forwardRef, useState } from 'react';
 import { PiCat, PiDog, PiCaretDown } from 'react-icons/pi';
 import { useSession } from 'next-auth/react';
-import userNameShort from '@/helpers/userNameShort';
+import userNameShort from '@/helpers/short-username';
 
 function Nav({ isOpen, onLinkClick }, ref) {
   const [breedsSubMenu, setBreedsSubMenu] = useState(false);

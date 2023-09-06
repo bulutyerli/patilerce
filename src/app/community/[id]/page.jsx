@@ -1,16 +1,16 @@
-import { getQuestionById } from '@/lib/community/getQuestions';
-import { getAnswers, getAnswersCount } from '@/lib/community/getAnswers';
-import styles from './questionDetails.module.scss';
+import { getQuestionById } from '@/lib/community/get-questions';
+import { getAnswers, getAnswersCount } from '@/lib/community/get-answers';
+import styles from './question-details.module.scss';
 import Image from 'next/image';
 import catImage from 'public/images/cat-profile.svg';
-import { dateConverter } from '@/helpers/dateConverter';
+import { dateConverter } from '@/helpers/date-converter';
 import Link from 'next/link';
-import { DeletePosts } from '@/lib/deleteposts/DeletePostsModal';
+import { DeletePosts } from '@/lib/delete-posts/delete-posts';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import NotFound from '@/app/not-found';
-import AnswerHandler from '@/lib/community/AnswerHandler/AnswerHandler';
-import AnswerCard from '@/components/Community/AnswerCard/AnswerCard';
+import AnswerHandler from '@/lib/community/answer-handler/answer-handler';
+import AnswerCard from '@/components/community/answer-card/answer-card';
 import { PiChatCircleBold } from 'react-icons/pi';
 
 export default async function QuestionDetails({ params, searchParams }) {

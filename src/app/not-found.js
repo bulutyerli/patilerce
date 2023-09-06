@@ -1,4 +1,4 @@
-import styles from '../styles/notFound.module.scss';
+import styles from '../styles/not-found.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 

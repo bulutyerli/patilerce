@@ -1,7 +1,7 @@
 'use client';
 
-import Button from '@/components/Button/Button';
-import styles from './askquestion.module.scss';
+import CustomButton from '@/components/custom-button/custom-button';
+import styles from './ask-question.module.scss';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -92,14 +92,14 @@ export default function AskQuestion() {
             ></textarea>
           </div>
           <div className={styles.submitButton}>
-            <Button
+            <CustomButton
               onClick={(e) => {
                 submitHandler(e);
               }}
               isLoading={isLoading}
               disableBtn={disableButton}
               text="Send"
-            ></Button>
+            ></CustomButton>
           </div>
           <div className={styles.errorMessage}>{error}</div>
         </form>

@@ -1,5 +1,5 @@
-import ImageSlider from '@/components/ImageSlider/ImageSlider';
-import styles from './details.module.scss';
+import ImageSlider from '@/components/image-slider/image-slider';
+import styles from './dog-details.module.scss';
 
 export async function getImages(id) {
   try {
@@ -21,7 +21,7 @@ export async function getImages(id) {
   }
 }
 
-export default async function DogDetails({ params }) {
+export default async function DogDetailsPage({ params }) {
   const images = await getImages(params.id);
   const breedInfo = images[0].breeds[0];
   let imageList = [];

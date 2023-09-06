@@ -1,6 +1,6 @@
-import connectDB from '@/dbConfig/dbConfig';
-import User from '@/models/userModel';
-import Question from '@/models/questionsModel';
+import connectDB from '@/db-config/db-config';
+import User from '@/models/user-model';
+import Question from '@/models/questions-model';
 import { NextResponse } from 'next/server';
 
 export async function POST(req) {

@@ -1,7 +1,7 @@
-import { getQuestions } from '../../lib/community/getQuestions';
-import QuestionCard from '@/components/Community/QuestionCard/QuestionCard';
-import QuestionFilters from '@/components/Community/QuestionFilters/QuestionFilters';
-import PaginationMongoDB from '@/components/Community/PaginationMongoDB/PaginationMongoDB';
+import { getQuestions } from '../../lib/community/get-questions';
+import QuestionCard from '@/components/community/question-card/question-card';
+import QuestionFilters from '@/components/community/question-filters/question-filters';
+import PaginationMongoDB from '@/components/community/pagination/pagination';
 import styles from './community.module.scss';
 
 export default async function Community({ searchParams }) {

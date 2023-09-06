@@ -5,7 +5,7 @@ import { PiBellBold, PiList, PiX } from 'react-icons/pi';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Nav from './Nav';
-import DesktopNav from './DesktopNav';
+import DesktopNav from './desktop-nav';
 import { useSession } from 'next-auth/react';
 
 export default function Header() {

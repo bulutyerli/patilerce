@@ -1,8 +1,8 @@
-import BreedCard from '@/components/BreedCard/BreedCard';
+import BreedCard from '@/components/breed-card/breed-card';
 import styles from './breeds.module.scss';
 import Link from 'next/link';
-import Pagination from '@/components/Pagination/Pagination';
-import LetterFilter from '@/components/Community/LetterFilter/LetterFilter';
+import Pagination from '@/components/breed-pagination/breed-pagination';
+import LetterFilter from '@/components/community/letter-filter/letter-filter';
 
 export default function Breeds({ params, breedData, type }) {
   const convertNum = (id) => {

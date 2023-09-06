@@ -1,5 +1,5 @@
-import styles from './usersProfilePage.module.scss';
+import styles from './user-profile-page.module.scss';
 
-export default function usersProfilePage({ params }) {
+export default function UserPofilePage({ params }) {
   return <div>{params.id}</div>;
 }

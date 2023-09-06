@@ -1,4 +1,4 @@
-import Breeds from '@/components/Breeds/Breeds';
+import Breeds from '@/components/breeds/breeds';
 
 const apiKey = process.env.CAT_API_KEY;
 

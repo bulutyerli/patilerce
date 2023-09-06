@@ -1,6 +1,6 @@
 import './globals.css';
-import Header from '@/components/header/header';
-import Footer from '@/components/footer/footer';
+import Header from '../components/header/header';
+import Footer from '../components/footer/footer';
 import { Roboto } from 'next/font/google';
 import { NextAuthProvider } from '../components/next-auth-provider';
 import { ToastContainer } from 'react-toastify';

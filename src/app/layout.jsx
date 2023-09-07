@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['300', '400', '500', '700'],
-  preload: true,
 });
 
 export const metadata = {

@@ -10,9 +10,9 @@ connectDB();
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/signin',
-    signOut: '/signout',
-    error: '/signin',
+    signIn: '/sign-in',
+    signOut: '/sign-out',
+    error: '/sign-in',
   },
   session: {
     strategy: 'jwt',

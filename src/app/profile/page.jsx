@@ -37,7 +37,7 @@ export default function ProfilePage() {
     e.preventDefault();
     try {
       setNameBtnLoading(true);
-      const response = await axios.post('/api/auth/profile/namechange', {
+      const response = await axios.post('/api/auth/profile/name-change', {
         email: session.user.email,
         newName: name,
       });
@@ -63,7 +63,7 @@ export default function ProfilePage() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axios.post('/api/auth/profile/passwordchange', {
+      const response = await axios.post('/api/auth/profile/password-change', {
         email: session.user.email,
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword,
@@ -123,7 +123,7 @@ export default function ProfilePage() {
 
           <h2>Logged in as {userNameShort(session?.user?.name)}</h2>
         </div>
-        <Link href="/signout">
+        <Link href="/sign-out">
           <CustomButton size="small" style="primary" text="Sign Out" />
         </Link>
         <dl className={styles.profileInfo}>

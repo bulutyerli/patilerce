@@ -80,14 +80,18 @@ function Nav({ isOpen, onLinkClick }, ref) {
             <Link
               onClick={onLinkClick}
               className={styles.signout}
-              href="/signout"
+              href="/sign-out"
             >
               Sign Out
             </Link>
           </li>
         ) : (
           <li>
-            <Link onClick={onLinkClick} className={styles.login} href="/signin">
+            <Link
+              onClick={onLinkClick}
+              className={styles.login}
+              href="/sign-in"
+            >
               Sign In
             </Link>
           </li>

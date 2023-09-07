@@ -47,7 +47,7 @@ export default function SignUpPage() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      await axios.post('/api/auth/signup', userData);
+      await axios.post('/api/auth/sign-up', userData);
       router.push('/');
       setUserData({
         name: '',
@@ -163,7 +163,7 @@ export default function SignUpPage() {
             </div>
             <div className={styles.signUpText}>
               Already have an account?
-              <Link className={styles.signupLink} href="/signin">
+              <Link className={styles.signupLink} href="/sign-in">
                 {' '}
                 Login here
               </Link>

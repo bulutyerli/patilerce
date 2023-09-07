@@ -26,13 +26,15 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const res = await axios.post('/api/auth/passwordemail', { email });
+      const res = await axios.post('/api/auth/password-change-email', {
+        email,
+      });
       if (!res) {
         throw new Error('Something went wrong, please try again');
       }
       setSuccess(true);
       setTimeout(() => {
-        router.push('/signin');
+        router.push('/sign-in');
       }, 10000);
     } catch (error) {
       setError(true);

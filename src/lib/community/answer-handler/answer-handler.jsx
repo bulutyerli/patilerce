@@ -5,12 +5,14 @@ import CustomButton from '../../../components/custom-button/custom-button';
 import styles from './answer-handler.module.scss';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { getSession } from 'next-auth/react';
 
 export default function AnswerHandler({ userId, questionId }) {
   const [answer, setAnswer] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { data: session } = getSession;
 
   const postHandler = async () => {
     try {

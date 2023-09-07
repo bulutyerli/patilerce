@@ -57,14 +57,31 @@
       grid-row: 5/11;
       padding-top: 1rem;
       border-top: 2px solid rgba(0, 0, 0, 0.2);
+
+      .editQuestionForm {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1rem;
+        textarea {
+          resize: none;
+          border: 1px solid $gray-4;
+          border-radius: 1rem;
+          padding: 1rem;
+          width: 100%;
+          height: 8rem;
+          box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+        }
+      }
     }
-    .delete {
+
+    .actionButtons {
       grid-column: 1/-1;
       grid-row: 12/13;
       justify-self: end;
-      text-decoration: none;
-      color: $primary-color;
-      font-size: 0.8rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
     }
   }
   .iconContainer {
@@ -89,7 +106,6 @@
       font-size: 0.6rem;
     }
   }
-
   .answersContainer {
     background-color: $gray-3;
     border-radius: 2rem;
@@ -100,6 +116,17 @@
 
     .noAnswerMessage {
       color: $gray-7;
+    }
+  }
+
+  .signInWarning {
+    color: $secondary-color;
+    .signInLink {
+      text-decoration: none;
+      color: $primary-color;
+      &:hover {
+        border-bottom: 1px solid $primary-color;
+      }
     }
   }
 }

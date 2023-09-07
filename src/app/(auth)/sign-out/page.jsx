@@ -9,7 +9,7 @@ export default function SignOutPage() {
   const router = useRouter();
   const signOutUser = () => {
     signOut({
-      callbackUrl: '/signin',
+      callbackUrl: '/sign-in',
     });
   };
 

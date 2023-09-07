@@ -6,9 +6,9 @@ import { checkValidPassword } from '@/helpers/check-valid-password';
 import checkValidEmail from '@/helpers/check-valid-email';
 import { sendEmail } from '@/helpers/mailer';
 
-export async function POST(request) {
-  await connectDB();
+connectDB();
 
+export async function POST(request) {
   try {
     const reqBody = await request.json();
     const { name, email, password } = reqBody;

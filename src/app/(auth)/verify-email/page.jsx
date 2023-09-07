@@ -20,7 +20,7 @@ export default function VerifyEmailPage() {
   useEffect(() => {
     const verifyUserEmail = async () => {
       try {
-        await axios.post('/api/auth/verifyemail', { token });
+        await axios.post('/api/auth/verify-email', { token });
         setVerified(true);
       } catch (error) {
         setError(true);
@@ -46,7 +46,7 @@ export default function VerifyEmailPage() {
             width={200}
             height={200}
           ></Image>
-          <Link className={styles.button} href="/signin">
+          <Link className={styles.button} href="/sign-in">
             <CustomButton style="secondary" text="Sign In" />
           </Link>
         </>

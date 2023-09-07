@@ -151,7 +151,7 @@ function DesktopNav() {
                 <Link
                   className={styles.login}
                   onClick={handleProfileMenuClick}
-                  href="/signout"
+                  href="/sign-out"
                 >
                   Sign Out
                 </Link>
@@ -161,7 +161,7 @@ function DesktopNav() {
         ) : (
           <li>
             <PiSignIn />
-            <Link className={styles.login} href="/signin">
+            <Link className={styles.login} href="/sign-in">
               Sign In
             </Link>
           </li>

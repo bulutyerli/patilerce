@@ -80,7 +80,7 @@ export default function SignInPage() {
               }}
             ></input>
           </div>
-          <Link className={styles.forgotPassword} href="/forgotpassword">
+          <Link className={styles.forgotPassword} href="/forgot-password">
             Forgot Password
           </Link>
           <CustomButton
@@ -91,7 +91,7 @@ export default function SignInPage() {
           />
           <div className={styles.signUpText}>
             Don't you have an account yet?
-            <Link className={styles.signupLink} href="/signup">
+            <Link className={styles.signupLink} href="/sign-up">
               {' '}
               Sign Up
             </Link>

@@ -3,12 +3,12 @@ import User from '@/models/user-model';
 import Question from '@/models/questions-model';
 import { NextResponse } from 'next/server';
 
-export async function POST(req) {
-  await connectDB();
+connectDB();
 
+export async function POST(req) {
   try {
     const reqBody = await req.json();
-    const { title, question, userId, answer, questionId } = reqBody;
+    const { title, question, userId } = reqBody;
 
     const user = await User.findById(userId);
 
@@ -46,8 +46,6 @@ export async function POST(req) {
 }
 
 export async function DELETE(req) {
-  await connectDB();
-
   try {
     const reqBody = await req.json();
     const { userId, questionId } = reqBody;
@@ -77,5 +75,40 @@ export async function DELETE(req) {
     );
   } catch (error) {
     return NextResponse.json({ error: error.message });
+  }
+}
+
+export async function PUT(req) {
+  try {
+    const reqBody = await req.json();
+    const { userId, questionId, updatedQuestion } = reqBody;
+
+    const user = await User.findById(userId);
+    const question = await Question.findById(questionId);
+
+    if (!user) {
+      console.log('no user');
+
+      throw new Error('There is no user');
+    }
+
+    if (!question) {
+      console.log('No question exist');
+
+      throw new Error('Question not found');
+    }
+
+    if (user.id.toString() !== question.user._id.toString()) {
+      throw new Error('Forbidden');
+    }
+
+    await Question.findByIdAndUpdate(questionId, { question: updatedQuestion });
+
+    return NextResponse.json(
+      { message: 'Question successfully deleted' },
+      { success: true }
+    );
+  } catch (error) {
+    console.log(error.message);
   }
 }

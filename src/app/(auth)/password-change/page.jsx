@@ -24,10 +24,10 @@ export default function PasswordChangePage() {
   useEffect(() => {
     const urlToken = window.location.search.split('=')[1];
     if (!urlToken) {
-      router.push('/signin');
+      router.push('/sign-in');
     }
     setToken(urlToken);
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (checkValidPassword(passwordData.password)) {
@@ -45,7 +45,7 @@ export default function PasswordChangePage() {
     if (token && token.length > 0) {
       try {
         setIsLoading(true);
-        await axios.post('/api/auth/passwordchange', { token, password });
+        await axios.post('/api/auth/password-change', { token, password });
         setSuccess(true);
       } catch (error) {
         setError(true);
@@ -66,7 +66,7 @@ export default function PasswordChangePage() {
           <div className={styles.header}>
             <h1 className={styles.success}>Your password has been changed</h1>
 
-            <Link className={styles.button} href="/signin">
+            <Link className={styles.button} href="/sign-in">
               <CustomButton style="secondary" text="Sign In" />
             </Link>
           </div>

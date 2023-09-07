@@ -7,6 +7,7 @@ export default function CustomButton({
   isLoading,
   style,
   size,
+  type,
 }) {
   let btnColor = styles.default;
   let btnSize;
@@ -24,6 +25,7 @@ export default function CustomButton({
 
   return (
     <button
+      type={type}
       onClick={onClick}
       className={`${styles.button} ${
         disableBtn || isLoading ? styles.disabled : ''

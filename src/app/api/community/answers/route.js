@@ -2,6 +2,9 @@ import Answer from '@/models/answers-model';
 import User from '@/models/user-model';
 import Question from '@/models/questions-model';
 import { NextResponse } from 'next/server';
+import connectDB from '@/db-config/db-config';
+
+connectDB();
 
 export async function POST(req) {
   try {

@@ -63,7 +63,7 @@ export default async function CatDetailsPage({ params }) {
   return (
     <article className={styles.container}>
       <div className={styles.slider}>
-        <ImageSlider imageList={imageList} />
+        <ImageSlider petName={breedInfo.name} imageList={imageList} />
       </div>
       <div className={styles.title}>
         <h1>{breedInfo.name}</h1>

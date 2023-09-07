@@ -5,10 +5,10 @@ import User from '@/models/user-model';
 import { getServerSession } from 'next-auth/next';
 import { NextResponse } from 'next/server';
 
+connectDB();
+
 export async function DELETE(req) {
   try {
-    await connectDB();
-
     const reqBody = await req.json();
     const { answerId } = reqBody;
 

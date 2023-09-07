@@ -5,6 +5,7 @@ import { dateConverter } from '@/helpers/date-converter';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
+import CustomButton from '@/components/custom-button/custom-button';
 
 export default async function AnswerCard({ answer }) {
   const image = answer?.user?.image ?? catImage;
@@ -32,7 +33,13 @@ export default async function AnswerCard({ answer }) {
       <p className={styles.answer}>{answer.answer}</p>
       {isUser && (
         <div className={styles.delete}>
-          <Link href={`/community/delete/${answer.id}`}>Delete</Link>
+          <Link href={`/community/delete/${answer.id}`}>
+            <CustomButton
+              style={'primary'}
+              size={'small'}
+              text={'Delete'}
+            ></CustomButton>
+          </Link>
         </div>
       )}
     </article>

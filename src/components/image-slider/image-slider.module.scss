@@ -5,11 +5,10 @@
   max-width: 250px;
   max-height: 250px;
   border-radius: 2rem;
-  border: 2px solid $gray-5;
 }
 .container {
   display: flex;
 }
 .image {
-  flex: 0 0 100%;
+  object-fit: contain;
 }

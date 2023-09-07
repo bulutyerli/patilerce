@@ -7,9 +7,9 @@ export default async function middleware(req, event) {
   const pathname = req.nextUrl.pathname;
 
   if (
-    pathname.startsWith('/signin') ||
-    pathname.startsWith('/signup') ||
-    pathname.startsWith('/verifyemail')
+    pathname.startsWith('/sign-in') ||
+    pathname.startsWith('/sign-up') ||
+    pathname.startsWith('/verify-email')
   ) {
     if (isAuthenticated) {
       return NextResponse.redirect(new URL('/profile', req.url));
@@ -19,10 +19,10 @@ export default async function middleware(req, event) {
   if (
     pathname.startsWith('/profile') ||
     pathname.startsWith('/messages') ||
-    pathname.startsWith('/askquestion')
+    pathname.startsWith('/ask-question')
   ) {
     if (!isAuthenticated) {
-      return NextResponse.redirect(new URL('/signin', req.url));
+      return NextResponse.redirect(new URL('/sign-in', req.url));
     }
   }
 }

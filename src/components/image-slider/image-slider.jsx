@@ -5,7 +5,7 @@ import Image from 'next/image';
 import styles from './image-slider.module.scss';
 import Autoplay from 'embla-carousel-autoplay';
 
-export default function ImageSlider({ imageList }) {
+export default function ImageSlider({ imageList, petName }) {
   const [imageRef] = useEmblaCarousel({ loop: false }, [Autoplay()]);
 
   return (
@@ -17,7 +17,7 @@ export default function ImageSlider({ imageList }) {
               <Image
                 className={styles.image}
                 src={image}
-                alt={`pet`}
+                alt={petName}
                 width={250}
                 height={250}
               ></Image>

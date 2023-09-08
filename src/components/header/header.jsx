@@ -39,7 +39,7 @@ export default function Header() {
   }, [menuOpen]);
 
   const { data: session } = useSession();
-  const authLink = session ? '/profile' : 'signin';
+  const authLink = session ? '/profile' : 'sign-in';
 
   return (
     <header className={styles.header}>
@@ -65,8 +65,8 @@ export default function Header() {
             )}
           </div>
         </div>
-
         <Nav ref={menu} isOpen={menuOpen} onLinkClick={closeMenu} />
+
         <DesktopNav />
       </nav>
     </header>

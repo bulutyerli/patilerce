@@ -1,7 +1,7 @@
 @use '/src/styles/variables.module' as *;
 
 .mobileNav {
-  display: flex;
+  visibility: hidden;
   flex-direction: column;
   justify-content: space-between;
   position: fixed;
@@ -44,6 +44,7 @@
   }
   &.showNav {
     transform: translateX(0);
+    visibility: visible;
   }
 }
 

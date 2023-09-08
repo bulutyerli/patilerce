@@ -68,20 +68,22 @@
     .desktopNav {
       display: block;
       width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
 
       ul {
         display: flex;
         flex-direction: row;
         list-style: none;
-        padding: 1rem 0;
         justify-content: space-between;
-        align-items: center;
+        min-width: 30rem;
 
         li {
           color: $gray-7;
           font-size: 0.9rem;
           cursor: pointer;
-          padding-bottom: 0.5rem;
           :hover {
             border-bottom: 2px solid $accent-color;
           }

@@ -5,14 +5,13 @@ import CustomButton from '@/components/custom-button/custom-button';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function QuestionFilters({ filter }) {
+export default function QuestionFilters({ filter, session }) {
   const [showFilters, setShowFilters] = useState(false);
 
   const handleFiltersClick = () => {
     setShowFilters(!showFilters);
   };
-
-  const filters = ['all', 'my', 'noanswer'];
+  const filters = ['all', `${session ? 'my' : ''}`, 'noanswer'];
 
   return (
     <section className={styles.container}>
@@ -30,10 +29,26 @@ export default function QuestionFilters({ filter }) {
             }`}
           >
             <ul className={styles.communityNav}>
-              <li>All</li>
-              <li>My Questions</li>
-              <li>New Ones</li>
-              <li>Waiting for Answer</li>
+              <li>
+                <Link href={`/community?filter=all&page=${parseInt(1)}`}>
+                  All
+                </Link>
+              </li>
+
+              {session && (
+                <li>
+                  <Link href={`/community?filter=my&page=${parseInt(1)}`}>
+                    My Questions
+                  </Link>
+                </li>
+              )}
+
+              <li>
+                {' '}
+                <Link href={`/community?filter=noanswer&page=${parseInt(1)}`}>
+                  Without Answers
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>
@@ -43,14 +58,13 @@ export default function QuestionFilters({ filter }) {
           </Link>{' '}
         </div>
       </div>
-
       <nav className={styles.desktopNav}>
+        <div className={styles.desktopAsk}>
+          <Link href="/community/ask-question">
+            <CustomButton text="Ask" style="secondary"></CustomButton>
+          </Link>
+        </div>{' '}
         <ul>
-          <li className={styles.desktopAsk}>
-            <Link href="/community/ask-question">
-              <CustomButton text="Ask" style="secondary"></CustomButton>
-            </Link>
-          </li>
           {filters.map((filterName, index) => {
             return (
               <li key={index} value={filterName}>
@@ -64,7 +78,9 @@ export default function QuestionFilters({ filter }) {
                     ? 'All Questions'
                     : filterName === 'my'
                     ? 'My Questions'
-                    : 'Without Answers'}
+                    : filterName === 'noanswer'
+                    ? 'Without Answers'
+                    : ''}
                 </Link>
               </li>
             );

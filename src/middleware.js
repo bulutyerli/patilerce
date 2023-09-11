@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-export default async function middleware(req, event) {
+export default async function middleware(req) {
   const token = await getToken({ req });
   const isAuthenticated = !!token;
   const pathname = req.nextUrl.pathname;
@@ -19,7 +19,8 @@ export default async function middleware(req, event) {
   if (
     pathname.startsWith('/profile') ||
     pathname.startsWith('/messages') ||
-    pathname.startsWith('/ask-question')
+    pathname.startsWith('/ask-question') ||
+    pathname.startsWith('/adopt/listing')
   ) {
     if (!isAuthenticated) {
       return NextResponse.redirect(new URL('/sign-in', req.url));

@@ -1,0 +1,61 @@
+@use '/src/styles/variables.module' as *;
+
+.fileInputContainer {
+  label {
+    margin-bottom: 1rem;
+  }
+  input[type='file']::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: $secondary-color;
+    padding: 4px 10px;
+    border-radius: 10px;
+    color: $gray-2;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+  }
+
+  input[type='file']::file-selector-button:hover {
+    background: #0d45a5;
+  }
+
+  .fileList {
+    list-style: none;
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+  .errorMessage {
+    margin-top: 1rem;
+    color: $primary-color;
+  }
+}
+
+.loading {
+  position: relative;
+}
+
+.loading:after {
+  content: ' ';
+  display: block;
+  width: 2px;
+  height: 4px;
+  margin: auto;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: $accent-color transparent $accent-color transparent;
+  animation: loading 1.2s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -41,6 +41,7 @@
 
     .subMenu {
       @include submenu-styles;
+      display: none;
 
       li:nth-child(2) {
         border-top: 2px solid $gray-3;
@@ -49,6 +50,7 @@
 
       &.showSubMenu {
         opacity: 1;
+        display: block;
         transform: translateY(0);
         pointer-events: auto;
       }

@@ -1,0 +1,36 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 2px solid $gray-4;
+  padding: 0.5rem 0.5rem;
+  width: 9rem;
+  background-color: $gray-1;
+  justify-content: flex-start;
+  align-items: center;
+
+  .image {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    * {
+      font-size: 0.8rem;
+    }
+
+    .title {
+      color: $gray-7;
+    }
+
+    .date {
+      color: $gray-6;
+    }
+  }
+}

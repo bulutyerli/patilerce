@@ -83,7 +83,9 @@ export default async function CatDetailsPage({ params }) {
       </p>
       <div className={styles.temperaments}>{temperaments}</div>
 
-      <span>Life Span: {breedInfo.life_span} years</span>
+      <span className={styles.lifeSpan}>
+        Life Span: {breedInfo.life_span} years
+      </span>
       <h2>Characteristics</h2>
       <section className={styles.scores}>
         <div className={styles.column1}>

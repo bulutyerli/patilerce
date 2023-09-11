@@ -1,10 +1,11 @@
-import connectDB from '@/db-config/db-config';
+import connectDB from '@/app/config/db-config';
 import Question from '@/models/questions-model';
 import { NextResponse } from 'next/server';
 import User from '@/models/user-model';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getAnswersCount } from './get-answers';
+
 connectDB();
 
 export const dynamic = 'force-dynamic';

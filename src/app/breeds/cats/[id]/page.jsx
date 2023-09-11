@@ -18,10 +18,14 @@ export async function getCats() {
 }
 
 async function BreedsPage({ params }) {
-  const cats = await getCats();
-  totalData = cats.length;
+  try {
+    const cats = await getCats();
+    totalData = cats.length;
 
-  return <Breeds params={params} breedData={cats} type={'cats'} />;
+    return <Breeds params={params} breedData={cats} type={'cats'} />;
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 export default BreedsPage;

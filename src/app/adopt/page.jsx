@@ -1,17 +1,40 @@
+import { getAdopts } from '@/lib/adopt/get-adopts';
 import styles from './adopt.module.scss';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]/route';
+import AdoptCard from '@/components/adopt/adopt-card/adopt-card';
+import Pagination from '@/components/pagination/pagination';
+import AdoptFilters from '@/components/adopt/adopt-filters/adopt-filters';
+import Link from 'next/link';
 
-export default function AdoptPage() {
+export default async function Adopt({ searchParams }) {
+  const { page: currentPage = 1, filter: filter = 'all' } = searchParams;
+  const limit = 10;
+  const { adopts, totalPages } = await getAdopts(
+    {
+      query: searchParams,
+    },
+    limit
+  );
+  const session = await getServerSession(authOptions);
+  const isUser = session?.user;
+
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>Pet Adoption</h1>
-      <div className={styles.warningMessage}>
-        <p>
-          Selling pets is strictly prohibited on this site. If anyone requests
-          payment for a pet, please don&apos;t hesitate to report it to us.
-        </p>
+
+      <AdoptFilters />
+      <div className={styles.adoptList}>
+        {adopts.map((adopt, index) => {
+          return <AdoptCard key={index} data={adopt} />;
+        })}
       </div>
-      <div className={styles.sideBar}>SideBar</div>
-      <div className={styles.adoptList}>Adoption Lists</div>
+      <Pagination
+        section={'adopt'}
+        totalPages={totalPages}
+        currentPage={currentPage}
+        filter={filter}
+      />
     </section>
   );
 }

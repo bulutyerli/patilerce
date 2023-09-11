@@ -1,4 +1,4 @@
-import connectDB from '@/db-config/db-config';
+import connectDB from '@/app/config/db-config';
 import User from '@/models/user-model';
 import Question from '@/models/questions-model';
 import { NextResponse } from 'next/server';

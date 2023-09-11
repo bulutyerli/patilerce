@@ -8,6 +8,7 @@ const nextConfig = {
       'api.thedogapi.com',
       'flagcdn.com',
       'lh3.googleusercontent.com',
+      'tailwish-pets.s3.eu-central-1.amazonaws.com',
     ],
   },
 };

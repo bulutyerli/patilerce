@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth';
-import connectDB from '@/db-config/db-config';
+import connectDB from '@/app/config/db-config';
 import User from '@/models/user-model';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';

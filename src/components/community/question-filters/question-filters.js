@@ -28,27 +28,30 @@ export default function QuestionFilters({ filter, session }) {
               showFilters ? styles.showFilters : ''
             }`}
           >
-            <ul className={styles.communityNav}>
-              <li>
-                <Link href={`/community?filter=all&page=${parseInt(1)}`}>
-                  All
-                </Link>
-              </li>
-
-              {session && (
-                <li>
-                  <Link href={`/community?filter=my&page=${parseInt(1)}`}>
-                    My Questions
-                  </Link>
-                </li>
-              )}
-
-              <li>
-                {' '}
-                <Link href={`/community?filter=noanswer&page=${parseInt(1)}`}>
-                  Without Answers
-                </Link>
-              </li>
+            <ul>
+              {filters.map((filterName, index) => {
+                return (
+                  <li key={index} value={filterName}>
+                    <Link
+                      onClick={handleFiltersClick}
+                      className={`${styles.links} ${
+                        filter === filterName ? styles.active : ''
+                      } `}
+                      href={`/community?filter=${filterName}&page=${parseInt(
+                        1
+                      )}`}
+                    >
+                      {filterName === 'all'
+                        ? 'All Questions'
+                        : filterName === 'my'
+                        ? 'My Questions'
+                        : filterName === 'noanswer'
+                        ? 'Without Answers'
+                        : ''}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </div>

@@ -6,13 +6,13 @@ import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
-export async function getAdopts(req, limit) {
+export async function getAdopts(req, limit, petType) {
   try {
     const session = await getServerSession(authOptions);
     const user = session?.user;
-    const { page = 1, filter } = req.query;
+    const { page = 1, filter, breed } = req.query;
     const skip = (page - 1) * limit;
-    let query = {};
+    let query = { petType: petType };
     const totalAdopts = await Adopt.countDocuments(query);
     const userAdopts = await Adopt.countDocuments({ user });
 
@@ -24,8 +24,17 @@ export async function getAdopts(req, limit) {
     }
 
     if (filter === 'my') {
-      query = { user: user._id };
+      query = { $and: [{ petType: petType }, { user: user._id }] };
       totalPages = userPages;
+    }
+
+    if (breed) {
+      const getBreedName = breed
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' '); // reformat searchParams to database breed values
+
+      query = { $and: [{ petType: petType }, { breed: getBreedName }] };
     }
 
     const adopts = await Adopt.find(query)
@@ -46,13 +55,13 @@ export async function getAdopts(req, limit) {
 
 export async function getAdoptById(id) {
   try {
-    const question = await Adopt.findById(id).populate({
+    const adopt = await Adopt.findById(id).populate({
       path: 'user',
       model: User,
-      select: 'name image',
+      select: 'name image createdAt',
     });
 
-    return { question };
+    return adopt;
   } catch (error) {
     throw new Error(error.message);
   }

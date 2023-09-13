@@ -1,4 +1,4 @@
-import ImageSlider from '@/components/image-slider/image-slider';
+import ImageSlider from '@/components/breeds/image-slider/image-slider';
 import styles from './dog-details.module.scss';
 
 export async function getImages(id) {

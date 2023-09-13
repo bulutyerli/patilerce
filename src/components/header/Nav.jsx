@@ -8,9 +8,14 @@ import userNameShort from '@/helpers/short-username';
 
 function Nav({ isOpen, onLinkClick }, ref) {
   const [breedsSubMenu, setBreedsSubMenu] = useState(false);
+  const [adoptSubMenu, setAdoptSubMenu] = useState(false);
 
   const handleSubMenuClick = () => {
     setBreedsSubMenu(!breedsSubMenu);
+  };
+
+  const handleAdoptSubMenuClick = () => {
+    setAdoptSubMenu(!adoptSubMenu);
   };
 
   const { data: session } = useSession();
@@ -26,10 +31,34 @@ function Nav({ isOpen, onLinkClick }, ref) {
             Home
           </Link>
         </li>
-        <li>
-          <Link onClick={onLinkClick} href="/adopt">
-            Adopt
-          </Link>
+        <li
+          onClick={handleAdoptSubMenuClick}
+          className={`${styles.adoptContainer} ${
+            adoptSubMenu ? styles.adoptShowSubMenu : ''
+          }`}
+        >
+          <div className={styles.adoptLink}>
+            Adopt <PiCaretDown />
+          </div>
+
+          <ul
+            className={`${styles.adoptSubMenu} ${
+              adoptSubMenu ? styles.showAdoptSubMenu : ''
+            }`}
+          >
+            <li>
+              <PiCat className={styles.icon} />
+              <Link onClick={onLinkClick} href="/adopt/cats">
+                Cats
+              </Link>
+            </li>
+            <li>
+              <Link onClick={onLinkClick} href="/adopt/dogs">
+                Dogs
+              </Link>
+              <PiDog className={styles.icon} />
+            </li>
+          </ul>
         </li>
         <li
           onClick={handleSubMenuClick}

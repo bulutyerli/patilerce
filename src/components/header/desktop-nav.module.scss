@@ -36,19 +36,26 @@
       }
     }
   }
-  .breedContainer {
+  .breedContainer,
+  .adoptContainer {
     position: relative;
 
-    .subMenu {
+    .subMenu,
+    .adoptSubMenu {
       @include submenu-styles;
       display: none;
 
-      li:nth-child(2) {
-        border-top: 2px solid $gray-3;
-        padding: 2rem 0;
+      li:first-child {
+        padding-bottom: 1rem;
       }
 
-      &.showSubMenu {
+      li:nth-child(2) {
+        border-top: 2px solid $gray-3;
+        padding: 1rem 0;
+      }
+
+      &.showSubMenu,
+      &.showAdoptSubMenu {
         opacity: 1;
         display: block;
         transform: translateY(0);

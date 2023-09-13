@@ -24,6 +24,25 @@
       color: $gray-8;
     }
 
+    h3 {
+      color: $gray-9;
+      margin-top: 2rem;
+      border-bottom: 2px solid $gray-4;
+      padding-bottom: 0.5rem;
+    }
+
+    .imageUpload {
+      display: flex;
+    }
+
+    .imageSuccess {
+      color: $secondary-color;
+    }
+
+    .imageError {
+      color: $primary-color;
+    }
+
     dl {
       display: flex;
       flex-direction: column;

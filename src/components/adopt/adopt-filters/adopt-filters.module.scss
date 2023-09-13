@@ -4,4 +4,34 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
+  position: relative;
+
+  .modal {
+    position: absolute;
+    width: 100%;
+    max-height: 25rem;
+    overflow: scroll;
+    background-color: $gray-1;
+    top: 2rem;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      list-style: none;
+
+      li {
+        padding: 1rem;
+
+        a {
+          text-decoration: none;
+          color: $gray-7;
+          font-size: 0.9rem;
+        }
+      }
+      :nth-child(2) {
+        border-top: 2px solid $gray-3;
+      }
+    }
+  }
 }

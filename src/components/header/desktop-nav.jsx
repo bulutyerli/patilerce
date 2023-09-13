@@ -23,7 +23,9 @@ import userNameShort from '@/helpers/short-username';
 function DesktopNav() {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [showProfileSub, setProfileSub] = useState(false);
+  const [showAdoptSubMenu, setShowAdoptSubMenu] = useState(false);
   const subMenu = useRef(null);
+  const adoptSubMenu = useRef(null);
   const profileMenu = useRef(null);
 
   const handleSubMenuClick = () => {
@@ -33,6 +35,29 @@ function DesktopNav() {
   const handleProfileMenuClick = () => {
     setProfileSub(!showProfileSub);
   };
+
+  const handleAdoptSubMenuClick = () => {
+    setShowAdoptSubMenu(!showAdoptSubMenu);
+  };
+
+  useEffect(() => {
+    const closeDropDown = (e) => {
+      if (
+        adoptSubMenu.current &&
+        showAdoptSubMenu &&
+        !adoptSubMenu.current.contains(e.target)
+      ) {
+        setShowAdoptSubMenu(false);
+      }
+    };
+    if (showAdoptSubMenu) {
+      document.addEventListener('mousedown', closeDropDown);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', closeDropDown);
+    };
+  }, [showAdoptSubMenu]);
 
   useEffect(() => {
     const closeDropDown = (e) => {
@@ -82,9 +107,33 @@ function DesktopNav() {
           <Link href="/">Home</Link>
         </li>
         <ul>
-          <li>
+          <li ref={adoptSubMenu} className={styles.adoptContainer}>
             <PiHandHeartDuotone />
-            <Link href="/adopt">Adopt</Link>
+            <button
+              className={styles.subMenuBtn}
+              onClick={handleAdoptSubMenuClick}
+            >
+              Adopt
+              <PiCaretDown />
+            </button>
+            <ul
+              className={`${styles.adoptSubMenu} ${
+                showAdoptSubMenu ? styles.showAdoptSubMenu : ''
+              }`}
+            >
+              <li>
+                <Link onClick={handleAdoptSubMenuClick} href="/adopt/cats">
+                  Cats
+                </Link>
+                <PiCat />
+              </li>
+              <li>
+                <Link onClick={handleAdoptSubMenuClick} href="/adopt/dogs">
+                  Dogs
+                </Link>
+                <PiDog />
+              </li>
+            </ul>
           </li>
           <li ref={subMenu} className={styles.breedContainer}>
             <PiPawPrint />

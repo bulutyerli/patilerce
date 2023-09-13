@@ -5,13 +5,13 @@ const adoptSchema = new Schema(
     title: {
       type: String,
       required: true,
-      maxLength: [30, 'Title should be less than 50 characters'],
+      maxLength: [40, 'Title should be less than 40 characters'],
       unique: false,
     },
     details: {
       type: String,
       required: true,
-      maxLength: [300, 'Title should be less than 50 characters'],
+      maxLength: [300, 'Details should be less than 50 characters'],
       unique: false,
     },
     isApproved: {
@@ -43,6 +43,16 @@ const adoptSchema = new Schema(
       type: String,
       required: true,
       enum: ['Male', 'Female'],
+      unique: false,
+    },
+    email: {
+      type: String,
+      required: false,
+      unique: false,
+    },
+    phoneNumber: {
+      type: String,
+      required: false,
       unique: false,
     },
     images: {

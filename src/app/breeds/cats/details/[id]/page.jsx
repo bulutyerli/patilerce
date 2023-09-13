@@ -1,4 +1,4 @@
-import ImageSlider from '@/components/image-slider/image-slider';
+import ImageSlider from '@/components/breeds/image-slider/image-slider';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { FaWikipediaW } from 'react-icons/fa';
 import styles from './cat-details.module.scss';

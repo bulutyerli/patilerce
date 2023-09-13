@@ -17,9 +17,7 @@ export default function AdoptCard({ data }) {
       <div className={styles.info}>
         <div className={styles.breed}>{data.breed}</div>
         <div className={styles.title}>{data.title}</div>
-        <div className={styles.date}>
-          Listed {dateConverter(data.createdAt)}
-        </div>
+        <div className={styles.date}>{dateConverter(data.createdAt)}</div>
       </div>
     </div>
   );

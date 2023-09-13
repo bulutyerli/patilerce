@@ -18,6 +18,8 @@ export default function ListingPage() {
     age: '1-3 months old',
     gender: '',
     images: '',
+    email: '',
+    phoneNumber: '',
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +36,8 @@ export default function ListingPage() {
   };
 
   useEffect(() => {
-    const values = Object.values(formData);
+    const { email, phoneNumber, ...rest } = formData;
+    const values = Object.values(rest);
     const isFormValid = values.every((value) => value.length > 0);
     setIsDisabled(!isFormValid);
   }, [formData]);
@@ -49,7 +52,7 @@ export default function ListingPage() {
     try {
       setIsLoading(true);
       const response = await axios.post('/api/adopt', { formData });
-      router.push('/adopt');
+      router.back();
       router.refresh();
     } catch (error) {
       console.error(error);
@@ -112,6 +115,9 @@ export default function ListingPage() {
             </select>
           </div>
 
+          <ImageUpload onImageChange={onImageChange} />
+        </div>
+        <div className={styles.formHalf}>
           <div className={styles.fieldGroup}>
             <label htmlFor="breed">Breed:</label>
             <select
@@ -137,8 +143,6 @@ export default function ListingPage() {
                   })}
             </select>
           </div>
-        </div>
-        <div className={styles.formHalf}>
           <div className={styles.fieldGroup}>
             <label htmlFor="age">Age:</label>
             <div className={styles.ageContainer}>
@@ -181,7 +185,30 @@ export default function ListingPage() {
               Female
             </div>
           </div>
-          <ImageUpload onImageChange={onImageChange} />
+          <div className={styles.fieldGroup}>
+            <span className={styles.contact}>
+              Contact Information on Listing
+              <br />
+              (not required)
+            </span>
+
+            <label htmlFor="email">Email Address:</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+            ></input>
+          </div>
+          <div className={styles.fieldGroup}>
+            <label htmlFor="email">Phone Number:</label>
+            <input
+              type="text"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleInputChange}
+            ></input>
+          </div>
           <div className={styles.errorMessage}>{errorMessage}</div>
           <div className={styles.submitButton}>
             <CustomButton

@@ -1,0 +1,45 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 2rem;
+
+  .title {
+    font-size: 1.2rem;
+    color: $gray-7;
+  }
+
+  .adoptList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  .noPetsMessage {
+    text-align: center;
+    line-height: 1.5rem;
+  }
+
+  .warning {
+    color: $primary-color;
+    font-size: 0.8rem;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+
+    a {
+      text-decoration: none;
+      color: $secondary-color;
+      font-size: 0.8rem;
+    }
+  }
+}

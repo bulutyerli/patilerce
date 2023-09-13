@@ -10,8 +10,17 @@ connectDB();
 export async function POST(req) {
   try {
     const reqBody = await req.json();
-    const { title, details, petType, breed, age, gender, images } =
-      reqBody.formData;
+    const {
+      title,
+      details,
+      petType,
+      breed,
+      age,
+      gender,
+      images,
+      email: formEmail,
+      phoneNumber: formPhone,
+    } = reqBody.formData;
 
     console.log(reqBody);
 
@@ -24,7 +33,8 @@ export async function POST(req) {
       return NextResponse.json({ error: 'User not found' }, { status: 400 });
     }
 
-    const values = Object.values(reqBody.formData);
+    const { email, phoneNumber, ...rest } = reqBody.formData;
+    const values = Object.values(rest);
     const isFormValid = values.every((value) => value.length > 0);
 
     if (!isFormValid) {
@@ -45,6 +55,8 @@ export async function POST(req) {
       gender: gender,
       images: images,
       user: user._id,
+      email: formEmail,
+      phoneNumber: formPhone,
     });
 
     await newAdopt.save();

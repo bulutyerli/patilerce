@@ -7,9 +7,11 @@
   border: 2px solid $gray-4;
   padding: 0.5rem 0.5rem;
   width: 9rem;
+  height: 13rem;
   background-color: $gray-1;
   justify-content: flex-start;
   align-items: center;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 
   .image {
     width: 6rem;
@@ -20,6 +22,9 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    height: 100%;
+    word-break: break-all;
+    justify-content: space-between;
 
     * {
       font-size: 0.8rem;

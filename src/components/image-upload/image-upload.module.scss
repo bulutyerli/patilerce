@@ -1,8 +1,12 @@
 @use '/src/styles/variables.module' as *;
 
 .fileInputContainer {
+  display: flex;
+  flex-direction: column;
+
   label {
     margin-bottom: 1rem;
+    align-self: flex-start;
   }
   input[type='file']::file-selector-button {
     margin-right: 20px;
@@ -13,6 +17,7 @@
     color: $gray-2;
     cursor: pointer;
     transition: background 0.2s ease-in-out;
+    font-size: 0.8rem;
   }
 
   input[type='file']::file-selector-button:hover {

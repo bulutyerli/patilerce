@@ -7,6 +7,7 @@ export default function Pagination({
   totalPages,
   currentPage,
   filter,
+  petType,
 }) {
   const pageNumbers = Array.from(
     { length: totalPages },
@@ -55,7 +56,9 @@ export default function Pagination({
           className={`${styles.elements} ${
             parseInt(currentPage) === pageNumber ? styles.activePage : ''
           }`}
-          href={`/${section}?filter=${filter}&page=${pageNumber}`}
+          href={`/${section}/${
+            petType ? petType : ''
+          }?filter=${filter}&page=${pageNumber}`}
           key={index}
         >
           {pageNumber}
@@ -70,7 +73,7 @@ export default function Pagination({
         <MdNavigateBefore />
       ) : (
         <Link
-          href={`/${section}?filter=${filter}&page=${
+          href={`/${section}/${petType ? petType : ''}?filter=${filter}&page=${
             parseInt(currentPage) - 1
           }`}
         >
@@ -84,7 +87,7 @@ export default function Pagination({
         <MdNavigateNext />
       ) : (
         <Link
-          href={`/${section}?filter=${filter}&page=${
+          href={`/${section}/${petType ? petType : ''}?filter=${filter}&page=${
             parseInt(currentPage) + 1
           }`}
         >

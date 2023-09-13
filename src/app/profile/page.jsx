@@ -10,11 +10,14 @@ import { useEffect, useState } from 'react';
 import { checkValidPassword } from '@/helpers/check-valid-password';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import ImageUpload from '@/components/image-upload/image-upload';
+import checkValidImageUrl from '@/helpers/check-valid-image-url';
 
 export default function ProfilePage() {
   const { data: session } = useSession();
   const oAuthUser = session?.user?.provider === 'google';
   const image = session?.user?.image;
+  const isImageValid = checkValidImageUrl(image);
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
@@ -30,6 +33,9 @@ export default function ProfilePage() {
   const [nameSuccess, setNameSuccess] = useState(false);
   const [passSuccess, setPassSuccess] = useState(false);
   const router = useRouter();
+  console.log(router);
+  const [imageMessage, setImageMessage] = useState('');
+  const [imageErrorMsg, setImageErrorMsg] = useState('');
 
   const onNameSubmit = async (e) => {
     setNameSuccess(false);
@@ -37,7 +43,7 @@ export default function ProfilePage() {
     e.preventDefault();
     try {
       setNameBtnLoading(true);
-      const response = await axios.post('/api/auth/profile/name-change', {
+      const response = await axios.post('/api/auth/profile/info-change', {
         email: session.user.email,
         newName: name,
       });
@@ -104,12 +110,31 @@ export default function ProfilePage() {
     }
   }, [passwordData]);
 
+  const onImageChange = async (imageList) => {
+    try {
+      setImageMessage('');
+      const newImage = imageList;
+      const response = await axios.post('/api/auth/profile/info-change', {
+        email: session.user.email,
+        profileImage: newImage,
+      });
+      setImageMessage(response.data.message);
+      if (response.data.success) {
+        console.log('success');
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        setImageErrorMsg(error?.response?.data?.error);
+      }
+    }
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.infoContainer}>
         <h1>Profile </h1>
         <div>
-          {image ? (
+          {isImageValid ? (
             <Image
               className={styles.profileImage}
               src={image}
@@ -137,8 +162,15 @@ export default function ProfilePage() {
               {session?.user?.isVerified ? 'Verified' : 'Not Verified'}
             </dd>{' '}
           </div>
+          <h3>Change Profile Picture</h3>
+          <dt className={styles.imageUpload}>
+            <ImageUpload profile={true} onImageChange={onImageChange} />
+          </dt>
+          <span className={styles.imageSuccess}>{imageMessage}</span>
+          <span className={styles.imageError}>{imageErrorMsg}</span>
         </dl>
       </div>
+
       <form className={styles.formContainer}>
         <h3 className={styles.formTitle}>Change Your Name</h3>
         <div className={styles.formElements}>

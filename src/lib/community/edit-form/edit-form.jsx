@@ -1,14 +1,13 @@
 'use client';
 
 import CustomButton from '@/components/custom-button/custom-button';
-import Link from 'next/link';
 import styles from './edit-form.module.scss';
 import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
-export default function EditForm({ userId, question, questionId }) {
+export default function EditForm({ question, questionId }) {
   const [updatedQuestion, setUpdatedQuestion] = useState(question);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -19,7 +18,6 @@ export default function EditForm({ userId, question, questionId }) {
     try {
       setIsLoading(true);
       await axios.put('/api/community/questions', {
-        userId: userId,
         updatedQuestion: updatedQuestion,
         questionId: questionId,
       });

@@ -22,29 +22,37 @@ export default async function Adopt({ params, searchParams }) {
         Warning! The sale of pets for monetary gain is strictly prohibited on
         this site. If anyone requests payment, please report it to us.
       </h2>
-      <AdoptFilters petType={petType} params={params.petType} />
-      <div className={styles.adoptList}>
-        {adopts.map((adopt, index) => {
-          return (
-            <Link key={index} href={`/adopt/${params.petType}/${adopt.id}`}>
-              <AdoptCard data={adopt} />
-            </Link>
-          );
-        })}
+      <div className={styles.filters}>
+        <AdoptFilters petType={petType} params={params.petType} />
       </div>
-      {adopts.length > 0 ? (
-        <Pagination
-          section={'adopt'}
-          petType={params.petType}
-          totalPages={totalPages}
-          currentPage={currentPage}
-          filter={filter}
-        />
-      ) : (
-        <div className={styles.noPetsMessage}>
-          There are currently no pets available for adoption from this breed.
-        </div>
-      )}
+      <div className={styles.cardsContainer}>
+        {adopts.length > 0 ? (
+          <div className={styles.cards}>
+            {adopts.map((adopt, index) => {
+              return (
+                <Link key={index} href={`/adopt/${params.petType}/${adopt.id}`}>
+                  <AdoptCard data={adopt} />
+                </Link>
+              );
+            })}
+          </div>
+        ) : (
+          <div className={styles.noPetsMessage}>There is nothing to show.</div>
+        )}
+        {totalPages < 1 ? (
+          ''
+        ) : (
+          <div className={styles.pagination}>
+            <Pagination
+              section={'adopt'}
+              petType={params.petType}
+              totalPages={totalPages}
+              currentPage={currentPage}
+              filter={filter}
+            />
+          </div>
+        )}
+      </div>
     </section>
   );
 }

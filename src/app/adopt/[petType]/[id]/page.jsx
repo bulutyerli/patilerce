@@ -1,17 +1,24 @@
 import styles from './adopt-details.module.scss';
 import { getAdoptById } from '@/lib/adopt/get-adopts';
-import ImageSlider from '@/components/breeds/image-slider/image-slider';
 import CustomButton from '@/components/custom-button/custom-button';
 import Image from 'next/image';
 import ImageGallery from '@/components/image-gallery/image-gallery';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { PiTrash } from 'react-icons/pi';
+import Link from 'next/link';
+import { DeletePosts } from '@/lib/delete-posts/delete-posts';
 
-export default async function AdoptDetails({ params }) {
+export default async function AdoptDetails({ params, searchParams }) {
   const adopt = await getAdoptById(params.id);
   const images = adopt.images;
-  console.log(adopt.user);
   const dateConvert = new Date(adopt.user.createdAt);
   const options = { year: 'numeric', month: 'long' };
   const memberDate = dateConvert.toLocaleString('en-US', options);
+  const session = await getServerSession(authOptions);
+  const userId = session?.user._id;
+  const isUser = userId === adopt.user.id;
+  const showModal = searchParams.modal;
 
   return (
     <div className={styles.container}>
@@ -67,6 +74,18 @@ export default async function AdoptDetails({ params }) {
           </div>
         </dl>
       </section>
+      {isUser && (
+        <span className={styles.delete}>
+          <PiTrash />
+          <Link href={'?modal=true'}>Delete</Link>
+        </span>
+      )}
+      {showModal && (
+        <DeletePosts
+          type={adopt.petType === 'Cat' ? 'adoptCat' : 'adoptDog'}
+          dataId={params.id}
+        />
+      )}
     </div>
   );
 }

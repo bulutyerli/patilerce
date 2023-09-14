@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './image-upload.module.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -16,6 +18,7 @@ export default function ImageUpload({ onImageChange, profile }) {
 
   const handleImageChange = async (e) => {
     try {
+      setImageList([]);
       setIsLoading(true);
       setErrorMessage('');
       if (profile) {

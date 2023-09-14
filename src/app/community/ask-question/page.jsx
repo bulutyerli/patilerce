@@ -5,7 +5,6 @@ import styles from './ask-question.module.scss';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 export default function AskQuestion() {
@@ -14,8 +13,6 @@ export default function AskQuestion() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [disableButton, setDisableButton] = useState(true);
-  const { data: session } = useSession();
-  const userId = session?.user?._id;
   const router = useRouter();
 
   const submitHandler = async (e) => {
@@ -25,7 +22,6 @@ export default function AskQuestion() {
       await axios.post('/api/community/questions', {
         title: title,
         question: question,
-        userId: userId,
       });
       router.push('/community');
       router.refresh();

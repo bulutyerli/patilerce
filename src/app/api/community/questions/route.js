@@ -2,13 +2,17 @@ import connectDB from '@/app/config/db-config';
 import User from '@/models/user-model';
 import Question from '@/models/questions-model';
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../../auth/[...nextauth]/route';
 
 connectDB();
 
 export async function POST(req) {
   try {
+    const session = await getServerSession(authOptions);
+    const userId = session.user._id;
     const reqBody = await req.json();
-    const { title, question, userId } = reqBody;
+    const { title, question } = reqBody;
 
     const user = await User.findById(userId);
 
@@ -47,11 +51,13 @@ export async function POST(req) {
 
 export async function DELETE(req) {
   try {
+    const session = await getServerSession(authOptions);
+    const userId = session.user._id;
     const reqBody = await req.json();
-    const { userId, questionId } = reqBody;
+    const { dataId } = reqBody;
 
     const user = await User.findById(userId);
-    const question = await Question.findById(questionId);
+    const question = await Question.findById(dataId);
 
     if (!user) {
       console.log('no user');
@@ -68,11 +74,12 @@ export async function DELETE(req) {
       throw new Error('Forbidden');
     }
 
-    await Question.deleteOne({ _id: questionId });
-    return NextResponse.json(
-      { message: 'Question successfully deleted' },
-      { success: true }
-    );
+    await Question.deleteOne({ _id: dataId });
+
+    return NextResponse.json({
+      message: 'Question successfully deleted',
+      success: true,
+    });
   } catch (error) {
     return NextResponse.json({ error: error.message });
   }
@@ -80,8 +87,10 @@ export async function DELETE(req) {
 
 export async function PUT(req) {
   try {
+    const session = await getServerSession(authOptions);
+    const userId = session.user._id;
     const reqBody = await req.json();
-    const { userId, questionId, updatedQuestion } = reqBody;
+    const { questionId, updatedQuestion } = reqBody;
 
     const user = await User.findById(userId);
     const question = await Question.findById(questionId);

@@ -18,7 +18,6 @@ import EditForm from '@/lib/community/edit-form/edit-form';
 export default async function QuestionDetails({ params, searchParams }) {
   try {
     const { question } = await getQuestionById(params.id);
-
     const image = question?.user?.image ?? catImage;
     const showModal = searchParams?.modal;
     const editPanel = searchParams?.edit;
@@ -89,9 +88,7 @@ export default async function QuestionDetails({ params, searchParams }) {
                     </Link>
                   </>
                 )}
-            {showModal && (
-              <DeletePosts userId={userId} questionId={questionId} />
-            )}
+            {showModal && <DeletePosts dataId={questionId} type={'question'} />}
           </div>
         </article>
         {auth ? (
@@ -109,7 +106,13 @@ export default async function QuestionDetails({ params, searchParams }) {
         {totalAnswers > 0 ? (
           <div className={styles.answersContainer}>
             {answers.map((answer) => {
-              return <AnswerCard key={answer.id} answer={answer} />;
+              return (
+                <AnswerCard
+                  searchParams={searchParams}
+                  key={answer.id}
+                  answer={answer}
+                />
+              );
             })}
           </div>
         ) : (

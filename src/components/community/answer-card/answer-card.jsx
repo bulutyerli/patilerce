@@ -5,12 +5,13 @@ import { dateConverter } from '@/helpers/date-converter';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
-import CustomButton from '@/components/custom-button/custom-button';
+import { DeletePosts } from '@/lib/delete-posts/delete-posts';
+import { PiTrash } from 'react-icons/pi';
 
-export default async function AnswerCard({ answer }) {
+export default async function AnswerCard({ answer, searchParams }) {
   const image = answer?.user?.image ?? catImage;
   const session = await getServerSession(authOptions);
-
+  const showAnswerModal = searchParams.modalanswer;
   const userId = session?.user?._id;
   const answerUserId = answer.user.id;
   const isUser = userId === answerUserId;
@@ -33,14 +34,12 @@ export default async function AnswerCard({ answer }) {
       <p className={styles.answer}>{answer.answer}</p>
       {isUser && (
         <div className={styles.delete}>
-          <Link href={`/community/delete/${answer.id}`}>
-            <CustomButton
-              style={'primary'}
-              size={'small'}
-              text={'Delete'}
-            ></CustomButton>
-          </Link>
+          <PiTrash />
+          <Link href={`?modalanswer=${answer.id}`}>Delete</Link>
         </div>
+      )}
+      {showAnswerModal && (
+        <DeletePosts type={'answer'} dataId={showAnswerModal} />
       )}
     </article>
   );

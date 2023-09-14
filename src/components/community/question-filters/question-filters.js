@@ -3,15 +3,35 @@
 import styles from './question-filters.module.scss';
 import CustomButton from '@/components/custom-button/custom-button';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export default function QuestionFilters({ filter, session }) {
   const [showFilters, setShowFilters] = useState(false);
+  const menuRef = useRef();
 
   const handleFiltersClick = () => {
     setShowFilters(!showFilters);
   };
   const filters = ['all', `${session ? 'my' : ''}`, 'noanswer'];
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        menuRef.current &&
+        showFilters &&
+        !menuRef.current.contains(event.target) &&
+        !event.target.classList.contains(styles.filterBtn)
+      ) {
+        setShowFilters(false);
+      }
+    }
+
+    document.body.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showFilters]);
 
   return (
     <section className={styles.container}>
@@ -24,6 +44,7 @@ export default function QuestionFilters({ filter, session }) {
             style="accent"
           ></CustomButton>
           <nav
+            ref={menuRef}
             className={`${styles.filters} ${
               showFilters ? styles.showFilters : ''
             }`}

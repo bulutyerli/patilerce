@@ -22,8 +22,6 @@ export async function POST(req) {
       phoneNumber: formPhone,
     } = reqBody.formData;
 
-    console.log(reqBody);
-
     const session = await getServerSession(authOptions);
     const id = session.user._id;
 
@@ -67,5 +65,41 @@ export async function POST(req) {
     });
   } catch (error) {
     console.log(error.message);
+  }
+}
+
+export async function DELETE(req) {
+  try {
+    const session = await getServerSession(authOptions);
+    const userId = session.user._id;
+    const reqBody = await req.json();
+    const { dataId } = reqBody;
+
+    const user = await User.findById(userId);
+    const adopt = await Adopt.findById(dataId);
+
+    if (!user) {
+      console.log('no user');
+      throw new Error('There is no user');
+    }
+
+    if (!adopt) {
+      console.log('no adopt listing');
+
+      throw new Error('Adopt listing not found');
+    }
+
+    if (user.id.toString() !== adopt.user._id.toString()) {
+      throw new Error('Forbidden');
+    }
+
+    await Adopt.deleteOne({ _id: dataId });
+
+    return NextResponse.json({
+      message: 'Adopt listing successfully deleted',
+      success: true,
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error.message });
   }
 }

@@ -5,32 +5,105 @@
   display: flex;
   justify-content: space-around;
   position: relative;
+  gap: 1rem;
 
-  .modal {
+  .modal,
+  .desktopFilter {
     position: absolute;
+    top: 1rem;
     width: 100%;
-    max-height: 25rem;
-    overflow: scroll;
-    background-color: $gray-1;
-    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    background-color: $gray-2;
 
     ul {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
       list-style: none;
+      height: 15rem;
+      overflow: scroll;
+      border: 2px solid $gray-4;
+      scrollbar-width: thin; /* For Firefox */
+      width: 100%;
+      h2 {
+        text-align: center;
+        font-size: 0.9rem;
+        background-color: $secondary-color;
+        padding: 0.3rem;
+        color: $gray-2;
+      }
+
+      &::-webkit-scrollbar {
+        width: 0.7rem; /* For Chrome, Safari, and Opera */
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $gray-2; /* Track color */
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $gray-3; /* Thumb color */
+        border-radius: 1rem; /* Rounder thumb */
+        border: 1px solid $gray-4; /* Border color of the thumb */
+      }
+
+      &::-webkit-scrollbar-corner {
+        background-color: $gray-2;
+      }
 
       li {
-        padding: 1rem;
+        margin-top: 0.5rem;
+        border-bottom: 2px solid $gray-3;
+        padding-bottom: 0.5rem;
+        text-indent: 1rem;
+      }
+
+      a {
+        text-decoration: none;
+        color: $gray-8;
+        font-size: 0.8rem;
+      }
+
+      .myListings {
+        text-align: center;
+        margin-bottom: 0.5rem;
+        background-color: $gray-7;
 
         a {
+          color: $gray-2;
           text-decoration: none;
-          color: $gray-7;
           font-size: 0.9rem;
         }
       }
-      :nth-child(2) {
-        border-top: 2px solid $gray-3;
+    }
+  }
+  .desktopFilter {
+    display: none;
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .listButton {
+    align-self: center;
+    justify-self: flex-start;
+  }
+  .container {
+    flex-direction: column;
+
+    .mobileFilter {
+      display: none;
+    }
+
+    .desktopFilter {
+      display: flex;
+      position: relative;
+      top: 0;
+      margin-top: 0;
+
+      ul {
+        height: 20rem;
+        width: 12rem;
       }
     }
   }

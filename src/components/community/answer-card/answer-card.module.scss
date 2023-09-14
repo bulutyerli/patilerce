@@ -49,8 +49,10 @@
     grid-column: 12/13;
     grid-row: 11/12;
     color: $primary-color;
-    justify-self: end;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 
     a {
       text-decoration: none;

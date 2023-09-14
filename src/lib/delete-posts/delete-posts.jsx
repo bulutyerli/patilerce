@@ -3,11 +3,11 @@
 import { useRouter } from 'next/navigation';
 import CustomButton from '../../components/custom-button/custom-button';
 import styles from './delete-posts-modal.module.scss';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-export function DeletePosts({ userId, questionId }) {
+export function DeletePosts({ dataId, type }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -16,16 +16,38 @@ export function DeletePosts({ userId, questionId }) {
   }, []);
 
   const deleteHandler = async () => {
+    let deleteRoute;
+    let routeToPush;
+    if (type === 'question') {
+      deleteRoute = '/api/community/questions';
+      routeToPush = '/community';
+    } else if (type === 'answer') {
+      deleteRoute = '/api/community/answers';
+      routeToPush = '/community';
+    } else if (type === 'adoptCat') {
+      deleteRoute = '/api/adopt';
+      routeToPush = '/adopt/cats';
+    } else if (type === 'adoptDog') {
+      deleteRoute = '/api/adopt';
+      routeToPush = '/adopt/dogs';
+    } else {
+      throw new Error('Route not found');
+    }
+
     try {
-      await axios.delete('/api/community/questions', {
+      const response = await axios.delete(deleteRoute, {
         data: {
-          userId: userId,
-          questionId: questionId,
+          dataId: dataId,
         },
       });
-      toast.success('Your question deleted');
-      router.push('/community');
-      router.refresh();
+
+      if (response.data.success) {
+        toast.success(`Your post successfuly deleted`);
+        router.push(routeToPush);
+        router.refresh();
+      } else {
+        throw new Error(response.data.error);
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -33,7 +55,7 @@ export function DeletePosts({ userId, questionId }) {
 
   return (
     <div className={styles.container}>
-      <p>Your question will be deleted.</p>
+      <p>Your post will be deleted.</p>
       <p>Are you sure?</p>
       <div className={styles.buttonContainer}>
         <CustomButton

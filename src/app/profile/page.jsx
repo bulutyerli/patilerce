@@ -33,7 +33,6 @@ export default function ProfilePage() {
   const [nameSuccess, setNameSuccess] = useState(false);
   const [passSuccess, setPassSuccess] = useState(false);
   const router = useRouter();
-  console.log(router);
   const [imageMessage, setImageMessage] = useState('');
   const [imageErrorMsg, setImageErrorMsg] = useState('');
 
@@ -53,7 +52,6 @@ export default function ProfilePage() {
 
       setNameResMessage(response.data.message);
       setNameSuccess(true);
-      router.refresh();
     } catch (error) {
       if (error.response && error.response.data) {
         const errorMsg = error?.response?.data?.error;
@@ -66,6 +64,7 @@ export default function ProfilePage() {
   };
 
   const onPasswordSubmit = async (e) => {
+    setPassSuccess(false);
     e.preventDefault();
     try {
       setIsLoading(true);
@@ -113,14 +112,13 @@ export default function ProfilePage() {
   const onImageChange = async (imageList) => {
     try {
       setImageMessage('');
-      const newImage = imageList;
-      const response = await axios.post('/api/auth/profile/info-change', {
-        email: session.user.email,
-        profileImage: newImage,
-      });
-      setImageMessage(response.data.message);
-      if (response.data.success) {
-        console.log('success');
+      if (checkValidImageUrl(imageList)) {
+        const newImage = imageList;
+        const response = await axios.post('/api/auth/profile/info-change', {
+          email: session.user.email,
+          profileImage: newImage,
+        });
+        setImageMessage(response.data.message);
       }
     } catch (error) {
       if (error.response && error.response.data) {
@@ -162,7 +160,7 @@ export default function ProfilePage() {
               {session?.user?.isVerified ? 'Verified' : 'Not Verified'}
             </dd>{' '}
           </div>
-          <h3>Change Profile Picture</h3>
+          <h3 className={styles.formTitle}>Change Profile Picture</h3>
           <dt className={styles.imageUpload}>
             <ImageUpload profile={true} onImageChange={onImageChange} />
           </dt>

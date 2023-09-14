@@ -17,13 +17,21 @@ export default function AdoptFilters({ petType, params }) {
 
   return (
     <div className={styles.container}>
-      <Link href={'/adopt/listing'}>
+      <Link className={styles.listButton} href={'/adopt/listing'}>
         <CustomButton style={'secondary'} text={'List a Pet'} />
       </Link>
-      <CustomButton onClick={modalHandler} text={'Filters'} />
+
+      <div className={styles.mobileFilter}>
+        <CustomButton onClick={modalHandler} text={'Filters'} />
+      </div>
       {showModal && (
         <div className={styles.modal}>
           <ul>
+            <h2 className={styles.myListings}>
+              <Link href={`?filter=my`}>My Listings</Link>
+            </h2>
+            <h2>Filter by Breed</h2>
+
             <li>
               <Link onClick={modalHandler} href={`${params}`}>
                 All
@@ -42,6 +50,25 @@ export default function AdoptFilters({ petType, params }) {
           </ul>
         </div>
       )}
+      <div className={styles.desktopFilter}>
+        <ul>
+          <h2 className={styles.myListings}>
+            <Link href={`?filter=my`}>My Listings</Link>
+          </h2>
+          <h2>Filter by Breed</h2>
+          <li>
+            <Link href={`${params}`}>All</Link>
+          </li>
+          {filterBreeds.map((breed, index) => {
+            const breedUrl = breed.replaceAll(' ', '-').toLowerCase();
+            return (
+              <li key={index} value={breed}>
+                <Link href={`?breed=${breedUrl}`}>{breed}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }

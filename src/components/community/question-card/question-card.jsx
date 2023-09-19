@@ -11,11 +11,23 @@ export default async function QuestionCard({ data }) {
   let longQuestion;
   let formattedQuestion;
 
-  if (data.question.split(' ').length < 50) {
+  const wordCount = data.question.split(' ').length;
+  const lineCount = data.question.split('\n').length;
+
+  if (wordCount < 50 && lineCount < 7) {
     formattedQuestion = data.question;
   } else {
-    formattedQuestion = data.question.split(' ').slice(0, 50).join(' ');
-    longQuestion = true;
+    // Truncate based on word count if word count is too high
+    if (wordCount > 50) {
+      formattedQuestion = data.question.split(' ').slice(0, 50).join(' ');
+      longQuestion = true;
+    }
+
+    // Truncate based on line count if line count is too high
+    if (lineCount > 6) {
+      formattedQuestion = data.question.split('\n').slice(0, 6).join('\n');
+      longQuestion = true;
+    }
   }
 
   const totalAnswers = await getAnswersCount(data?.id);

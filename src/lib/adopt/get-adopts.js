@@ -3,6 +3,9 @@ import Adopt from '@/models/adopt-model';
 import User from '@/models/user-model';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
+import connectDB from '@/app/config/db-config';
+
+connectDB();
 
 export const dynamic = 'force-dynamic';
 
@@ -63,6 +66,34 @@ export async function getAdoptById(id) {
 
     return adopt;
   } catch (error) {
-    throw new Error(error.message);
+    console.error(error.message);
+  }
+}
+
+export async function getBreedCounts(petType) {
+  try {
+    const breedCounts = await Adopt.aggregate([
+      {
+        $match: {
+          petType: petType, // Filter by petType (e.g., 'Cat' or 'Dog')
+        },
+      },
+      {
+        $group: {
+          _id: '$breed', // Group by breed name
+          count: { $sum: 1 }, // Count the number of listings for each breed
+        },
+      },
+      {
+        $sort: {
+          _id: 1,
+        },
+      },
+    ]);
+
+    return breedCounts;
+  } catch (error) {
+    console.error('Error fetching breed counts:', error);
+    return [];
   }
 }

@@ -14,25 +14,35 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     margin-top: 1rem;
     background-color: $gray-2;
+    border: 2px solid $gray-4;
+    align-self: center;
+
+    h2 {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 0.2rem;
+      color: $gray-2;
+      background-color: $secondary-color;
+      width: 100%;
+      cursor: pointer;
+      text-align: left;
+      text-indent: 1rem;
+      a {
+        color: $gray-2;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+    }
 
     ul {
       list-style: none;
-      height: 15rem;
-      overflow: scroll;
-      border: 2px solid $gray-4;
-      scrollbar-width: thin; /* For Firefox */
+      max-height: 15rem;
       width: 100%;
-      h2 {
-        text-align: center;
-        font-size: 0.9rem;
-        background-color: $secondary-color;
-        padding: 0.3rem;
-        color: $gray-2;
-      }
+      overflow: scroll;
+      scrollbar-width: thin; /* For Firefox */
 
       &::-webkit-scrollbar {
         width: 0.7rem; /* For Chrome, Safari, and Opera */
@@ -53,27 +63,17 @@
       }
 
       li {
-        margin-top: 0.5rem;
         border-bottom: 2px solid $gray-3;
-        padding-bottom: 0.5rem;
+        padding: 0.5rem 0;
         text-indent: 1rem;
-      }
+        display: flex;
+        justify-content: space-between;
 
-      a {
-        text-decoration: none;
-        color: $gray-8;
-        font-size: 0.8rem;
-      }
-
-      .myListings {
-        text-align: center;
-        margin-bottom: 0.5rem;
-        background-color: $gray-7;
-
-        a {
-          color: $gray-2;
+        a,
+        span {
           text-decoration: none;
-          font-size: 0.9rem;
+          color: $gray-8;
+          font-size: 0.8rem;
         }
       }
     }
@@ -100,11 +100,7 @@
       position: relative;
       top: 0;
       margin-top: 0;
-
-      ul {
-        height: 20rem;
-        width: 12rem;
-      }
+      width: 90%;
     }
   }
 }

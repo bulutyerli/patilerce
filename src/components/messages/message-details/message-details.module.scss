@@ -1,0 +1,60 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0.25rem 1rem;
+  overflow: scroll;
+  scrollbar-width: thin; /* For Firefox */
+
+  &::-webkit-scrollbar {
+    width: 0.7rem; /* For Chrome, Safari, and Opera */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $gray-2; /* Track color */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray-3; /* Thumb color */
+    border-radius: 1rem; /* Rounder thumb */
+    border: 1px solid $gray-4; /* Border color of the thumb */
+    &:hover {
+      background-color: $accent-color;
+    }
+  }
+
+  &::-webkit-scrollbar-corner {
+    background-color: $gray-2;
+  }
+
+  .user,
+  .otherUser {
+    position: relative;
+    border: 2px solid $gray-4;
+    max-width: 45%;
+    padding: 1.5rem 1rem;
+    margin-bottom: 0.25rem;
+    border-radius: 1rem;
+
+    .time {
+      position: absolute;
+      font-size: 0.6rem;
+      right: 0.5rem;
+      bottom: 0.25rem;
+      color: $gray-5;
+    }
+  }
+
+  .user {
+    background-color: $secondary-color;
+    color: $gray-4;
+    align-self: flex-end;
+  }
+  .otherUser {
+    color: $accent-color;
+    background-color: $gray-1-2;
+    align-self: flex-start;
+  }
+}

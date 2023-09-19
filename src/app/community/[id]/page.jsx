@@ -11,8 +11,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import NotFound from '@/app/not-found';
 import AnswerHandler from '@/lib/community/answer-handler/answer-handler';
 import AnswerCard from '@/components/community/answer-card/answer-card';
-import { PiChatCircleBold } from 'react-icons/pi';
-import CustomButton from '@/components/custom-button/custom-button';
+import { PiChatCircleBold, PiTrash, PiPencil } from 'react-icons/pi';
 import EditForm from '@/lib/community/edit-form/edit-form';
 
 export default async function QuestionDetails({ params, searchParams }) {
@@ -63,29 +62,21 @@ export default async function QuestionDetails({ params, searchParams }) {
             <PiChatCircleBold className={styles.icon} />
             <div className={styles.badge}>{totalAnswers}</div>
           </div>
-          <div className={styles.actionButtons}>
+          <div className={styles.userButtons}>
             {editPanel
               ? ''
               : isUser && (
                   <>
-                    <Link href={`/community/${question.id}/?edit=true`}>
-                      <CustomButton
-                        size={'small'}
-                        text={'Edit'}
-                        style={'secondary'}
-                        className={styles.edit}
-                      ></CustomButton>
-                    </Link>
-                    <Link
-                      className={styles.delete}
-                      href={`/community/${question.id}/?modal=true`}
-                    >
-                      <CustomButton
-                        style={'primary'}
-                        size={'small'}
-                        text={'Delete'}
-                      ></CustomButton>
-                    </Link>
+                    <div className={styles.edit}>
+                      <PiPencil />
+                      <Link href={`/community/${question.id}/?edit=true`}>
+                        Edit
+                      </Link>
+                    </div>
+                    <div className={styles.delete}>
+                      <PiTrash />
+                      <Link href={`?modal=true`}>Delete</Link>
+                    </div>
                   </>
                 )}
             {showModal && <DeletePosts dataId={questionId} type={'question'} />}

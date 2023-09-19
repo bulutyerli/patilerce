@@ -1,0 +1,30 @@
+@use '/src/styles/variables.module' as *;
+
+.formContainer {
+  grid-row: 12/13;
+  align-self: flex-end;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+
+  form {
+    textarea {
+      width: 100%;
+      max-height: 4rem;
+      resize: none;
+      border: 1px solid $gray-4;
+      padding: 0.5rem;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px inset;
+      background-color: $gray-1;
+      border-radius: 1rem;
+      &:focus {
+        outline: none;
+        border: 2px solid $accent-color;
+      }
+    }
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0.25rem;
+    }
+  }
+}

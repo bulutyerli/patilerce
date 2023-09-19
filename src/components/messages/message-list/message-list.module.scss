@@ -1,0 +1,14 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+
+  .messageCard {
+    a {
+      text-decoration: none;
+    }
+  }
+}

@@ -13,15 +13,16 @@ export default function ImageUpload({ onImageChange, profile }) {
 
   useEffect(() => {
     onImageChange(imageList, success);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageList]);
 
   const handleImageChange = async (e) => {
     try {
-      setImageList([]);
       setIsLoading(true);
       setErrorMessage('');
       if (profile) {
+        setImageList([]);
         if (imageList.length > 1) {
           throw new Error('You can not upload more than 1 image');
         }
@@ -37,7 +38,7 @@ export default function ImageUpload({ onImageChange, profile }) {
       setImageList((prevImages) => [...prevImages, ...imageLink]);
       setSuccess(true);
     } catch (error) {
-      const errorMsg = error.response.data.error;
+      const errorMsg = error.message;
       setErrorMessage(errorMsg);
     } finally {
       setIsLoading(false);

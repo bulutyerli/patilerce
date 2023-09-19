@@ -6,7 +6,7 @@ import styles from './answer-handler.module.scss';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-export default function AnswerHandler({ userId, questionId }) {
+export default function AnswerHandler({ questionId }) {
   const [answer, setAnswer] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);

@@ -1,9 +1,10 @@
-import { getAdopts } from '@/lib/adopt/get-adopts';
+import { getAdopts, getBreedCounts } from '@/lib/adopt/get-adopts';
 import styles from './adopt.module.scss';
 import AdoptCard from '@/components/adopt/adopt-card/adopt-card';
 import Pagination from '@/components/pagination/pagination';
 import AdoptFilters from '@/components/adopt/adopt-filters/adopt-filters';
 import Link from 'next/link';
+import breedsList from '@/helpers/breeds-list.json';
 
 export default async function Adopt({ params, searchParams }) {
   const petType = params.petType === 'cats' ? 'Cat' : 'Dog';
@@ -15,6 +16,9 @@ export default async function Adopt({ params, searchParams }) {
     petType
   );
 
+  const petNamesWithCounts = await getBreedCounts(petType);
+  console.log(petNamesWithCounts);
+
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>{petType} Adoption</h1>
@@ -23,7 +27,7 @@ export default async function Adopt({ params, searchParams }) {
         this site. If anyone requests payment, please report it to us.
       </h2>
       <div className={styles.filters}>
-        <AdoptFilters petType={petType} params={params.petType} />
+        <AdoptFilters filterList={petNamesWithCounts} params={params.petType} />
       </div>
       <div className={styles.cardsContainer}>
         {adopts.length > 0 ? (

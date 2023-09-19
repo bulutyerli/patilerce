@@ -57,6 +57,7 @@
       grid-row: 5/11;
       padding-top: 1rem;
       border-top: 2px solid rgba(0, 0, 0, 0.2);
+      white-space: pre-wrap;
 
       .editQuestionForm {
         display: flex;
@@ -75,13 +76,35 @@
       }
     }
 
-    .actionButtons {
+    .userButtons {
       grid-column: 1/-1;
       grid-row: 12/13;
       justify-self: end;
       display: flex;
       gap: 1rem;
       align-items: center;
+      .edit,
+      .delete {
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+      }
+      .edit {
+        color: $secondary-color;
+        a {
+          text-decoration: none;
+          color: $secondary-color;
+          font-size: 0.8rem;
+        }
+      }
+      .delete {
+        color: $primary-color;
+        a {
+          text-decoration: none;
+          color: $primary-color;
+          font-size: 0.8rem;
+        }
+      }
     }
   }
   .iconContainer {

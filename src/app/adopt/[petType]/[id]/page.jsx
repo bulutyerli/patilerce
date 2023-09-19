@@ -70,7 +70,9 @@ export default async function AdoptDetails({ params, searchParams }) {
             <dd>{adopt.phoneNumber ? adopt.phoneNumber : ''}</dd>
           </div>
           <div className={styles.messageBtn}>
-            <CustomButton text={'Message'} />
+            <Link href={`/messages?to=${adopt.user.id}`}>
+              <CustomButton text={'Message'} />
+            </Link>
           </div>
         </dl>
       </section>

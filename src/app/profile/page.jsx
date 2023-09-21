@@ -12,7 +12,7 @@ import axios from 'axios';
 import ImageUpload from '@/components/image-upload/image-upload';
 import checkValidImageUrl from '@/helpers/check-valid-image-url';
 
-export default function ProfilePage() {
+export default function ProfileSettingsPage() {
   const { data: session } = useSession();
   const oAuthUser = session?.user?.provider === 'google';
   const image = session?.user?.image;

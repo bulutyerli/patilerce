@@ -25,9 +25,16 @@ export default function ListingForm({ petData, isEdit, adoptId }) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log(formData.title.length);
+
     setFormData({
       ...formData,
-      [name]: value,
+      [name]:
+        name === 'title'
+          ? value.slice(0, 60)
+          : name === 'details'
+          ? value.slice(0, 1000)
+          : value,
     });
   };
 
@@ -85,8 +92,8 @@ export default function ListingForm({ petData, isEdit, adoptId }) {
               value={formData.title}
               onChange={handleInputChange}
               required
-              maxLength={40}
-              placeholder="Maximum 40 letters"
+              maxLength={60}
+              placeholder="Maximum 60 letters"
             />
           </div>
 
@@ -98,6 +105,7 @@ export default function ListingForm({ petData, isEdit, adoptId }) {
               value={formData.details}
               onChange={handleInputChange}
               required
+              maxLength={1000}
               placeholder="Provide details about the pet (e.g., personality, special needs, last home)"
             ></textarea>
           </div>

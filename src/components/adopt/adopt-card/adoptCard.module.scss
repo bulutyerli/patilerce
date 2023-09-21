@@ -9,7 +9,6 @@
   width: 9rem;
   height: 13rem;
   background-color: $gray-1;
-  justify-content: flex-start;
   align-items: center;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 
@@ -25,9 +24,15 @@
     height: 100%;
     word-break: break-all;
     justify-content: space-between;
+    width: 100%;
+    text-align: center;
 
     * {
       font-size: 0.8rem;
+    }
+
+    .breed {
+      color: $secondary-color;
     }
 
     .title {

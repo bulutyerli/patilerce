@@ -24,16 +24,24 @@
       text-align: center;
       font-size: 0.9rem;
       padding: 0.2rem;
-      color: $gray-2;
-      background-color: $secondary-color;
+      color: $gray-6;
+      background-color: $gray-4;
       width: 100%;
       cursor: pointer;
       text-align: left;
       text-indent: 1rem;
       a {
-        color: $gray-2;
+        color: $gray-6;
         text-decoration: none;
         font-size: 0.9rem;
+      }
+
+      &.active {
+        background-color: $secondary-color;
+        color: $gray-3;
+        a {
+          color: $gray-3;
+        }
       }
     }
 
@@ -68,6 +76,13 @@
         text-indent: 1rem;
         display: flex;
         justify-content: space-between;
+
+        &.active {
+          a {
+            font-weight: 900;
+            color: $secondary-color;
+          }
+        }
 
         a,
         span {

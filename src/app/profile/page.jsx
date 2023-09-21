@@ -9,7 +9,6 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { checkValidPassword } from '@/helpers/check-valid-password';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
 import ImageUpload from '@/components/image-upload/image-upload';
 import checkValidImageUrl from '@/helpers/check-valid-image-url';
 
@@ -32,7 +31,6 @@ export default function ProfilePage() {
   const [passwordResMessage, setPasswordResMessage] = useState('');
   const [nameSuccess, setNameSuccess] = useState(false);
   const [passSuccess, setPassSuccess] = useState(false);
-  const router = useRouter();
   const [imageMessage, setImageMessage] = useState('');
   const [imageErrorMsg, setImageErrorMsg] = useState('');
 
@@ -162,7 +160,11 @@ export default function ProfilePage() {
           </div>
           <h3 className={styles.formTitle}>Change Profile Picture</h3>
           <dt className={styles.imageUpload}>
-            <ImageUpload profile={true} onImageChange={onImageChange} />
+            <ImageUpload
+              images={''}
+              profile={true}
+              onImageChange={onImageChange}
+            />
           </dt>
           <span className={styles.imageSuccess}>{imageMessage}</span>
           <span className={styles.imageError}>{imageErrorMsg}</span>

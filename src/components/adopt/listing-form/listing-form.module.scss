@@ -1,0 +1,134 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  h1 {
+    color: $secondary-color;
+  }
+
+  .formContainer {
+    border-top: 2px solid $accent-color;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 2rem;
+    justify-content: space-around;
+    position: relative;
+    margin-top: 2rem;
+    padding-top: 2rem;
+
+    .dogsImage {
+      position: absolute;
+      margin-top: -3.75rem;
+      height: 2rem;
+      width: auto;
+    }
+
+    .formHalf {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      label {
+        color: $gray-7;
+        display: flex;
+        gap: 1rem;
+      }
+      label,
+      input,
+      textarea,
+      select {
+        font-size: 0.9rem;
+      }
+      input,
+      textarea,
+      select {
+        padding: 0.2rem;
+        border-radius: 0.5rem;
+        border: 1px solid $gray-4;
+        height: 2rem;
+        width: 15rem;
+        box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+
+        &:focus {
+          outline: none;
+          border: 2px solid $accent-color;
+        }
+      }
+
+      span {
+        color: $gray-7;
+        font-size: 0.9rem;
+        display: flex;
+        margin-bottom: 0.5rem;
+      }
+
+      textarea {
+        resize: none;
+        min-height: 5rem;
+      }
+
+      .fieldGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .contact {
+          color: $accent-color;
+          border-top: 1px solid $gray-5;
+          padding-top: 1rem;
+          text-align: center;
+          align-self: center;
+        }
+
+        .genderButtons {
+          font-size: 0.85rem;
+          color: $gray-8;
+          display: flex;
+          gap: 1rem;
+
+          input[type='radio'] {
+            appearance: none;
+            background-color: $gray-1;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+
+            &:checked {
+              background-color: $secondary-color;
+            }
+          }
+        }
+      }
+    }
+
+    .submitButton {
+      align-self: center;
+    }
+  }
+
+  .errorMessage {
+    color: $primary-color;
+    align-self: center;
+  }
+}
+
+@media (min-width: 544px) {
+  .container {
+    .formContainer {
+      justify-content: space-around;
+
+      .dogsImage {
+        margin-top: -4.6rem;
+        height: 3rem;
+        width: auto;
+      }
+    }
+  }
+}

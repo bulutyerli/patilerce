@@ -3,11 +3,13 @@
 import styles from './message-form.module.scss';
 import CustomButton from '@/components/custom-button/custom-button';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function MessageForm({ searchParams }) {
   const [message, setMessage] = useState('');
+  const [isDisable, setIsDisable] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const receiverUser = searchParams.to;
   const router = useRouter();
 
@@ -15,6 +17,7 @@ export default function MessageForm({ searchParams }) {
     e.preventDefault();
 
     try {
+      setIsLoading(true);
       const response = await axios.post('/api/messages', {
         receiverId: receiverUser,
         content: message,
@@ -26,8 +29,17 @@ export default function MessageForm({ searchParams }) {
       console.error(error.message);
     } finally {
       setMessage('');
+      setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (message.length > 0 && receiverUser) {
+      setIsDisable(false);
+    } else {
+      setIsDisable(true);
+    }
+  }, [message, receiverUser]);
 
   return (
     <div className={styles.formContainer}>
@@ -48,6 +60,8 @@ export default function MessageForm({ searchParams }) {
               sendMessage(e);
             }}
             text={'Send'}
+            disableBtn={isDisable}
+            isLoading={isLoading}
           />
         </div>
       </form>

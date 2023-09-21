@@ -16,6 +16,7 @@ export const authOptions = {
   },
   session: {
     strategy: 'jwt',
+    maxAge: 1 * 24 * 60 * 60,
   },
 
   providers: [
@@ -70,6 +71,7 @@ export const authOptions = {
     },
     async session({ session, token }) {
       session.user = token.user;
+
       return session;
     },
   },

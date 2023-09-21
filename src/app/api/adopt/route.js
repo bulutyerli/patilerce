@@ -103,3 +103,29 @@ export async function DELETE(req) {
     return NextResponse.json({ error: error.message });
   }
 }
+
+export async function PUT(req) {
+  try {
+    const session = await getServerSession(authOptions);
+    const userId = session.user._id;
+    const reqBody = await req.json();
+    const { adoptId, formData } = reqBody;
+    console.log('this is formdata:', formData);
+
+    if (!userId) {
+      console.log('no user');
+      throw new Error('There is no user');
+    }
+
+    const adopt = await Adopt.findByIdAndUpdate(adoptId, formData, {
+      new: true,
+    });
+    if (!adopt) {
+      return NextResponse.json({ error: 'No listing found' });
+    }
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.log(error.message);
+    return NextResponse.json({ error: error.message });
+  }
+}

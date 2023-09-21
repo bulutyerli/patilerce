@@ -16,29 +16,107 @@
   }
 
   .receiverCard {
-    grid-column: 2/-1;
+    grid-column: 1/-1;
     grid-row: 2/3;
+    position: relative;
+    display: none;
+    &.show {
+      display: block;
+    }
+
+    .closeIcon {
+      position: absolute;
+      right: 0.5rem;
+      top: 0.5rem;
+
+      a {
+        color: $primary-color;
+      }
+    }
   }
 
   .messageList {
-    grid-column: 1/2;
+    grid-column: 1/-1;
     grid-row: 2/-1;
     max-height: 100%;
     border: 2px solid $gray-5;
     background-color: $gray-4;
-    border-right: none;
+    display: none;
+    &.show {
+      display: block;
+    }
   }
 
   .messageDetails {
-    grid-column: 2/-1;
+    grid-column: 1/-1;
     grid-row: 3/12;
     border: 2px solid $gray-5;
     background-color: $gray-2;
+    display: none;
+    &.show {
+      display: block;
+    }
   }
 
   .messageForm {
-    grid-column: 2/-1;
+    grid-column: 1/-1;
     grid-row: 12/13;
-    border-left: 2px solid $gray-5;
+    display: none;
+    &.show {
+      display: block;
+    }
+  }
+}
+
+@media (min-width: $medium-screen) {
+  .container {
+    height: 80vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: repeat(12, 1fr);
+
+    h1 {
+      align-self: center;
+      color: $secondary-color;
+      grid-column: 1/-1;
+      grid-row: 1/2;
+      justify-self: center;
+    }
+
+    .receiverCard {
+      grid-column: 2/-1;
+      grid-row: 2/3;
+      display: block;
+    }
+
+    .messageList {
+      grid-column: 1/2;
+      grid-row: 2/-1;
+      max-height: 100%;
+      border: 2px solid $gray-5;
+      background-color: $gray-4;
+      border-right: none;
+      display: block;
+    }
+
+    .messageDetails {
+      grid-column: 2/-1;
+      grid-row: 3/12;
+      border: 2px solid $gray-5;
+      background-color: $gray-2;
+      display: block;
+    }
+
+    .messageForm {
+      grid-column: 2/-1;
+      grid-row: 12/13;
+      border-left: 2px solid $gray-5;
+      display: block;
+    }
+
+    .closeIcon {
+      display: none;
+    }
   }
 }

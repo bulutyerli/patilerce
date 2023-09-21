@@ -29,6 +29,16 @@
     background-color: $gray-2;
   }
 
+  .date {
+    padding: 1rem;
+    text-align: center;
+    color: $gray-6;
+  }
+  .dateContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
   .user,
   .otherUser {
     position: relative;
@@ -37,6 +47,8 @@
     padding: 1.5rem 1rem;
     margin-bottom: 0.25rem;
     border-radius: 1rem;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 
     .time {
       position: absolute;

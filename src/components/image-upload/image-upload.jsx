@@ -4,9 +4,10 @@ import styles from './image-upload.module.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import { PiTrash } from 'react-icons/pi';
 
-export default function ImageUpload({ onImageChange, profile }) {
-  const [imageList, setImageList] = useState([]);
+export default function ImageUpload({ onImageChange, profile, images }) {
+  const [imageList, setImageList] = useState(images);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -45,6 +46,12 @@ export default function ImageUpload({ onImageChange, profile }) {
     }
   };
 
+  const removeImage = (index) => {
+    const updatedImageList = [...imageList];
+    updatedImageList.splice(index, 1);
+    setImageList(updatedImageList);
+  };
+
   return (
     <div className={styles.fileInputContainer}>
       <label htmlFor="images">
@@ -69,8 +76,16 @@ export default function ImageUpload({ onImageChange, profile }) {
           {imageList.map((image, index) => {
             const url = image.toString();
             return (
-              <div key={index}>
+              <div className={styles.images} key={index}>
                 <Image src={url} alt="images" width={50} height={50}></Image>
+                <div
+                  onClick={() => {
+                    removeImage(index);
+                  }}
+                  className={styles.deleteIcon}
+                >
+                  <PiTrash />
+                </div>
               </div>
             );
           })}

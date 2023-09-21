@@ -5,7 +5,7 @@ import Image from 'next/image';
 import ImageGallery from '@/components/image-gallery/image-gallery';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { PiTrash } from 'react-icons/pi';
+import { PiTrash, PiPencil } from 'react-icons/pi';
 import Link from 'next/link';
 import { DeletePosts } from '@/lib/delete-posts/delete-posts';
 
@@ -68,19 +68,29 @@ export default async function AdoptDetails({ params, searchParams }) {
           <div className={styles.infoPair}>
             <dt>Phone Number:</dt>
             <dd>{adopt.phoneNumber ? adopt.phoneNumber : ''}</dd>
-          </div>
-          <div className={styles.messageBtn}>
-            <Link href={`/messages?to=${adopt.user.id}`}>
-              <CustomButton text={'Message'} />
-            </Link>
-          </div>
+          </div>{' '}
+          {userId === adopt.user.id ? (
+            ''
+          ) : (
+            <div className={styles.messageBtn}>
+              <Link href={`/messages?to=${adopt.user.id}`}>
+                <CustomButton text={'Message'} />
+              </Link>
+            </div>
+          )}
         </dl>
       </section>
       {isUser && (
-        <span className={styles.delete}>
-          <PiTrash />
-          <Link href={'?modal=true'}>Delete</Link>
-        </span>
+        <div className={styles.userActions}>
+          <span className={styles.edit}>
+            <PiPencil />
+            <Link href={`/adopt/edit/${adopt.id}`}>Edit</Link>
+          </span>
+          <span className={styles.delete}>
+            <PiTrash />
+            <Link href={'?modal=true'}>Delete</Link>
+          </span>
+        </div>
       )}
       {showModal && (
         <DeletePosts

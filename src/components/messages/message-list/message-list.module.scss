@@ -12,3 +12,11 @@
     }
   }
 }
+
+.noConversation {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  color: $gray-6;
+  padding: 1rem;
+}

@@ -32,6 +32,29 @@
     li {
       margin-bottom: 0.5rem;
     }
+
+    .images {
+      position: relative;
+      .deleteIcon {
+        color: $gray-1-2;
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        display: none;
+        * {
+          border: 1px solid $primary-color;
+          background-color: $primary-color;
+          border-radius: 50%;
+          padding: 1px;
+        }
+      }
+      &:hover {
+        .deleteIcon {
+          display: block;
+        }
+      }
+    }
   }
   .errorMessage {
     margin-top: 1rem;

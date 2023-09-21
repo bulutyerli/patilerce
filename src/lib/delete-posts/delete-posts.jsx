@@ -30,6 +30,9 @@ export function DeletePosts({ dataId, type }) {
     } else if (type === 'adoptDog') {
       deleteRoute = '/api/adopt';
       routeToPush = '/adopt/dogs';
+    } else if (type === 'message') {
+      deleteRoute = '/api/messages';
+      routeToPush = '/messages';
     } else {
       throw new Error('Route not found');
     }

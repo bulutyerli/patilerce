@@ -2,7 +2,6 @@
 
 import styles from './listing.module.scss';
 import ListingForm from '@/components/adopt/listing-form/listing-form';
-import axios from 'axios';
 
 export default function ListingPage() {
   return (

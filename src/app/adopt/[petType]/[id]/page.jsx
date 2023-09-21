@@ -8,6 +8,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { PiTrash, PiPencil } from 'react-icons/pi';
 import Link from 'next/link';
 import { DeletePosts } from '@/lib/delete-posts/delete-posts';
+import AddFavorite from '@/lib/adopt/add-favorite';
 
 export default async function AdoptDetails({ params, searchParams }) {
   const adopt = await getAdoptById(params.id);
@@ -42,6 +43,14 @@ export default async function AdoptDetails({ params, searchParams }) {
         <dt className={styles.infoTitle}>Details:</dt>
         <dd className={styles.info}>{adopt.details}</dd>
       </dl>
+
+      {userId === adopt.user.id ? (
+        ''
+      ) : (
+        <div className={styles.addFavorite}>
+          <AddFavorite favList={adopt.favoritedBy} adoptId={params.id} />
+        </div>
+      )}
 
       <section className={styles.user}>
         <dl>
@@ -80,6 +89,7 @@ export default async function AdoptDetails({ params, searchParams }) {
           )}
         </dl>
       </section>
+
       {isUser && (
         <div className={styles.userActions}>
           <span className={styles.edit}>

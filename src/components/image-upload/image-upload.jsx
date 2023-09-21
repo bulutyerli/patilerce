@@ -73,22 +73,23 @@ export default function ImageUpload({ onImageChange, profile, images }) {
         ''
       ) : (
         <div className={styles.fileList}>
-          {imageList.map((image, index) => {
-            const url = image.toString();
-            return (
-              <div className={styles.images} key={index}>
-                <Image src={url} alt="images" width={50} height={50}></Image>
-                <div
-                  onClick={() => {
-                    removeImage(index);
-                  }}
-                  className={styles.deleteIcon}
-                >
-                  <PiTrash />
+          {imageList &&
+            imageList.map((image, index) => {
+              const url = image.toString();
+              return (
+                <div className={styles.images} key={index}>
+                  <Image src={url} alt="images" width={50} height={50}></Image>
+                  <div
+                    onClick={() => {
+                      removeImage(index);
+                    }}
+                    className={styles.deleteIcon}
+                  >
+                    <PiTrash />
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       )}
     </div>

@@ -124,6 +124,11 @@
     justify-items: center;
     padding-bottom: 2rem;
 
+    .addFavorite {
+      grid-column: 7/-1;
+      grid-row: 2/3;
+    }
+
     .title {
       grid-column: 1/-1;
       grid-row: 1/2;

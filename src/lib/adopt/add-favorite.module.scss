@@ -1,0 +1,19 @@
+@use '/src/styles/variables.module' as *;
+
+.container {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  padding: 0.25rem;
+  color: $gray-7;
+  cursor: pointer;
+
+  span {
+    font-size: 0.75rem;
+    align-self: flex-start;
+  }
+
+  .icon {
+    color: $primary-color;
+  }
+}

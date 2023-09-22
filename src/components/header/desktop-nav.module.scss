@@ -23,10 +23,6 @@
           text-decoration: none;
           color: $secondary-color;
           transition: border-color 0.2s ease-in-out;
-
-          &:hover {
-            border-bottom: 2px solid $accent-color;
-          }
         }
         .login {
           color: $primary-color;
@@ -100,5 +96,30 @@
     display: flex;
     gap: 0.2rem;
     background-color: transparent;
+  }
+
+  .envelopeIcon {
+    position: relative;
+    display: inline-block;
+    display: flex;
+
+    .menuIcon {
+      font-size: 1.1rem;
+    }
+    a {
+      text-decoration: none;
+      color: $gray-7;
+    }
+
+    .messageCount {
+      position: absolute;
+      top: -0.2rem;
+      right: -0.2rem;
+      background-color: $secondary-color;
+      color: $gray-1;
+      border-radius: 50%;
+      padding: 0.1rem 0.2rem;
+      font-size: 0.4rem;
+    }
   }
 }

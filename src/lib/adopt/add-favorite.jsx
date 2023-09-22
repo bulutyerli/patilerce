@@ -39,7 +39,9 @@ export default function AddFavorite({ adoptId, favList }) {
       <div onClick={addFavHandler} className={styles.icon}>
         {favorited ? <PiHeartFill /> : <PiHeart />}
       </div>
-      <span>{favorited ? 'Favorited' : 'Add to Favorite'}</span>
+      <span onClick={addFavHandler}>
+        {favorited ? 'Remove from favorites' : 'Add to favorites'}
+      </span>
     </div>
   );
 }

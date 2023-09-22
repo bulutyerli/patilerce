@@ -1,10 +1,18 @@
 import styles from './adoptCard.module.scss';
 import Image from 'next/image';
 import { dateConverter } from '@/helpers/date-converter';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { PiHeart, PiHeartFill } from 'react-icons/pi';
 
-export default function AdoptCard({ data }) {
+export default async function AdoptCard({ data }) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user?._id;
+  const isFav = data.favoritedBy.some((id) => id === userId);
+
   return (
     <div className={styles.container}>
+      <div>{isFav ? <PiHeartFill className={styles.heart} /> : ''}</div>
       <div>
         <Image
           className={styles.image}

@@ -11,6 +11,7 @@ const messageSchema = new Schema(
       ref: 'user',
     },
     deletedBy: [],
+    readBy: [],
     content: String,
     sentAt: { type: Date, default: Date.now },
     receivedAt: { type: Date, default: Date.now },

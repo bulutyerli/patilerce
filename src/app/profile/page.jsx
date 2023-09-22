@@ -128,7 +128,7 @@ export default function ProfileSettingsPage() {
   return (
     <section className={styles.container}>
       <div className={styles.infoContainer}>
-        <h1>Profile </h1>
+        <h1>Profile Settings </h1>
         <div>
           {isImageValid ? (
             <Image

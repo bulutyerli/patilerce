@@ -4,7 +4,6 @@ import AdoptCard from '@/components/adopt/adopt-card/adopt-card';
 import Pagination from '@/components/pagination/pagination';
 import AdoptFilters from '@/components/adopt/adopt-filters/adopt-filters';
 import Link from 'next/link';
-import breedsList from '@/helpers/breeds-list.json';
 
 export default async function Adopt({ params, searchParams }) {
   const petType = params.petType === 'cats' ? 'Cat' : 'Dog';
@@ -17,7 +16,6 @@ export default async function Adopt({ params, searchParams }) {
   );
 
   const petNamesWithCounts = await getBreedCounts(petType);
-  console.log(petNamesWithCounts);
 
   return (
     <section className={styles.container}>

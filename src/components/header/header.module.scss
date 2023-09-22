@@ -30,9 +30,31 @@
   display: flex;
   align-items: baseline;
   gap: 1rem;
+  .messageIcon {
+    position: relative;
+    display: inline-block;
+    color: $secondary-color;
+    a {
+      text-decoration: none;
+      color: $gray-7;
+    }
+    .messageCount {
+      position: absolute;
+      top: -0.1rem;
+      right: 0rem;
+      background-color: $secondary-color;
+      color: $gray-1;
+      border-radius: 50%;
+      padding: 0.05rem 0.15rem;
+      font-size: 0.5rem;
+    }
+  }
 }
 
 @media (min-width: $medium-screen) {
+  .mobileNavContainer {
+    display: none;
+  }
   .logo {
     height: 4rem;
   }

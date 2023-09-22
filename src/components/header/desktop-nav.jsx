@@ -10,7 +10,8 @@ import {
   PiDog,
   PiCaretDown,
   PiDotsThreeOutlineVerticalBold,
-  PiBellBold,
+  PiEnvelopeSimple,
+  PiEnvelopeSimpleOpen,
   PiEnvelope,
   PiSignOut,
   PiSignIn,
@@ -20,7 +21,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import userNameShort from '@/helpers/short-username';
 
-function DesktopNav() {
+function DesktopNav({ newMessages }) {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [showProfileSub, setProfileSub] = useState(false);
   const [showAdoptSubMenu, setShowAdoptSubMenu] = useState(false);
@@ -167,7 +168,18 @@ function DesktopNav() {
         </ul>
         {session && session.user ? (
           <li ref={profileMenu} className={styles.loginContainer}>
-            <PiBellBold />
+            {session && session.user && newMessages > 0 ? (
+              <Link className={styles.envelopeIcon} href={'messages'}>
+                <PiEnvelopeSimple className={styles.menuIcon} />
+                <div className={styles.messageCount}>{newMessages}</div>
+              </Link>
+            ) : (
+              <div>
+                <Link className={styles.envelopeIcon} href={'messages'}>
+                  <PiEnvelopeSimpleOpen className={styles.menuIcon} />
+                </Link>
+              </div>
+            )}
             <button
               className={styles.subMenuBtn}
               onClick={handleProfileMenuClick}

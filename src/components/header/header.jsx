@@ -1,16 +1,24 @@
 'use client';
 import styles from './header.module.scss';
 import Image from 'next/image';
-import { PiBellBold, PiList, PiX } from 'react-icons/pi';
+import {
+  PiEnvelopeSimple,
+  PiEnvelopeSimpleOpen,
+  PiList,
+  PiX,
+} from 'react-icons/pi';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Nav from './Nav';
 import DesktopNav from './desktop-nav';
 import { useSession } from 'next-auth/react';
 
-export default function Header() {
+export default function Header({ messageCount }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [newMessages, setNewMessages] = useState(0);
   const menu = useRef(null);
+  const { data: session } = useSession();
+  const user = session?.user?._id;
 
   const menuHandler = () => {
     setMenuOpen(!menuOpen);
@@ -38,8 +46,9 @@ export default function Header() {
     };
   }, [menuOpen]);
 
-  const { data: session } = useSession();
-  const authLink = session ? '/profile' : 'sign-in';
+  useEffect(() => {
+    setNewMessages(messageCount);
+  }, [messageCount]);
 
   return (
     <header className={styles.header}>
@@ -54,9 +63,19 @@ export default function Header() {
           ></Image>
         </Link>
         <div className={styles.mobileNavContainer}>
-          <Link className={styles.loginIcon} href={authLink}>
-            <PiBellBold className={styles.menuIcon} />
-          </Link>
+          {user && newMessages > 0 ? (
+            <Link className={styles.messageIcon} href={'messages'}>
+              <PiEnvelopeSimple className={styles.menuIcon} />
+              <div className={styles.messageCount}>{newMessages}</div>
+            </Link>
+          ) : (
+            <div>
+              <Link className={styles.messageIcon} href={'messages'}>
+                <PiEnvelopeSimpleOpen className={styles.menuIcon} />
+              </Link>
+            </div>
+          )}
+
           <div onClick={menuHandler}>
             {menuOpen ? (
               <PiX className={styles.menuIcon} />
@@ -67,7 +86,7 @@ export default function Header() {
         </div>
         <Nav ref={menu} isOpen={menuOpen} onLinkClick={closeMenu} />
 
-        <DesktopNav />
+        <DesktopNav newMessages={newMessages} />
       </nav>
     </header>
   );

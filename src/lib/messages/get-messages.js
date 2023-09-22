@@ -22,6 +22,13 @@ export async function getMessages(otherUserId) {
       ],
     });
 
+    messages.forEach(async (message) => {
+      if (!message.readBy.includes(loggedInUser._id)) {
+        message.readBy.push(loggedInUser._id);
+        await message.save();
+      }
+    });
+
     return messages;
   } catch (error) {
     console.error('Error fetching messages:', error);

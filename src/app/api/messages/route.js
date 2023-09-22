@@ -36,6 +36,7 @@ export async function POST(req) {
       sender: loggedInUser._id,
       receiver: receiverId,
       content: content,
+      readBy: [loggedInUser._id],
     });
 
     await newMessage.save();
@@ -54,6 +55,7 @@ export async function POST(req) {
       sender: loggedInUser._id,
       receiver: receiverId,
       content: content,
+      readBy: [loggedInUser._id],
     });
 
     await newMessage.save();

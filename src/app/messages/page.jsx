@@ -34,9 +34,8 @@ export default async function MessagesPage({ searchParams }) {
     createdAt: message.createdAt.toString(),
     updatedAt: message.updatedAt.toString(),
     deletedBy: message.deletedBy.toString(),
+    readBy: message.readBy.toString(),
   }));
-
-  console.log(otherUserId);
 
   return (
     <div className={styles.container}>

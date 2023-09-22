@@ -25,7 +25,6 @@ export default function ListingForm({ petData, isEdit, adoptId }) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(formData.title.length);
 
     setFormData({
       ...formData,

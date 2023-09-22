@@ -5,6 +5,7 @@ import { Roboto } from 'next/font/google';
 import { NextAuthProvider } from '../components/next-auth-provider';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getUnreadMessages } from '@/lib/messages/get-unread-messages';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -17,12 +18,14 @@ export const metadata = {
   icons: '/favicon.png',
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const messageCount = await getUnreadMessages();
+
   return (
     <html className={roboto.className} lang="en">
       <body>
         <NextAuthProvider>
-          <Header />
+          <Header messageCount={messageCount} />
           {children}
           <ToastContainer autoClose={1000} position="top-center" />
           <Footer />

@@ -18,8 +18,7 @@ export async function getAdopts(req, limit, petType) {
     let query = { petType: petType };
     const totalAdopts = await Adopt.countDocuments(query);
     const userAdopts = await Adopt.countDocuments({ user, petType });
-    const userFavs = await Adopt.countDocuments({ favoritedBy: user._id });
-
+    const userFavs = await Adopt.countDocuments({ favoritedBy: user?._id });
     let totalPages = Math.ceil(totalAdopts / limit);
     const userPages = Math.ceil(userAdopts / limit);
     const favPages = Math.ceil(userFavs / limit);
@@ -29,13 +28,13 @@ export async function getAdopts(req, limit, petType) {
     }
 
     if (filter === 'my') {
-      query = { $and: [{ petType: petType }, { user: user._id }] };
+      query = { $and: [{ petType: petType }, { user: user?._id }] };
       totalPages = userPages;
     }
 
     if (filter === 'fav') {
       query = {
-        $and: [{ petType: petType }, { favoritedBy: user._id }],
+        $and: [{ petType: petType }, { favoritedBy: user?._id }],
       };
       totalPages = favPages;
     }
@@ -61,6 +60,7 @@ export async function getAdopts(req, limit, petType) {
 
     return { adopts, totalPages };
   } catch (error) {
+    console.log(error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

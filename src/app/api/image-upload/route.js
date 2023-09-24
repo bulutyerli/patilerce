@@ -13,7 +13,7 @@ const s3Client = new S3Client({
 
 async function uploadImageToS3(file, fileName) {
   const resizedImageBuffer = await sharp(file)
-    .resize(500, 500) // Specify your desired width or height for resizing
+    .resize(750, 550) // Specify your desired width or height for resizing
     .toBuffer();
 
   const params = {

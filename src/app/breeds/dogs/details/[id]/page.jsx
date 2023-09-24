@@ -29,46 +29,45 @@ export default async function DogDetailsPage({ params }) {
     imageList.push(image.url);
   });
 
-  const temperamentsArray = breedInfo.temperament.split(',');
-  const temperaments = temperamentsArray.map((temperament, i) => {
-    return (
-      <span key={i} className={styles.temperament}>
-        {temperament}
-      </span>
-    );
-  });
+  const temperamentsArray = breedInfo?.temperament?.split(',');
+  const temperaments =
+    temperamentsArray &&
+    temperamentsArray.map((temperament, i) => {
+      return (
+        <span key={i} className={styles.temperament}>
+          {temperament}
+        </span>
+      );
+    });
 
   return (
     <article className={styles.container}>
       <div className={styles.slider}>
         <ImageSlider imageList={imageList} />
       </div>
-      <div className={styles.title}>
-        <h1>{breedInfo.name}</h1>
-      </div>
-
+      <h1 className={styles.title}>{breedInfo.name}</h1>
       <div className={styles.temperaments}>{temperaments}</div>
       <section className={styles.infoContainer}>
         {breedInfo.bred_for ? (
-          <div>
-            <span>Bred for:</span> {breedInfo.bred_for}
+          <div className={styles.info}>
+            <h2>Bred for:</h2> <span>{breedInfo.bred_for}</span>
           </div>
         ) : (
           ''
         )}
 
-        <div>
-          <span>Life Span:</span> {breedInfo.life_span}
+        <div className={styles.info}>
+          <h2>Life Span:</h2> <span>{breedInfo.life_span}</span>
         </div>
-        <div>
-          <span>Breed Group:</span> {breedInfo.breed_group}
+        <div className={styles.info}>
+          <h2>Breed Group:</h2> <span>{breedInfo.breed_group}</span>
         </div>
 
-        <div>
-          <span>Weight Range:</span> {breedInfo.weight.metric} kg
+        <div className={styles.info}>
+          <h2>Weight Range:</h2> <span>{breedInfo.weight.metric} kg</span>
         </div>
-        <div>
-          <span>Height Range:</span> {breedInfo.height.metric} cm
+        <div className={styles.info}>
+          <h2>Height Range:</h2> <span>{breedInfo.height.metric} cm</span>
         </div>
       </section>
     </article>

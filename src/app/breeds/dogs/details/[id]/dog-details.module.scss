@@ -35,18 +35,29 @@
     flex-direction: column;
     gap: 2rem;
     padding-bottom: 1rem;
-    align-items: start;
+    align-items: flex-start;
+    margin: 0 10%;
+    justify-content: space-between;
 
-    div {
-      font-size: 0.9rem;
-    }
+    .info {
+      display: flex;
+      gap: 1rem;
 
-    span {
-      font-size: 0.9rem;
-      font-weight: 500;
+      h2 {
+        white-space: nowrap;
+        color: $gray-7;
+        font-weight: 500;
+        min-width: 6rem;
+      }
+
+      span {
+        color: $gray-7;
+        font-weight: 700;
+      }
     }
   }
 }
+
 @media (min-width: $medium-screen) {
   .container {
     display: grid;

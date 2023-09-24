@@ -51,14 +51,16 @@ export default async function CatDetailsPage({ params }) {
     ? `https://flagcdn.com/60x45/${countryCode}.png`
     : '';
 
-  const temperamentsArray = breedInfo.temperament.split(',');
-  const temperaments = temperamentsArray.map((temperament, i) => {
-    return (
-      <span key={i} className={styles.temperament}>
-        {temperament}
-      </span>
-    );
-  });
+  const temperamentsArray = breedInfo?.temperament?.split(',');
+  const temperaments =
+    temperamentsArray &&
+    temperamentsArray.map((temperament, i) => {
+      return (
+        <span key={i} className={styles.temperament}>
+          {temperament}
+        </span>
+      );
+    });
 
   return (
     <article className={styles.container}>

@@ -16,7 +16,7 @@ export default function ImageGallery({ images, breed }) {
   return (
     <div className={styles.container}>
       <div className={styles.mainImage}>
-        <Image src={mainImage} alt={breed} width={250} height={250}></Image>
+        <Image src={mainImage} alt={breed} width={300} height={225}></Image>
       </div>
       <div className={styles.imageThumbnails}>
         {images.map((image, index) => {

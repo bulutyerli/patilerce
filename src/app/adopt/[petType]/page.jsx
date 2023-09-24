@@ -8,7 +8,7 @@ import Link from 'next/link';
 export default async function Adopt({ params, searchParams }) {
   const petType = params.petType === 'cats' ? 'Cat' : 'Dog';
   const { page: currentPage = 1, filter: filter = 'all' } = searchParams;
-  const limit = 10;
+  const limit = 20;
   const { adopts, totalPages } = await getAdopts(
     { query: searchParams },
     limit,

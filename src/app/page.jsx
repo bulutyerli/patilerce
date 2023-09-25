@@ -53,7 +53,7 @@ export default async function Home() {
         ></Image>
         <div className={styles.cards}>
           <h1>Latest Cats Seeking Loving Homes</h1>
-          {cats.adopts.map((cat, index) => {
+          {cats?.adopts?.map((cat, index) => {
             return (
               <Link key={index} href={`/adopt/cats/${cat._id}`}>
                 <AdoptCard homepage={true} data={cat} />
@@ -72,7 +72,7 @@ export default async function Home() {
         ></Image>
         <div className={styles.cards}>
           <h1>Latest Dogs Seeking Loving Homes</h1>
-          {dogs.adopts.map((cat) => {
+          {dogs?.adopts?.map((cat) => {
             return <AdoptCard homepage={true} key={cat._id} data={cat} />;
           })}
         </div>
@@ -88,7 +88,7 @@ export default async function Home() {
             alt="curious cat"
           ></Image>
         </div>
-        {qdata.questions.map((question, index) => {
+        {qdata?.questions?.map((question, index) => {
           return (
             <div className={styles.questionCard} key={index}>
               <Image

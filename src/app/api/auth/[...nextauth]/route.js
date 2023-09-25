@@ -58,7 +58,7 @@ export const authOptions = {
   ],
 
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account, profile }) {
       if (account.type === 'oauth') {
         return await signInWithOAuth(account, profile);
       }

@@ -11,17 +11,20 @@ import { checkValidPassword } from '@/helpers/check-valid-password';
 import axios from 'axios';
 import ImageUpload from '@/components/image-upload/image-upload';
 import checkValidImageUrl from '@/helpers/check-valid-image-url';
+import catImage from 'public/images/cat-profile.svg';
+import { toast } from 'react-toastify';
 
 export default function ProfileSettingsPage() {
   const { data: session } = useSession();
   const oAuthUser = session?.user?.provider === 'google';
-  const image = session?.user?.image;
+  const image = session?.user?.image ?? catImage;
   const isImageValid = checkValidImageUrl(image);
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
     reEnterNewPassword: '',
   });
+
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isNameBtnLoading, setNameBtnLoading] = useState(false);
@@ -33,6 +36,7 @@ export default function ProfileSettingsPage() {
   const [passSuccess, setPassSuccess] = useState(false);
   const [imageMessage, setImageMessage] = useState('');
   const [imageErrorMsg, setImageErrorMsg] = useState('');
+  const [emailButtonLoading, setEmailButtonLoading] = useState(false);
 
   const onNameSubmit = async (e) => {
     setNameSuccess(false);
@@ -125,6 +129,24 @@ export default function ProfileSettingsPage() {
     }
   };
 
+  const verifyEmailHandler = async () => {
+    try {
+      setEmailButtonLoading(true);
+      const response = await axios.post('/api/auth/new-verify-email', {
+        clientEmail: session?.user?.email,
+      });
+      if (!response.data.success) {
+        throw new Error(response.data.error);
+      }
+      toast.success('A new verification email sent!');
+    } catch (error) {
+      toast.error('Could not send email, try again.');
+      console.log(error.message);
+    } finally {
+      setEmailButtonLoading(false);
+    }
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.infoContainer}>
@@ -154,10 +176,21 @@ export default function ProfileSettingsPage() {
           </div>
           <div>
             <dt>Status:</dt>
-            <dd>
-              {session?.user?.isVerified ? 'Verified' : 'Not Verified'}
-            </dd>{' '}
+            <dd>{session?.user?.isVerified ? 'Verified' : 'Not Verified'}</dd>
+            {session?.user?.isVerified ? (
+              ''
+            ) : (
+              <div>
+                <CustomButton
+                  isLoading={emailButtonLoading}
+                  onClick={verifyEmailHandler}
+                  text={'Send Email Again'}
+                  size={'small'}
+                />
+              </div>
+            )}
           </div>
+
           <h3 className={styles.formTitle}>Change Profile Picture</h3>
           <dt className={styles.imageUpload}>
             <ImageUpload

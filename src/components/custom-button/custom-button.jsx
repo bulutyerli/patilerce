@@ -18,7 +18,6 @@ export default function CustomButton({
   if (style === 'secondary') {
     btnColor = styles.secondary;
   }
-
   if (size === 'small') {
     btnSize = styles.small;
   }

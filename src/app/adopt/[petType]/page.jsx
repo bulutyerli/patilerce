@@ -28,9 +28,9 @@ export default async function Adopt({ params, searchParams }) {
         <AdoptFilters filterList={petNamesWithCounts} params={params.petType} />
       </div>
       <div className={styles.cardsContainer}>
-        {adopts.length > 0 ? (
+        {adopts?.length > 0 ? (
           <div className={styles.cards}>
-            {adopts.map((adopt, index) => {
+            {adopts?.map((adopt, index) => {
               return (
                 <Link key={index} href={`/adopt/${params.petType}/${adopt.id}`}>
                   <AdoptCard data={adopt} />

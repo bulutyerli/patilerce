@@ -99,6 +99,9 @@ export default async function Home() {
       <section className={styles.communityContainer}>
         <div className={styles.title}>
           <h2>Latest questions asked by our users</h2>
+          <Link className={styles.listButton} href={'/community/ask-question'}>
+            <CustomButton style={'secondary'} text={'Ask'} />
+          </Link>
           <div className={styles.imageContainer}>
             <Image
               className={styles.questionCatImages}
@@ -108,9 +111,6 @@ export default async function Home() {
               alt="curious cat"
             ></Image>
           </div>
-          <Link className={styles.listButton} href={'/community/ask-question'}>
-            <CustomButton style={'secondary'} text={'Ask'} />
-          </Link>
         </div>
 
         {qdata?.questions?.map((question, index) => {

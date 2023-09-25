@@ -98,6 +98,7 @@ export default function ListingForm({ petData, isEdit, adoptId }) {
               id="title"
               name="title"
               value={formData.title}
+              autoComplete="off"
               onChange={handleInputChange}
               required
               maxLength={60}
@@ -213,6 +214,7 @@ export default function ListingForm({ petData, isEdit, adoptId }) {
             <input
               type="email"
               name="email"
+              autoComplete="off"
               value={formData.email}
               onChange={handleInputChange}
             ></input>
@@ -222,6 +224,7 @@ export default function ListingForm({ petData, isEdit, adoptId }) {
             <input
               type="text"
               name="phoneNumber"
+              autoComplete="off"
               value={formData.phoneNumber}
               onChange={handleInputChange}
             ></input>

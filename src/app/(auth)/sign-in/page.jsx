@@ -66,6 +66,7 @@ export default function SignInPage() {
               type="text"
               id="email"
               value={userEmail}
+              autoComplete="off"
               onChange={(e) => {
                 setUserEmail(e.target.value);
               }}
@@ -75,6 +76,7 @@ export default function SignInPage() {
               type="password"
               id="password"
               value={userPassword}
+              autoComplete="off"
               onChange={(e) => {
                 setUserPassword(e.target.value);
               }}

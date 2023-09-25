@@ -88,6 +88,7 @@ export default function PasswordChangePage() {
                 type="password"
                 id="password"
                 value={passwordData.password}
+                autoComplete="off"
                 placeholder="6+ chars: letter, num, symbol"
                 onChange={(e) =>
                   setPasswordData((prevUserData) => ({
@@ -100,6 +101,7 @@ export default function PasswordChangePage() {
               <input
                 type="password"
                 id="reEnteredPassword"
+                autoComplete="off"
                 value={passwordData.reEnteredPassword}
                 onChange={(e) =>
                   setPasswordData((prevUserData) => ({

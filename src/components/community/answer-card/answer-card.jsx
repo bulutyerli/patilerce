@@ -1,6 +1,5 @@
 import styles from './answer-card.module.scss';
 import Image from 'next/image';
-import catImage from 'public/images/cat-profile.svg';
 import { dateConverter } from '@/helpers/date-converter';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
@@ -9,7 +8,7 @@ import { DeletePosts } from '@/lib/delete-posts/delete-posts';
 import { PiTrash } from 'react-icons/pi';
 
 export default async function AnswerCard({ answer, searchParams }) {
-  const image = answer?.user?.image ?? catImage;
+  const image = answer?.user?.image;
   const session = await getServerSession(authOptions);
   const showAnswerModal = searchParams.modalanswer;
   const userId = session?.user?._id;

@@ -32,6 +32,16 @@ export default function ImageUpload({ onImageChange, profile, images }) {
         throw new Error('You can not upload more than 4 images');
       }
       const file = e.target.files[0];
+      if (!file) {
+        return;
+      }
+
+      const fileName = file.name;
+      const fileExtension = fileName.split('.').pop().toLowerCase();
+      if (!['jpg', 'jpeg', 'png'].includes(fileExtension)) {
+        throw new Error('Invalid file type. Please upload a JPG or PNG file.');
+      }
+
       const imageData = new FormData();
       imageData.append('file', file);
       const response = await axios.post('/api/image-upload', imageData);
@@ -39,8 +49,7 @@ export default function ImageUpload({ onImageChange, profile, images }) {
       setImageList((prevImages) => [...prevImages, ...imageLink]);
       setSuccess(true);
     } catch (error) {
-      const errorMsg = error.message;
-      setErrorMessage(errorMsg);
+      setErrorMessage(error.message);
     } finally {
       setIsLoading(false);
     }

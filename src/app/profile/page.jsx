@@ -2,7 +2,6 @@
 
 import styles from './profile.module.scss';
 import Image from 'next/image';
-import userNameShort from '@/helpers/short-username';
 import CustomButton from '@/components/custom-button/custom-button';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
@@ -11,13 +10,12 @@ import { checkValidPassword } from '@/helpers/check-valid-password';
 import axios from 'axios';
 import ImageUpload from '@/components/image-upload/image-upload';
 import checkValidImageUrl from '@/helpers/check-valid-image-url';
-import catImage from 'public/images/cat-profile.svg';
 import { toast } from 'react-toastify';
 
 export default function ProfileSettingsPage() {
   const { data: session } = useSession();
   const oAuthUser = session?.user?.provider === 'google';
-  const image = session?.user?.image ?? catImage;
+  const image = session?.user?.image ?? '/images/cat-profile.svg';
   const isImageValid = checkValidImageUrl(image);
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
@@ -164,7 +162,10 @@ export default function ProfileSettingsPage() {
             ''
           )}
 
-          <h2>Logged in as {userNameShort(session?.user?.name)}</h2>
+          <h2>
+            Logged in as{' '}
+            <span className={styles.userName}>{session?.user?.name}</span>
+          </h2>
         </div>
         <Link href="/sign-out">
           <CustomButton size="small" style="primary" text="Sign Out" />

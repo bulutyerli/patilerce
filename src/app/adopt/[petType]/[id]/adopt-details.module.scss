@@ -36,8 +36,8 @@
   dt {
     color: $gray-6;
     font-size: 0.9rem;
-    width: 6.5rem;
     text-align: left;
+    white-space: nowrap;
   }
 
   dd {
@@ -61,7 +61,7 @@
     border: 2px solid $gray-4;
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 20rem;
+    max-width: 22rem;
 
     h3 {
       color: $secondary-color;
@@ -84,6 +84,12 @@
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
+
+      .userImage {
+        height: 40px;
+        width: auto;
+        border: 2px solid $gray-5;
+      }
     }
   }
 
@@ -99,6 +105,7 @@
       color: $primary-color;
       gap: 0.25rem;
       cursor: pointer;
+      white-space: nowrap;
 
       a {
         text-decoration: none;
@@ -165,7 +172,6 @@
       grid-column: 7/-1;
       grid-row: 3/4;
       align-self: flex-start;
-      width: 20rem;
     }
     .userActions {
       grid-column: 12/13;

@@ -41,6 +41,9 @@ export default function ImageUpload({ onImageChange, profile, images }) {
       if (!['jpg', 'jpeg', 'png'].includes(fileExtension)) {
         throw new Error('Invalid file type. Please upload a JPG or PNG file.');
       }
+      if (file.size > 6000000) {
+        throw new Error('You can not upload image size more than 6mb');
+      }
 
       const imageData = new FormData();
       imageData.append('file', file);

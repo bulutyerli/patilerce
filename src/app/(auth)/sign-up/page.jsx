@@ -91,6 +91,7 @@ export default function SignUpPage() {
                 type="text"
                 value={userData.name}
                 placeholder="minumum 4 letters"
+                autoComplete="off"
                 onChange={(e) =>
                   setUserData((prevUserData) => ({
                     ...prevUserData,
@@ -112,6 +113,7 @@ export default function SignUpPage() {
                 type="email"
                 value={userData.email}
                 placeholder="example@example.com"
+                autoComplete="off"
                 onChange={(e) =>
                   setUserData((prevUserData) => ({
                     ...prevUserData,
@@ -133,6 +135,7 @@ export default function SignUpPage() {
                 type="password"
                 value={userData.password}
                 placeholder="6+ chars: letter, num, symbol"
+                autoComplete="off"
                 onChange={(e) =>
                   setUserData((prevUserData) => ({
                     ...prevUserData,
@@ -155,6 +158,7 @@ export default function SignUpPage() {
               <input
                 type="password"
                 value={userData.reEnteredPassword}
+                autoComplete="off"
                 onChange={(e) =>
                   setUserData((prevUserData) => ({
                     ...prevUserData,

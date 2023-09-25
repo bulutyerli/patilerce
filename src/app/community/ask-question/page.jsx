@@ -66,6 +66,7 @@ export default function AskQuestion() {
               type="text"
               id="title"
               value={title}
+              autoComplete="off"
               maxLength={50}
               placeholder="Title of your question"
               onChange={(e) => setTitle(e.target.value)}

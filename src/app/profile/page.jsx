@@ -214,6 +214,7 @@ export default function ProfileSettingsPage() {
             id="name"
             name="name"
             value={name}
+            autoComplete="off"
             placeholder="min 4 letters"
             onChange={(e) => setName(e.target.value)}
           />
@@ -248,6 +249,7 @@ export default function ProfileSettingsPage() {
                 type="password"
                 id="currentPassword"
                 name="currentPassword"
+                autoComplete="off"
                 value={passwordData.currentPassword}
                 onChange={(e) =>
                   setPasswordData((prevUserData) => ({
@@ -263,6 +265,7 @@ export default function ProfileSettingsPage() {
                 type="password"
                 id="newPassword"
                 name="newPassword"
+                autoComplete="off"
                 value={passwordData.newPassword}
                 placeholder="6+ chars: letter, num, symbol"
                 onChange={(e) =>
@@ -280,6 +283,7 @@ export default function ProfileSettingsPage() {
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
+                autoComplete="off"
                 value={passwordData.reEnterNewPassword}
                 onChange={(e) =>
                   setPasswordData((prevUserData) => ({

@@ -2,7 +2,6 @@ import { getQuestionById } from '@/lib/community/get-questions';
 import { getAnswers, getAnswersCount } from '@/lib/community/get-answers';
 import styles from './question-details.module.scss';
 import Image from 'next/image';
-import catImage from 'public/images/cat-profile.svg';
 import { dateConverter } from '@/helpers/date-converter';
 import Link from 'next/link';
 import { DeletePosts } from '@/lib/delete-posts/delete-posts';
@@ -17,7 +16,7 @@ import EditForm from '@/lib/community/edit-form/edit-form';
 export default async function QuestionDetails({ params, searchParams }) {
   try {
     const { question } = await getQuestionById(params.id);
-    const image = question?.user?.image ?? catImage;
+    const image = question?.user?.image;
     const showModal = searchParams?.modal;
     const editPanel = searchParams?.edit;
     const session = await getServerSession(authOptions);

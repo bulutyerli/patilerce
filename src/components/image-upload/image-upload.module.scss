@@ -59,6 +59,8 @@
   .errorMessage {
     margin-top: 1rem;
     color: $primary-color;
+    word-break: break-all;
+    max-width: 15rem;
   }
 }
 

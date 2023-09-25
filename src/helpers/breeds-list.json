@@ -1,5 +1,6 @@
 {
   "dogs": [
+    "Local Dog(Mixed Breed)",
     "Affenpinscher",
     "Afghan Hound",
     "African Hunting Dog",
@@ -174,6 +175,7 @@
     "Yorkshire Terrier"
   ],
   "cats": [
+    "Local Cat(Mixed Breed)",
     "Abyssinian",
     "Aegean",
     "American Bobtail",

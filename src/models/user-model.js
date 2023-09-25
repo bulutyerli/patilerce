@@ -6,7 +6,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       minLength: [4, 'Full name should be atleast 4 characters long'],
-      maxLength: [20, 'Full name should be less than 20 characters'],
+      maxLength: [30, 'Full name should be less than 30 characters'],
     },
     email: {
       type: String,
@@ -18,7 +18,7 @@ const userSchema = new Schema(
       ],
     },
     password: String,
-    image: String,
+    image: { type: String, default: '/images/cat-profile.svg' },
     role: {
       type: String,
       default: 'user',

@@ -4,7 +4,7 @@ import { getToken } from 'next-auth/jwt';
 export default async function middleware(req) {
   const token = await getToken({ req });
   const isAuthenticated = !!token;
-  const isVerified = token.isVerified;
+  const isVerified = token?.user?.isVerified;
   const pathname = req.nextUrl.pathname;
 
   if (pathname.startsWith('/sign-in') || pathname.startsWith('/sign-up')) {

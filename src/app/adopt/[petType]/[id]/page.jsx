@@ -58,6 +58,7 @@ export default async function AdoptDetails({ params, searchParams }) {
           <div className={styles.userInfo}>
             <div className={styles.infoPair}>
               <Image
+                className={styles.userImage}
                 src={adopt.user.image}
                 alt="Profile Image"
                 width={30}
@@ -77,7 +78,7 @@ export default async function AdoptDetails({ params, searchParams }) {
           <div className={styles.infoPair}>
             <dt>Phone Number:</dt>
             <dd>{adopt.phoneNumber ? adopt.phoneNumber : ''}</dd>
-          </div>{' '}
+          </div>
           {userId === adopt.user.id ? (
             ''
           ) : (

@@ -12,6 +12,7 @@ import {
 import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -49,6 +50,7 @@ export default function SignUpPage() {
       setIsLoading(true);
       await axios.post('/api/auth/sign-up', userData);
       router.push('/sign-in');
+      toast.success('You are successfully signed up!');
       setUserData({
         name: '',
         email: '',

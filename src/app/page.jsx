@@ -4,9 +4,10 @@ import AdoptCard from '@/components/adopt/adopt-card/adopt-card';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getQuestions } from '@/lib/community/get-questions';
+import CustomButton from '@/components/custom-button/custom-button';
 
 export default async function Home() {
-  const limit = 8;
+  const limit = 10;
   const cats = await getAdopts({ query: {} }, limit, 'Cat');
   const dogs = await getAdopts({ query: {} }, limit, 'Dog');
   const qdata = await getQuestions({ query: {} }, 5);
@@ -51,15 +52,22 @@ export default async function Home() {
           width={800}
           height={600}
         ></Image>
-        <div className={styles.cards}>
-          <h1>Latest Cats Seeking Loving Homes</h1>
-          {cats?.adopts?.map((cat, index) => {
-            return (
-              <Link key={index} href={`/adopt/cats/${cat._id}`}>
-                <AdoptCard homepage={true} data={cat} />
-              </Link>
-            );
-          })}
+        <div className={styles.cardsContainer}>
+          <div className={styles.title}>
+            <h1>Latest Cats Seeking Loving Homes</h1>
+            <Link className={styles.listButton} href={'/adopt/listing'}>
+              <CustomButton style={'secondary'} text={'List a Pet'} />
+            </Link>
+          </div>
+          <div className={styles.cards}>
+            {cats?.adopts?.map((cat, index) => {
+              return (
+                <Link key={index} href={`/adopt/cats/${cat._id}`}>
+                  <AdoptCard homepage={true} data={cat} />
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
       <section className={styles.dogAdopts}>
@@ -70,24 +78,41 @@ export default async function Home() {
           width={800}
           height={600}
         ></Image>
-        <div className={styles.cards}>
-          <h1>Latest Dogs Seeking Loving Homes</h1>
-          {dogs?.adopts?.map((cat) => {
-            return <AdoptCard homepage={true} key={cat._id} data={cat} />;
-          })}
+        <div className={styles.cardsContainer}>
+          <div className={styles.title}>
+            <h1>Latest Dogs Seeking Loving Homes</h1>
+            <Link className={styles.listButton} href={'/adopt/listing'}>
+              <CustomButton style={'secondary'} text={'List a Pet'} />
+            </Link>
+          </div>
+          <div className={styles.cards}>
+            {dogs?.adopts?.map((dog, index) => {
+              return (
+                <Link key={index} href={`/adopt/cats/${dog._id}`}>
+                  <AdoptCard homepage={true} data={dog} />
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
       <section className={styles.communityContainer}>
-        <h2>Latest questions asked by our users</h2>
-        <div className={styles.imageContainer}>
-          <Image
-            className={styles.questionCatImages}
-            src={'/images/curiouscat-2.png'}
-            width={100}
-            height={100}
-            alt="curious cat"
-          ></Image>
+        <div className={styles.title}>
+          <h2>Latest questions asked by our users</h2>
+          <div className={styles.imageContainer}>
+            <Image
+              className={styles.questionCatImages}
+              src={'/images/curiouscat-2.png'}
+              width={100}
+              height={100}
+              alt="curious cat"
+            ></Image>
+          </div>
+          <Link className={styles.listButton} href={'/community/ask-question'}>
+            <CustomButton style={'secondary'} text={'Ask'} />
+          </Link>
         </div>
+
         {qdata?.questions?.map((question, index) => {
           return (
             <div className={styles.questionCard} key={index}>

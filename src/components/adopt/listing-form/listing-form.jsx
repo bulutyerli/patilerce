@@ -38,6 +38,15 @@ export default function ListingForm({ petData, isEdit, adoptId }) {
   };
 
   useEffect(() => {
+    if (formData.petType === 'Dog') {
+      setFormData((prevData) => ({
+        ...prevData,
+        breed: 'Local Dog(Mixed Breed)',
+      }));
+    }
+  }, [formData.petType]);
+
+  useEffect(() => {
     const { email, phoneNumber, ...rest } = formData;
     const values = Object.values(rest);
     const isFormValid = values.every((value) => value.length > 0);

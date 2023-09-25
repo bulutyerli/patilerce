@@ -18,10 +18,6 @@ export default async function Community({ searchParams }) {
   const session = await getServerSession(authOptions);
   const isUser = session?.user;
 
-  if (!questions) {
-    throw new Error('Could not get the questions, please try again.');
-  }
-
   return (
     <section className={styles.container}>
       <h1>Community Q&A</h1>

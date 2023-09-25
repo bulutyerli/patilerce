@@ -6,11 +6,20 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import styles from './verify-email.module.scss';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function VerifyEmailPage() {
   const [token, setToken] = useState('');
   const [verified, setVerified] = useState(false);
   const [error, setError] = useState(false);
+  const { data: session } = useSession();
+  const isVerified = session?.user?.isVerified;
+  const router = useRouter();
+
+  if (isVerified) {
+    router.push('/profile');
+  }
 
   useEffect(() => {
     const urlToken = window.location.search.split('=')[1];
@@ -23,8 +32,8 @@ export default function VerifyEmailPage() {
         await axios.post('/api/auth/verify-email', { token });
         setVerified(true);
       } catch (error) {
+        console.log(error);
         setError(true);
-        console.log(error.response.data);
       }
     };
     if (token && token.length > 0) {

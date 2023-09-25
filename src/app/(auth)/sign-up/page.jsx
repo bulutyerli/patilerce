@@ -48,7 +48,7 @@ export default function SignUpPage() {
     try {
       setIsLoading(true);
       await axios.post('/api/auth/sign-up', userData);
-      router.push('/');
+      router.push('/sign-in');
       setUserData({
         name: '',
         email: '',

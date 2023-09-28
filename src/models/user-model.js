@@ -31,6 +31,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
 
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,

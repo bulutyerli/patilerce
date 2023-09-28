@@ -65,6 +65,10 @@
         background-color: $gray-3; /* Thumb color */
         border-radius: 1rem; /* Rounder thumb */
         border: 1px solid $gray-4; /* Border color of the thumb */
+
+        &:hover {
+          background-color: $secondary-color;
+        }
       }
 
       &::-webkit-scrollbar-corner {

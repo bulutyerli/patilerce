@@ -6,9 +6,14 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <p className={styles.copy}>© Copyright {year} Bulut Yerli</p>
-      <Link href={'/about-us'} className={styles.aboutUs}>
-        About Us
-      </Link>
+      <nav className={styles.footerNav}>
+        <Link href={'/about-us'} className={styles.footerLinks}>
+          About Us
+        </Link>
+        <Link href={'/contact-us'} className={styles.footerLinks}>
+          Contact
+        </Link>
+      </nav>
     </footer>
   );
 }

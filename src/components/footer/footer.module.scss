@@ -8,7 +8,12 @@
     font-size: 0.7rem;
   }
 
-  .aboutUs {
+  .footerNav {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footerLinks {
     color: $secondary-color;
     cursor: pointer;
     text-decoration: none;

@@ -21,8 +21,9 @@ export default async function Adopt({ params, searchParams }) {
     <section className={styles.container}>
       <h1 className={styles.title}>{petType} Adoption</h1>
       <h2 className={styles.warning}>
-        Warning! The sale of pets for monetary gain is strictly prohibited on
-        this site. If anyone requests payment, please report it to us.
+        Important Notice: Selling pets for profit is strictly forbidden on this
+        platform. If you encounter any requests for payment, please{' '}
+        <Link href={'/contact-us'}>notify us</Link> immediately.
       </h2>
       <div className={styles.filters}>
         <AdoptFilters filterList={petNamesWithCounts} params={params.petType} />

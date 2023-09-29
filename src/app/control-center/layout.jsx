@@ -15,11 +15,6 @@ export default function ControlCenterLayout({ children }) {
             Listing Approval
           </Link>
         </li>
-        <li>
-          <Link href={'/control-center/question-approval'}>
-            Question Approval
-          </Link>
-        </li>
       </nav>
       {children}
     </section>

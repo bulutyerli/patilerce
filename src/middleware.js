@@ -7,6 +7,7 @@ export default async function middleware(req) {
   const isVerified = token?.user?.isVerified;
   const pathname = req.nextUrl.pathname;
   const isAdmin = token?.user?.isAdmin;
+  const isBanned = token?.user?.isBanned;
 
   if (pathname.startsWith('/sign-in') || pathname.startsWith('/sign-up')) {
     if (isAuthenticated) {
@@ -21,16 +22,19 @@ export default async function middleware(req) {
 
   if (pathname.startsWith('/control-center')) {
     if (!isAdmin) {
-      return NextResponse.redirect(new URL('/not-found'));
+      return NextResponse.redirect(new URL('/', req.url));
     }
   }
 
   if (
     pathname.startsWith('/profile') ||
     pathname.startsWith('/messages') ||
-    pathname.startsWith('/ask-question') ||
+    pathname.startsWith('/community/ask-question') ||
     pathname.startsWith('/adopt/listing')
   ) {
+    if (isBanned) {
+      return NextResponse.redirect(new URL('/banned', req.url));
+    }
     if (!isAuthenticated) {
       return NextResponse.redirect(new URL('/sign-in', req.url));
     }

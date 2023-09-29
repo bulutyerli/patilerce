@@ -16,6 +16,7 @@ import {
   PiSignOut,
   PiSignIn,
   PiUser,
+  PiHourglassHighDuotone,
 } from 'react-icons/pi';
 import { useState, useRef, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
@@ -28,6 +29,7 @@ function DesktopNav({ newMessages }) {
   const subMenu = useRef(null);
   const adoptSubMenu = useRef(null);
   const profileMenu = useRef(null);
+  const { data: session } = useSession();
 
   const handleSubMenuClick = () => {
     setShowSubMenu(!showSubMenu);
@@ -98,8 +100,6 @@ function DesktopNav({ newMessages }) {
     };
   }, [showProfileSub]);
 
-  const { data: session } = useSession();
-
   return (
     <nav className={styles.desktopNav}>
       <ul>
@@ -168,18 +168,20 @@ function DesktopNav({ newMessages }) {
         </ul>
         {session && session.user ? (
           <li ref={profileMenu} className={styles.loginContainer}>
-            {session && session.user && newMessages > 0 ? (
-              <Link className={styles.envelopeIcon} href={'messages'}>
-                <PiEnvelopeSimple className={styles.menuIcon} />
-                <div className={styles.messageCount}>{newMessages}</div>
-              </Link>
-            ) : (
-              <div>
+            {session &&
+              session.user &&
+              (newMessages > 0 ? (
                 <Link className={styles.envelopeIcon} href={'messages'}>
-                  <PiEnvelopeSimpleOpen className={styles.menuIcon} />
+                  <PiEnvelopeSimple className={styles.menuIcon} />
+                  <div className={styles.messageCount}>{newMessages}</div>
                 </Link>
-              </div>
-            )}
+              ) : (
+                <div>
+                  <Link className={styles.envelopeIcon} href={'messages'}>
+                    <PiEnvelopeSimpleOpen className={styles.menuIcon} />
+                  </Link>
+                </div>
+              ))}
             <button
               className={styles.subMenuBtn}
               onClick={handleProfileMenuClick}
@@ -197,13 +199,40 @@ function DesktopNav({ newMessages }) {
               <li>
                 <PiUser />
                 <Link onClick={handleProfileMenuClick} href="/profile">
-                  Profile
+                  Profile Settings
                 </Link>
               </li>
               <li>
                 <PiEnvelope className={styles.messageIcon} />
                 <Link onClick={handleProfileMenuClick} href="/messages">
                   Messages
+                </Link>
+              </li>
+              <li>
+                <PiHandHeartDuotone className={styles.messageIcon} />
+                <Link
+                  onClick={handleProfileMenuClick}
+                  href="/profile/my-listings"
+                >
+                  My Listings
+                </Link>
+              </li>
+              <li>
+                <PiHourglassHighDuotone className={styles.messageIcon} />
+                <Link
+                  onClick={handleProfileMenuClick}
+                  href="/profile/my-listings?filter=pending"
+                >
+                  Pending Listings
+                </Link>
+              </li>
+              <li>
+                <PiChatsCircle className={styles.messageIcon} />
+                <Link
+                  onClick={handleProfileMenuClick}
+                  href="/community?filter=my&page=1"
+                >
+                  My Questions
                 </Link>
               </li>
 

@@ -20,7 +20,7 @@ export default function NotVerifiedEmailPage() {
       </p>
       <div className={styles.buttons}>
         <CustomButton onClick={() => router.back()} text={'Back'} />
-        <Link href={'/profile'}>
+        <Link href={'/profile/settings'}>
           <CustomButton style={'secondary'} text={'Profile'} />
         </Link>
       </div>

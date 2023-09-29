@@ -28,22 +28,35 @@ export default async function Community({ searchParams }) {
           session={isUser}
         />
       </div>
+      <h2 className={styles.filterTitle}>
+        {filter === 'my'
+          ? 'My Questions'
+          : filter === 'noanswer'
+          ? 'Without Answers'
+          : 'All Questions'}
+      </h2>
+
       <div className={styles.questionsContainer}>
-        {questions &&
+        {questions?.length > 0 ? (
           questions.map((question) => {
             return (
               <div key={question._id}>
                 <QuestionCard data={question} />
               </div>
             );
-          })}
+          })
+        ) : (
+          <div className={styles.nothingToShow}>There is nothing to show.</div>
+        )}
       </div>
-      <Pagination
-        section={'community'}
-        totalPages={totalPages}
-        currentPage={currentPage}
-        filter={filter}
-      />
+      {questions?.length > 0 && (
+        <Pagination
+          section={'community'}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          filter={filter}
+        />
+      )}
     </section>
   );
 }

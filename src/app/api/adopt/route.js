@@ -89,16 +89,19 @@ export async function DELETE(req) {
       throw new Error('Adopt listing not found');
     }
 
-    if (user.id.toString() !== adopt.user._id.toString()) {
-      throw new Error('Forbidden');
+    if (
+      user.id.toString() === adopt.user._id.toString() ||
+      session?.user?.isAdmin
+    ) {
+      await Adopt.deleteOne({ _id: dataId });
+
+      return NextResponse.json({
+        message: 'Adopt listing successfully deleted',
+        success: true,
+      });
+    } else {
+      return NextResponse.json({ error: 'forbidden' });
     }
-
-    await Adopt.deleteOne({ _id: dataId });
-
-    return NextResponse.json({
-      message: 'Adopt listing successfully deleted',
-      success: true,
-    });
   } catch (error) {
     return NextResponse.json({ error: error.message });
   }
@@ -110,20 +113,31 @@ export async function PUT(req) {
     const userId = session.user._id;
     const reqBody = await req.json();
     const { adoptId, formData } = reqBody;
-    console.log('this is formdata:', formData);
 
     if (!userId) {
       console.log('no user');
       throw new Error('There is no user');
     }
 
-    const adopt = await Adopt.findByIdAndUpdate(adoptId, formData, {
-      new: true,
-    });
+    const adopt = await Adopt.findById(adoptId);
+
     if (!adopt) {
-      return NextResponse.json({ error: 'No listing found' });
+      console.log('Adopt not found');
+      throw new Error('Adopt not found');
     }
-    return NextResponse.json({ success: true });
+
+    if (
+      userId.toString() === adopt.user._id.toString() ||
+      session?.user?.isAdmin
+    ) {
+      const updatedAdopt = await Adopt.findByIdAndUpdate(adoptId, formData, {
+        new: true,
+      });
+
+      return NextResponse.json({ success: true });
+    } else {
+      return NextResponse.json({ error: 'forbidden' });
+    }
   } catch (error) {
     console.log(error.message);
     return NextResponse.json({ error: error.message });

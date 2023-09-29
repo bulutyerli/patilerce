@@ -66,13 +66,15 @@
     .profileSubMenu {
       @include submenu-styles;
       gap: 0;
-      left: -3rem;
+      left: -6rem;
 
       li:not(:first-child) {
         border-top: 2px solid $gray-3;
       }
       li {
         padding: 1rem 0;
+        display: flex;
+        gap: 1rem;
       }
       li:first-child {
         padding-top: 0;

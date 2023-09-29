@@ -6,19 +6,22 @@ import {
   PiEnvelopeSimpleOpen,
   PiList,
   PiX,
+  PiUser,
 } from 'react-icons/pi';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import Nav from './Nav';
+import Nav from './nav';
 import DesktopNav from './desktop-nav';
+import UserNav from './user-nav';
 import { useSession } from 'next-auth/react';
 
 export default function Header({ messageCount }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [newMessages, setNewMessages] = useState(0);
   const menu = useRef(null);
+  const userMenu = useRef(null);
   const { data: session } = useSession();
-  const user = session?.user?._id;
 
   const menuHandler = () => {
     setMenuOpen(!menuOpen);
@@ -28,14 +31,29 @@ export default function Header({ messageCount }) {
     setMenuOpen(false);
   };
 
+  const closeUserMenu = () => {
+    setUserMenuOpen(false);
+  };
+
+  const userMenuHandler = () => {
+    setUserMenuOpen(!userMenuOpen);
+  };
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (menu.current && menuOpen && !menu.current.contains(event.target)) {
         setMenuOpen(false);
       }
+      if (
+        userMenu.current &&
+        userMenuOpen &&
+        !userMenu.current.contains(event.target)
+      ) {
+        setUserMenuOpen(false);
+      }
     }
 
-    if (menuOpen) {
+    if (menuOpen || userMenuOpen) {
       document.body.style.overflow = 'hidden';
       document.addEventListener('click', handleClickOutside);
     }
@@ -44,11 +62,20 @@ export default function Header({ messageCount }) {
       document.removeEventListener('click', handleClickOutside);
       document.body.style.overflow = 'unset';
     };
-  }, [menuOpen]);
+  }, [menuOpen, userMenuOpen]);
 
   useEffect(() => {
     setNewMessages(messageCount);
   }, [messageCount]);
+
+  useEffect(() => {
+    if (menuOpen) {
+      setUserMenuOpen(false);
+    }
+    if (userMenuOpen) {
+      setMenuOpen(false);
+    }
+  }, [menuOpen, userMenuOpen]);
 
   return (
     <header className={styles.header}>
@@ -63,19 +90,27 @@ export default function Header({ messageCount }) {
           ></Image>
         </Link>
         <div className={styles.mobileNavContainer}>
-          {user && newMessages > 0 ? (
-            <Link className={styles.messageIcon} href={'messages'}>
-              <PiEnvelopeSimple className={styles.menuIcon} />
-              <div className={styles.messageCount}>{newMessages}</div>
-            </Link>
-          ) : (
-            <div>
+          {session &&
+            session.user &&
+            (newMessages > 0 ? (
               <Link className={styles.messageIcon} href={'messages'}>
-                <PiEnvelopeSimpleOpen className={styles.menuIcon} />
+                <PiEnvelopeSimple className={styles.menuIcon} />
+                <div className={styles.messageCount}>{newMessages}</div>
               </Link>
+            ) : (
+              <div>
+                <Link className={styles.messageIcon} href={'messages'}>
+                  <PiEnvelopeSimpleOpen className={styles.menuIcon} />
+                </Link>
+              </div>
+            ))}
+          {session && session.user ? (
+            <div onClick={userMenuHandler}>
+              <PiUser className={styles.menuIcon} />
             </div>
+          ) : (
+            ''
           )}
-
           <div onClick={menuHandler}>
             {menuOpen ? (
               <PiX className={styles.menuIcon} />
@@ -85,7 +120,11 @@ export default function Header({ messageCount }) {
           </div>
         </div>
         <Nav ref={menu} isOpen={menuOpen} onLinkClick={closeMenu} />
-
+        <UserNav
+          ref={userMenu}
+          isOpen={userMenuOpen}
+          onLinkClick={closeUserMenu}
+        />
         <DesktopNav newMessages={newMessages} />
       </nav>
     </header>

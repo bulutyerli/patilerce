@@ -6,6 +6,7 @@ export default async function middleware(req) {
   const isAuthenticated = !!token;
   const isVerified = token?.user?.isVerified;
   const pathname = req.nextUrl.pathname;
+  const isAdmin = token?.user?.isAdmin;
 
   if (pathname.startsWith('/sign-in') || pathname.startsWith('/sign-up')) {
     if (isAuthenticated) {
@@ -14,9 +15,13 @@ export default async function middleware(req) {
   }
   if (pathname.startsWith('/adopt/listing')) {
     if (!isVerified && isAuthenticated) {
-      return NextResponse.redirect(
-        new URL('/profile/not-verified-email', req.url)
-      );
+      return NextResponse.redirect(new URL('/not-verified-email', req.url));
+    }
+  }
+
+  if (pathname.startsWith('/control-center')) {
+    if (!isAdmin) {
+      return NextResponse.redirect(new URL('/not-found'));
     }
   }
 

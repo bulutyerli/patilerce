@@ -81,16 +81,19 @@ export async function DELETE(req) {
       throw new Error('Answer not found');
     }
 
-    if (user.id.toString() !== answer.user._id.toString()) {
-      throw new Error('Forbidden');
+    if (
+      user.id.toString() === answer.user._id.toString() ||
+      session?.user?.isAdmin
+    ) {
+      await Answer.deleteOne({ _id: dataId });
+
+      return NextResponse.json({
+        message: 'Answer successfully deleted',
+        success: true,
+      });
+    } else {
+      return NextResponse.json({ error: 'forbidden' });
     }
-
-    await Answer.deleteOne({ _id: dataId });
-
-    return NextResponse.json({
-      message: 'Answer successfully deleted',
-      success: true,
-    });
   } catch (error) {
     return NextResponse.json({ error: error.message });
   }

@@ -70,16 +70,19 @@ export async function DELETE(req) {
       throw new Error('Question not found');
     }
 
-    if (user.id.toString() !== question.user._id.toString()) {
-      throw new Error('Forbidden');
+    if (
+      user.id.toString() === question.user._id.toString() ||
+      session?.user?.isAdmin
+    ) {
+      await Question.deleteOne({ _id: dataId });
+
+      return NextResponse.json({
+        message: 'Question successfully deleted',
+        success: true,
+      });
+    } else {
+      return NextResponse.json({ error: 'forbidden' });
     }
-
-    await Question.deleteOne({ _id: dataId });
-
-    return NextResponse.json({
-      message: 'Question successfully deleted',
-      success: true,
-    });
   } catch (error) {
     return NextResponse.json({ error: error.message });
   }
@@ -107,16 +110,21 @@ export async function PUT(req) {
       throw new Error('Question not found');
     }
 
-    if (user.id.toString() !== question.user._id.toString()) {
-      throw new Error('Forbidden');
+    if (
+      user.id.toString() === question.user._id.toString() ||
+      session?.user?.isAdmin
+    ) {
+      await Question.findByIdAndUpdate(questionId, {
+        question: updatedQuestion,
+      });
+
+      return NextResponse.json(
+        { message: 'Question successfully deleted' },
+        { success: true }
+      );
+    } else {
+      return NextResponse.json({ error: 'forbidden' });
     }
-
-    await Question.findByIdAndUpdate(questionId, { question: updatedQuestion });
-
-    return NextResponse.json(
-      { message: 'Question successfully deleted' },
-      { success: true }
-    );
   } catch (error) {
     console.log(error.message);
   }

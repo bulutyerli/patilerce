@@ -13,7 +13,7 @@ export async function getCats() {
     }
     return response.json();
   } catch (error) {
-    console.log('something went wrong', error);
+    console.log(error);
   }
 }
 

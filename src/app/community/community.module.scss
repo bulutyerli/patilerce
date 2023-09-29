@@ -15,11 +15,27 @@
     margin-bottom: 2rem;
     width: 100%;
     text-align: center;
+    color: $gray-7;
+  }
+
+  .filterTitle {
+    color: $accent-color;
+  }
+
+  .nothingToShow {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    color: $primary-color;
   }
 }
 
 @media (min-width: $medium-screen) {
   .container {
     width: 80%;
+  }
+
+  .filterTitle {
+    display: none;
   }
 }

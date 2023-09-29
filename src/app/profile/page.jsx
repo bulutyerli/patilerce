@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './profile.module.scss';
+import styles from './profile-settings.module.scss';
 import Image from 'next/image';
 import CustomButton from '@/components/custom-button/custom-button';
 import Link from 'next/link';
@@ -12,7 +12,7 @@ import ImageUpload from '@/components/image-upload/image-upload';
 import checkValidImageUrl from '@/helpers/check-valid-image-url';
 import { toast } from 'react-toastify';
 
-export default function ProfileSettingsPage() {
+export default function ProfilePage() {
   const { data: session } = useSession();
   const oAuthUser = session?.user?.provider === 'google';
   const image = session?.user?.image ?? '/images/cat-profile.svg';

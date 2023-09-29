@@ -15,20 +15,27 @@ export async function getAdopts(req, limit, petType) {
     const user = session?.user;
     const { page = 1, filter, breed } = req.query;
     const skip = (page - 1) * limit;
-    let query = { petType: petType };
+    let query = { petType: petType, isApproved: true };
     const totalAdopts = await Adopt.countDocuments(query);
     const userAdopts = await Adopt.countDocuments({ user, petType });
     const userFavs = await Adopt.countDocuments({ favoritedBy: user?._id });
+    const pendingAdopts = await Adopt.countDocuments({
+      user,
+      isApproved: false,
+    });
     let totalPages = Math.ceil(totalAdopts / limit);
     const userPages = Math.ceil(userAdopts / limit);
     const favPages = Math.ceil(userFavs / limit);
+    const pendingPages = Math.ceil(pendingAdopts / limit);
 
     if (page < 1 || page > totalPages) {
       throw new Error('Page not found');
     }
 
     if (filter === 'my') {
-      query = { $and: [{ petType: petType }, { user: user?._id }] };
+      query = {
+        $and: [{ petType: petType }, { user: user?._id }, { isApproved: true }],
+      };
       totalPages = userPages;
     }
 
@@ -39,13 +46,28 @@ export async function getAdopts(req, limit, petType) {
       totalPages = favPages;
     }
 
+    if (filter === 'pending') {
+      query = {
+        petType: petType,
+        user: user?._id,
+        isApproved: false,
+      };
+      totalPages = pendingPages;
+    }
+
     if (breed) {
       const getBreedName = breed
         .split('-')
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' '); // reformat searchParams to database breed values
 
-      query = { $and: [{ petType: petType }, { breed: getBreedName }] };
+      query = {
+        $and: [
+          { petType: petType },
+          { isApproved: true },
+          { breed: getBreedName },
+        ],
+      };
     }
 
     const adopts = await Adopt.find(query)
@@ -85,6 +107,7 @@ export async function getBreedCounts(petType) {
       {
         $match: {
           petType: petType, // Filter by petType (e.g., 'Cat' or 'Dog')
+          isApproved: true,
         },
       },
       {
@@ -104,5 +127,36 @@ export async function getBreedCounts(petType) {
   } catch (error) {
     console.error('Error fetching breed counts:', error);
     return [];
+  }
+}
+
+export async function getAllUserAdopts(req, limit) {
+  const session = await getServerSession(authOptions);
+  const user = session?.user;
+  const { page = 1, filter } = req.query;
+  const skip = (page - 1) * limit;
+  let query = { user: user?._id, isApproved: true };
+  const userAdopts = await Adopt.countDocuments({ user });
+  const totalPages = Math.ceil(userAdopts / limit);
+
+  if (filter === 'pending') {
+    query = {
+      user: user?._id,
+      isApproved: false,
+    };
+  }
+  try {
+    const adopts = await Adopt.find(query)
+      .populate({
+        path: 'user',
+        model: User,
+        select: 'name image ',
+      })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(parseInt(10));
+    return { adopts, totalPages };
+  } catch (error) {
+    console.log(error);
   }
 }

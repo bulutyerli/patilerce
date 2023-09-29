@@ -1,0 +1,65 @@
+@use '/src/styles/variables.module' as *;
+
+.mobileNav {
+  visibility: hidden;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  left: 5rem;
+  right: 0;
+  top: 5rem;
+  padding-top: 3rem;
+  height: 100%;
+  border-top-left-radius: 20px;
+  background-color: $secondary-color;
+  z-index: 3;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(110%);
+  box-shadow: -5px 1px 5px rgba(0, 0, 0, 0.2);
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    li {
+      list-style: none;
+      text-align: center;
+      color: $gray-3;
+
+      a {
+        text-decoration: none;
+        color: $gray-3;
+      }
+    }
+  }
+
+  .backgroundImage {
+    width: 250px;
+    height: 250px;
+    background-image: url('/images/backgroundlogo.png');
+    background-size: cover;
+    opacity: 0.1;
+    align-self: flex-end;
+  }
+  &.showNav {
+    transform: translateX(0);
+    visibility: visible;
+  }
+}
+
+.profileSubMenu {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  gap: 2rem;
+  justify-content: center;
+  .login {
+    color: $accent-color;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  }
+  .signout {
+    color: $gray-5;
+  }
+}

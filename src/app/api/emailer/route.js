@@ -22,7 +22,6 @@ export async function POST(req) {
     };
 
     const response = await transporter.sendMail(mailOptions);
-    console.log(response);
 
     if (response.accepted.length > 0) {
       return NextResponse.json({ success: true });

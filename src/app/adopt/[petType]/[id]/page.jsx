@@ -91,7 +91,7 @@ export default async function AdoptDetails({ params, searchParams }) {
         </dl>
       </section>
 
-      {isUser && (
+      {(isUser || session?.user?.isAdmin) && (
         <div className={styles.userActions}>
           <span className={styles.edit}>
             <PiPencil />

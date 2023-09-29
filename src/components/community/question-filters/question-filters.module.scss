@@ -6,14 +6,9 @@
   align-items: center;
   gap: 1rem;
 
-  h1 {
-    color: $gray-7;
-  }
-
   .mobileNav {
     display: flex;
-    justify-content: space-around;
-    width: 100%;
+    gap: 2rem;
   }
   .desktopNav,
   .desktopAsk {

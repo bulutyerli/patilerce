@@ -39,6 +39,11 @@ export default function AdoptFilters({ filterList, params }) {
               My Listings
             </Link>
           </h2>
+          <h2 className={filterName === 'pending' ? styles.active : ''}>
+            <Link onClick={modalHandler} href={`?filter=pending`}>
+              Pending Approval
+            </Link>
+          </h2>
           <h2 className={filterName === 'fav' ? styles.active : ''}>
             <Link onClick={modalHandler} href={`?filter=fav`}>
               My Favorites
@@ -70,6 +75,9 @@ export default function AdoptFilters({ filterList, params }) {
         </h2>
         <h2 className={filterName === 'my' ? styles.active : ''}>
           <Link href={`?filter=my`}>My Listings</Link>
+        </h2>
+        <h2 className={filterName === 'pending' ? styles.active : ''}>
+          <Link href={`?filter=pending`}>Pending Approval</Link>
         </h2>
         <h2 className={filterName === 'fav' ? styles.active : ''}>
           <Link href={`?filter=fav`}>My Favorites</Link>

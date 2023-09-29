@@ -67,14 +67,16 @@ export default function ListingForm({ petData, isEdit, adoptId }) {
           adoptId: adoptId,
           formData: formData,
         });
+        router.back();
+        router.refresh();
       } else {
         const response = await axios.post('/api/adopt', { formData });
+        router.push('/profile/my-listings?filter=pending');
+        router.refresh();
       }
-      router.back();
-      router.refresh();
     } catch (error) {
       console.error(error);
-      setErrorMessage('Couldnt create listing, try again');
+      setErrorMessage('Could not create listing, try again');
     } finally {
       setIsLoading(false);
     }

@@ -31,12 +31,13 @@ export default async function AnswerCard({ answer, searchParams }) {
         answered <time>{dateConverter(answer.createdAt)}</time>
       </div>
       <p className={styles.answer}>{answer.answer}</p>
-      {isUser && (
-        <div className={styles.delete}>
-          <PiTrash />
-          <Link href={`?modalanswer=${answer.id}`}>Delete</Link>
-        </div>
-      )}
+      {isUser ||
+        (session?.user?.isAdmin && (
+          <div className={styles.delete}>
+            <PiTrash />
+            <Link href={`?modalanswer=${answer.id}`}>Delete</Link>
+          </div>
+        ))}
       {showAnswerModal && (
         <DeletePosts type={'answer'} dataId={showAnswerModal} />
       )}

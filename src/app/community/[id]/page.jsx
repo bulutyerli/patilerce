@@ -64,7 +64,8 @@ export default async function QuestionDetails({ params, searchParams }) {
           <div className={styles.userButtons}>
             {editPanel
               ? ''
-              : isUser && (
+              : isUser ||
+                (session?.user?.isAdmin && (
                   <>
                     <div className={styles.edit}>
                       <PiPencil />
@@ -77,7 +78,7 @@ export default async function QuestionDetails({ params, searchParams }) {
                       <Link href={`?modal=true`}>Delete</Link>
                     </div>
                   </>
-                )}
+                ))}
             {showModal && <DeletePosts dataId={questionId} type={'question'} />}
           </div>
         </article>

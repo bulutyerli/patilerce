@@ -6,6 +6,11 @@ import styles from './community.module.scss';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 
+export const metadata = {
+  title: 'Ask Questions About Pets',
+  description: 'Tailwish.com community Q&A section.',
+};
+
 export default async function Community({ searchParams }) {
   const { page: currentPage = 1, filter: filter = 'all' } = searchParams;
   const limit = 10;

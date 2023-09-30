@@ -12,11 +12,10 @@ Tailwish is a platform where people can adopt pets or offer their pets for adopt
 ## Technologies Used
 
 - Front-end: React, Next.js
-- Back-end: Node.js
+- Back-end: Next.js
 - Database: MongoDB
 - Styling: SCSS
-- Messaging: Socket.io
-- Authentication: JWT
+- Authentication: Next-Auth
 
 ## License
 
@@ -25,3 +24,7 @@ All rights reserved. This project and its source code are the intellectual prope
 ## Acknowledgments
 
 - Inspired by our love for pets and the desire to create a positive impact on pet adoption.
+
+## Visit Website
+
+For more information about Tailwish and to explore the platform, please visit website: [Tailwish Website](tailwish.vercel.app)

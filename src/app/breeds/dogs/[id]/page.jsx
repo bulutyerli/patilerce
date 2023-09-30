@@ -3,6 +3,12 @@ import Breeds from '@/components/breeds/breeds';
 const apiKey = process.env.DOG_API_KEY;
 
 let totalData;
+
+export const metadata = {
+  title: 'Images and informations about dog breeds',
+  description: 'information and images of more than 120 dog breeds',
+};
+
 export async function getDogs() {
   try {
     const response = await fetch('https://api.thedogapi.com/v1/breeds', {

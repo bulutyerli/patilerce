@@ -1,5 +1,10 @@
 import styles from './about-us.module.scss';
 
+export const metadata = {
+  title: 'About Tailwish.com',
+  description: 'Find more about tailwish.com',
+};
+
 export default function AboutUsPage() {
   return (
     <section className={styles.container}>

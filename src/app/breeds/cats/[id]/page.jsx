@@ -3,6 +3,12 @@ import Breeds from '@/components/breeds/breeds';
 const apiKey = process.env.CAT_API_KEY;
 
 let totalData;
+
+export const metadata = {
+  title: 'Images and informations about cat breeds',
+  description: 'information and images of more than 60 cat breeds',
+};
+
 export async function getCats() {
   try {
     const response = await fetch('https://api.thecatapi.com/v1/breeds', {

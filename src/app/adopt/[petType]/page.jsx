@@ -5,6 +5,11 @@ import Pagination from '@/components/pagination/pagination';
 import AdoptFilters from '@/components/adopt/adopt-filters/adopt-filters';
 import Link from 'next/link';
 
+export const metadata = {
+  title: 'Find Cats and Dogs for Adoption for Free',
+  description: 'You can adopt cats and dogs or list for adoption',
+};
+
 export default async function Adopt({ params, searchParams }) {
   const petType = params.petType === 'cats' ? 'Cat' : 'Dog';
   const { page: currentPage = 1, filter: filter = 'all' } = searchParams;

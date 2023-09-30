@@ -5,11 +5,6 @@ import { useEffect, useState } from 'react';
 import CustomButton from '@/components/custom-button/custom-button';
 import axios from 'axios';
 
-export const metadata = {
-  title: 'Contact Tailwish.com',
-  description: 'Get in touch with tailwish.com',
-};
-
 export default function ContactUsPage() {
   const [title, setTitle] = useState('');
   const [subject, setSubject] = useState('');

@@ -11,9 +11,13 @@ export default function ControlCenterLayout({ children }) {
           <Link href={'/control-center'}>Users</Link>
         </li>
         <li>
-          <Link href={'/control-center/listing-approval'}>
-            Listing Approval
-          </Link>
+          <Link href={'/control-center/question-approval'}>Questions</Link>
+        </li>
+        <li>
+          <Link href={'/control-center/answer-approval'}>Answers</Link>
+        </li>
+        <li>
+          <Link href={'/control-center/listing-approval'}>Listings</Link>
         </li>
       </nav>
       {children}

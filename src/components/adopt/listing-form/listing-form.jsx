@@ -8,6 +8,7 @@ import ImageUpload from '@/components/image-upload/image-upload';
 import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 export default function ListingForm({ petData, isEdit, adoptId }) {
   const [formData, setFormData] = useState(petData);
@@ -71,6 +72,7 @@ export default function ListingForm({ petData, isEdit, adoptId }) {
         router.refresh();
       } else {
         const response = await axios.post('/api/adopt', { formData });
+        toast.success('Your listing will be added after review');
         router.push('/profile/my-listings?filter=pending');
         router.refresh();
       }

@@ -15,7 +15,7 @@ export async function getQuestions(req, limit) {
     const user = session?.user;
     const { page = 1, filter } = req.query;
     const skip = (page - 1) * limit;
-    let query = {};
+    let query = { isApproved: true };
     const totalQuestions = await Question.countDocuments(query);
     const userQuestions = await Question.countDocuments({ user });
 
@@ -27,13 +27,13 @@ export async function getQuestions(req, limit) {
     }
 
     if (filter === 'my') {
-      query = { user: user._id };
+      query = { ...query, user: user._id };
       totalPages = userPages;
     }
 
     if (filter === 'noanswer') {
       const questionId = await getQuestionsWithoutAnswers();
-      query = { _id: { $in: questionId } };
+      query = { ...query, _id: { $in: questionId } };
     }
 
     const questions = await Question.find(query)

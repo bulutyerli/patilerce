@@ -6,11 +6,9 @@ import { useEffect, useState } from 'react'; // Import useState
 import Image from 'next/image';
 import CustomButton from '@/components/custom-button/custom-button';
 import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -26,7 +24,7 @@ export default function UsersPage() {
     };
 
     fetchUsers();
-  }, []);
+  }, [users]);
 
   const banHandler = async (id, action) => {
     try {
@@ -35,11 +33,9 @@ export default function UsersPage() {
         toast.error('Something went wrong');
       }
       toast.success('Successful');
-      router.refresh();
     } catch (error) {
       console.log(error);
     } finally {
-      router.refresh();
     }
   };
 
@@ -54,13 +50,14 @@ export default function UsersPage() {
                 <div className={styles.user}>
                   <dl>
                     <Image
+                      className={styles.userImage}
                       src={user.image}
                       alt="profile picture"
                       width={50}
                       height={50}
                     ></Image>
                   </dl>
-                  <div>
+                  <div className={styles.userDetails}>
                     <dl>
                       <dt>Name:</dt>
                       <dd>{user.name}</dd>

@@ -3,7 +3,10 @@ import User from '@/models/user-model';
 
 export async function getAnswers(refQuestion) {
   try {
-    const answers = await Answer.find({ refQuestion: refQuestion })
+    const answers = await Answer.find({
+      refQuestion: refQuestion,
+      isApproved: true,
+    })
       .populate({
         path: 'user',
         model: User,
@@ -20,6 +23,7 @@ export async function getAnswersCount(refQuestion) {
   try {
     const totalAnswers = await Answer.countDocuments({
       refQuestion: refQuestion,
+      isApproved: true,
     });
     return totalAnswers;
   } catch (error) {

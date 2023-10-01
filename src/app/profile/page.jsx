@@ -16,7 +16,6 @@ export default function ProfilePage() {
   const { data: session } = useSession();
   const oAuthUser = session?.user?.provider === 'google';
   const image = session?.user?.image ?? '/images/cat-profile.svg';
-  const isImageValid = checkValidImageUrl(image);
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
@@ -35,6 +34,24 @@ export default function ProfilePage() {
   const [imageMessage, setImageMessage] = useState('');
   const [imageErrorMsg, setImageErrorMsg] = useState('');
   const [emailButtonLoading, setEmailButtonLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
+  const [imageLoading, setImageLoading] = useState(false);
+  const isImageValid = checkValidImageUrl(imageUrl);
+
+  const getProfileImage = async () => {
+    try {
+      setImageLoading(true);
+      const response = await axios.get('/api/auth/profile/info-change');
+      if (!response.data.success) {
+        throw new Error(error);
+      }
+      setImageUrl(response.data.image);
+    } catch (error) {
+      setImageErrorMsg('Could not get profile image');
+    } finally {
+      setImageLoading(false);
+    }
+  };
 
   const onNameSubmit = async (e) => {
     setNameSuccess(false);
@@ -119,6 +136,7 @@ export default function ProfilePage() {
           profileImage: newImage,
         });
         setImageMessage(response.data.message);
+        getProfileImage();
       }
     } catch (error) {
       if (error.response && error.response.data) {
@@ -150,10 +168,10 @@ export default function ProfilePage() {
       <div className={styles.infoContainer}>
         <h1>Profile Settings </h1>
         <div>
-          {isImageValid ? (
+          {isImageValid || !imageLoading ? (
             <Image
               className={styles.profileImage}
-              src={image}
+              src={imageUrl.length < 1 ? image : imageUrl}
               alt="profile image"
               width={50}
               height={50}

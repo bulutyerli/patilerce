@@ -1,39 +1,38 @@
 'use client';
 
-import styles from './listing-approval.module.scss';
+import styles from './question-approval.module.scss';
 import axios from 'axios';
-import { useEffect, useState } from 'react'; // Import useState
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import CustomButton from '@/components/custom-button/custom-button';
 import { toast } from 'react-toastify';
 
 export default function ListingApprovalPage() {
-  const [adopts, setAdopts] = useState([]);
-  const [rejectStates, setRejectStates] = useState(false);
-  const [loadingStates, setLoadingStates] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [rejectStates, setRejectStates] = useState({});
+  const [loadingStates, setLoadingStates] = useState({});
 
   useEffect(() => {
-    const fetchAdopts = async () => {
+    const fetchQuestions = async () => {
       try {
-        const response = await axios.get('/api/admin/adopts');
+        const response = await axios.get('/api/admin/questions');
         if (!response.data.success) {
           throw new Error('Could not get the listings');
         }
-        setAdopts(response.data.adopts);
+        setQuestions(response.data.questions);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchAdopts();
-  }, [adopts]);
+    fetchQuestions();
+  }, [questions]);
 
   const buttonHandler = async ({ id, buttonAction }) => {
     try {
       buttonAction === 'approve'
         ? setLoadingStates((prev) => ({ ...prev, [id]: true }))
         : setRejectStates((prev) => ({ ...prev, [id]: true }));
-      const response = await axios.put('/api/admin/adopts', {
+      const response = await axios.put('/api/admin/questions', {
         adoptId: id,
         action: buttonAction,
       });
@@ -54,55 +53,29 @@ export default function ListingApprovalPage() {
 
   return (
     <div className={styles.container}>
-      <h1>Approve Listings</h1>
+      <h1>Approve Questions</h1>
       <div className={styles.cards}>
-        {adopts &&
-          adopts.map((adopt, index) => {
-            const isLoading = loadingStates[adopt._id] || false;
-            const isRejectLoading = rejectStates[adopt._id] || false;
-
+        {questions &&
+          questions.map((question, index) => {
+            const isLoading = loadingStates[question._id] || false;
+            const isRejectLoading = rejectStates[question._id] || false;
             return (
               <div className={styles.card} key={index}>
                 <dl>
-                  <dt>Images:</dt>
-                  <dl>
-                    {adopt.images.map((image, index) => {
-                      return (
-                        <div className={styles.images} key={index}>
-                          <Image
-                            src={image}
-                            alt="pet image"
-                            width={40}
-                            height={40}
-                          ></Image>
-                        </div>
-                      );
-                    })}
-                  </dl>
-                </dl>
-                <dl>
                   <dt>Title:</dt>
-                  <dd>{adopt.title}</dd>
+                  <dd>{question.title}</dd>
                 </dl>
                 <dl>
-                  <dt>Details:</dt>
-                  <dd>{adopt.details}</dd>
-                </dl>
-                <dl>
-                  <dt>Pet Type:</dt>
-                  <dd>{adopt.petType}</dd>
-                </dl>
-                <dl>
-                  <dt>Breed:</dt>
-                  <dd>{adopt.breed}</dd>
+                  <dt>Question:</dt>
+                  <dd>{question.question}</dd>
                 </dl>
                 <dl>
                   <dt>User:</dt>
-                  <dd>{adopt.user.name}</dd>
+                  <dd>{question.user.name}</dd>
                 </dl>
                 <dl>
                   <dt>User Email:</dt>
-                  <dd>{adopt.user.email}</dd>
+                  <dd>{question.user.email}</dd>
                 </dl>
                 <div className={styles.buttons}>
                   <div className={styles.button}>
@@ -110,7 +83,7 @@ export default function ListingApprovalPage() {
                       isLoading={isLoading}
                       onClick={() => {
                         buttonHandler({
-                          id: adopt._id,
+                          id: question._id,
                           buttonAction: 'approve',
                         });
                       }}
@@ -123,7 +96,7 @@ export default function ListingApprovalPage() {
                       isLoading={isRejectLoading}
                       onClick={() => {
                         buttonHandler({
-                          id: adopt._id,
+                          id: question._id,
                           buttonAction: 'reject',
                         });
                       }}

@@ -113,15 +113,22 @@ export default async function Home() {
         {qdata?.questions?.map((question, index) => {
           return (
             <div className={styles.questionCard} key={index}>
-              <Image
-                className={styles.questionImage}
-                src={question.user.image}
-                alt="profile image"
-                width={50}
-                height={50}
-              ></Image>
+              <Link href={`/community/${question._id}`}>
+                <Image
+                  className={styles.questionImage}
+                  src={question.user.image}
+                  alt="profile image"
+                  width={50}
+                  height={50}
+                ></Image>{' '}
+              </Link>
+
               <div className={styles.details}>
-                <span className={styles.username}>{question.user.name}</span>
+                <span className={styles.username}>
+                  <Link href={`/community/${question._id}`}>
+                    {question.user.name}
+                  </Link>
+                </span>
                 <span className={styles.title}>
                   <Link href={`/community/${question._id}`}>
                     {question.title}

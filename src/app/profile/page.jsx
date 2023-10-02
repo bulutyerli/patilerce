@@ -23,6 +23,7 @@ export default function ProfilePage() {
   });
 
   const [name, setName] = useState('');
+  const [profileName, setProfileName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isNameBtnLoading, setNameBtnLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -53,6 +54,10 @@ export default function ProfilePage() {
     }
   };
 
+  useEffect(() => {
+    setProfileName(session?.user?.name);
+  }, [session]);
+
   const onNameSubmit = async (e) => {
     setNameSuccess(false);
 
@@ -63,10 +68,11 @@ export default function ProfilePage() {
         email: session.user.email,
         newName: name,
       });
+
       if (!response) {
         throw new Error('Something went wrong');
       }
-
+      setProfileName(name);
       setNameResMessage(response.data.message);
       setNameSuccess(true);
     } catch (error) {
@@ -181,8 +187,7 @@ export default function ProfilePage() {
           )}
 
           <h2>
-            Logged in as{' '}
-            <span className={styles.userName}>{session?.user?.name}</span>
+            Logged in as <span className={styles.userName}>{profileName}</span>
           </h2>
         </div>
         <Link href="/sign-out">

@@ -18,8 +18,6 @@ body {
   max-width: 1080px;
   margin: 0 auto;
   background-image: url('/images/background-image-paws.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 textarea,
 input,

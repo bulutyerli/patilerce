@@ -1,13 +1,14 @@
-import styles from './my-listings.module.scss';
-import { getAllUserAdopts } from '@/lib/adopt/get-adopts';
-import AdoptCard from '@/components/adopt/adopt-card/adopt-card';
+import styles from './my-questions.module.scss';
 import Pagination from '@/components/pagination/pagination';
+import QuestionCard from '@/components/community/question-card/question-card';
+import { getAllUserQuestions } from '@/lib/community/get-questions';
+
 import Link from 'next/link';
 
 export default async function MyListings({ searchParams }) {
   const { page: currentPage = 1, filter } = searchParams;
   const limit = 20;
-  const { adopts, totalPages } = await getAllUserAdopts(
+  const { questions, totalPages } = await getAllUserQuestions(
     { query: searchParams },
     limit,
     filter
@@ -16,17 +17,17 @@ export default async function MyListings({ searchParams }) {
   return (
     <section className={styles.container}>
       {filter ? (
-        <h1 className={styles.title}>My Listings Pending Approval</h1>
+        <h1 className={styles.title}>My Questions Pending Approval</h1>
       ) : (
-        <h1 className={styles.title}>My Listings</h1>
+        <h1 className={styles.title}>My Questions</h1>
       )}
       <div className={styles.cardsContainer}>
-        {adopts?.length > 0 ? (
+        {questions?.length > 0 ? (
           <div className={styles.cards}>
-            {adopts?.map((adopt, index) => {
+            {questions?.map((question, index) => {
               return (
-                <Link key={index} href={`/adopt/${adopt.petType}/${adopt.id}`}>
-                  <AdoptCard data={adopt} />
+                <Link key={index} href={`/community/${question.id}`}>
+                  <QuestionCard data={question} />
                 </Link>
               );
             })}
@@ -40,7 +41,7 @@ export default async function MyListings({ searchParams }) {
       ) : (
         <div className={styles.pagination}>
           <Pagination
-            section={'adopt'}
+            section={'question'}
             totalPages={totalPages}
             currentPage={currentPage}
           />

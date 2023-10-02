@@ -78,3 +78,34 @@ export async function getQuestionsWithoutAnswers() {
   }
   return questionsWithoutAnswers;
 }
+
+export async function getAllUserQuestions(req, limit) {
+  const session = await getServerSession(authOptions);
+  const user = session?.user;
+  const { page = 1, filter } = req.query;
+  const skip = (page - 1) * limit;
+  let query = { user: user?._id, isApproved: true };
+  const userQuestions = await Question.countDocuments({ user });
+  const totalPages = Math.ceil(userQuestions / limit);
+
+  if (filter === 'pending') {
+    query = {
+      user: user?._id,
+      isApproved: false,
+    };
+  }
+  try {
+    const questions = await Question.find(query)
+      .populate({
+        path: 'user',
+        model: User,
+        select: 'name image ',
+      })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(parseInt(10));
+    return { questions, totalPages };
+  } catch (error) {
+    console.log(error);
+  }
+}

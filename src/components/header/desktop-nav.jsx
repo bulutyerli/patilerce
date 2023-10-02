@@ -230,9 +230,18 @@ function DesktopNav({ newMessages }) {
                 <PiChatsCircle className={styles.messageIcon} />
                 <Link
                   onClick={handleProfileMenuClick}
-                  href="/community?filter=my&page=1"
+                  href="/profile/my-questions"
                 >
                   My Questions
+                </Link>
+              </li>
+              <li>
+                <PiHourglassHighDuotone className={styles.messageIcon} />
+                <Link
+                  onClick={handleProfileMenuClick}
+                  href="/profile/my-questions?filter=pending"
+                >
+                  Pending Questions
                 </Link>
               </li>
 

@@ -45,8 +45,16 @@ function UserNav({ isOpen, onLinkClick }, ref) {
           </Link>
         </li>
         <li className={styles.profileSubMenu}>
-          <Link onClick={onLinkClick} href="/community?filter=my">
+          <Link onClick={onLinkClick} href="/profile/my-questions">
             My Questions
+          </Link>
+        </li>
+        <li className={styles.profileSubMenu}>
+          <Link
+            onClick={onLinkClick}
+            href="/profile/my-questions?filter=pending"
+          >
+            Pending Questions
           </Link>
         </li>
         <li className={styles.profileSubMenu}>

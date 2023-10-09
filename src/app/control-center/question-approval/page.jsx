@@ -33,10 +33,9 @@ export default function ListingApprovalPage() {
         ? setLoadingStates((prev) => ({ ...prev, [id]: true }))
         : setRejectStates((prev) => ({ ...prev, [id]: true }));
       const response = await axios.put('/api/admin/questions', {
-        adoptId: id,
+        questionId: id,
         action: buttonAction,
       });
-      console.log(buttonAction);
       if (!response.data.success) {
         toast.error('Something went wrong');
         throw new Error(response.data.message);

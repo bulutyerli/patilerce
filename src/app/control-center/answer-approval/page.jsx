@@ -33,7 +33,7 @@ export default function ListingApprovalPage() {
         ? setLoadingStates((prev) => ({ ...prev, [id]: true }))
         : setRejectStates((prev) => ({ ...prev, [id]: true }));
       const response = await axios.put('/api/admin/answers', {
-        adoptId: id,
+        answerId: id,
         action: buttonAction,
       });
       console.log(buttonAction);

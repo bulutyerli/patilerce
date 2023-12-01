@@ -13,7 +13,7 @@ export default function MessageCard({
   if (!sender) return null;
   const senderId = sender._id.toString();
   const activeMessage = searchParams.to;
-  const isModal = searchParams.modal;
+  const isModal = searchParams.modal && searchParams.modalId === conversationId;
 
   return (
     <div
@@ -37,7 +37,7 @@ export default function MessageCard({
         </div>
       </Link>
       <div className={styles.deleteBtn}>
-        <Link href={'?modal=true'}>
+        <Link href={`?modal=true&modalId=${conversationId}`}>
           <PiTrash />
         </Link>
       </div>

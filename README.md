@@ -27,4 +27,4 @@ All rights reserved. This project and its source code are the intellectual prope
 
 ## Visit Website
 
-For more information about Tailwish and to explore the platform, please visit website: [Tailwish Website](https://tailwish.vercel.app/)
+For more information about Tailwish and to explore the platform, please visit website: [Tailwish Website](https://tailwish.netlify.app/)

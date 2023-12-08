@@ -6,7 +6,6 @@ import { NextAuthProvider } from '../components/next-auth-provider';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getUnreadMessages } from '@/lib/messages/get-unread-messages';
-import { Analytics } from '@vercel/analytics/react';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -28,7 +27,6 @@ export default async function RootLayout({ children }) {
         <NextAuthProvider>
           <Header messageCount={messageCount} />
           {children}
-          <Analytics />
           <ToastContainer autoClose={1000} position="top-center" />
           <Footer />
         </NextAuthProvider>

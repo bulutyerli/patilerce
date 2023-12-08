@@ -1,4 +1,3 @@
-import spinner from 'public/images/loading.svg';
 import Image from 'next/image';
 import styles from './loading-spinner.module.scss';
 
@@ -7,7 +6,7 @@ export default function LoadingSpinner() {
     <div className={styles.container}>
       <div className={styles.spinner}>
         <Image
-          src={spinner}
+          src="images/loading.svg"
           alt="loading animation"
           width={100}
           height={100}

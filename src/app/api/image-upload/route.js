@@ -4,7 +4,7 @@ import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import sharp from 'sharp';
 
 const s3Client = new S3Client({
-  region: process.env.AWS_REGION,
+  region: process.env.AWS_REGION_KEY,
   credentials: {
     accessKeyId: process.env.AWS_S3_ID,
     secretAccessKey: process.env.AWS_S3_SECRET,
@@ -75,7 +75,7 @@ export async function POST(req) {
         Date.now() + uuid() + '.' + fileExtension
       );
 
-      const baseURL = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`;
+      const baseURL = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION_KEY}.amazonaws.com/${fileName}`;
 
       imageLinks.push(baseURL);
     }

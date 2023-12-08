@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './image-gallery.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 
 export default function ImageGallery({ images, breed }) {

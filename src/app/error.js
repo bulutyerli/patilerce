@@ -1,6 +1,6 @@
 'use client';
 
-import errorImage from 'public/images/errorPageDog.jpg';
+import errorImage from '../../public/images/errorPageDog.jpg';
 import Image from 'next/image';
 import styles from '../styles/error.module.scss';
 import CustomButton from '../components/custom-button/custom-button';

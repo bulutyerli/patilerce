@@ -1,6 +1,6 @@
 import styles from './question-card.module.scss';
 import Image from 'next/image';
-import catImage from 'public/images/cat-profile.svg';
+import catImage from '../../../../public/images/cat-profile.svg';
 import { dateConverter } from '@/helpers/date-converter';
 import Link from 'next/link';
 import { PiChatCircleBold } from 'react-icons/pi';

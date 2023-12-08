@@ -42,9 +42,11 @@ export const sendEmail = async ({ email, emailType, userId }) => {
         emailType === 'VERIFY' ? 'Verify your email' : 'Reset your password',
       html:
         emailType === 'VERIFY'
-          ? htmlEmail(`http://localhost:3000/verify-email?token=${hashedToken}`)
+          ? htmlEmail(
+              `http://${process.env.DOMAIN}/verify-email?token=${hashedToken}`
+            )
           : htmlPassword(
-              `http://localhost:3000/password-change?token=${hashedToken}`
+              `http://${process.env.DOMAIN}/password-change?token=${hashedToken}`
             ),
     };
 

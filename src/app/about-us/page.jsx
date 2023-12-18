@@ -1,8 +1,8 @@
 import styles from './about-us.module.scss';
 
 export const metadata = {
-  title: 'About Tailwish.com',
-  description: 'Find more about tailwish.com',
+  title: 'About patilerce.com',
+  description: 'Find more about patilerce.com',
 };
 
 export default function AboutUsPage() {

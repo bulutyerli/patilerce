@@ -7,6 +7,6 @@ export default function robots() {
       disallow: '/messages/',
       disallow: '/profile/',
     },
-    sitemap: 'https://tailwish.netlify.app/sitemap.xml',
+    sitemap: 'https://patilerce.com/sitemap.xml',
   };
 }

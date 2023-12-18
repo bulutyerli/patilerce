@@ -13,7 +13,7 @@ const roboto = Roboto({
 });
 
 export const metadata = {
-  title: 'Tailwish A Place Where You Can Adopt Cats And Dogs',
+  title: 'Patilerce A Place Where You Can Adopt Cats And Dogs',
   description: 'Home for Paws',
   icons: '/favicon.png',
 };

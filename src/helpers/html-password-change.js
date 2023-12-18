@@ -38,7 +38,7 @@ export function htmlPassword(verificationLink) {
             <p>
               Thank you,
               <br />
-              Tailwish.com
+              Patilerce.com
             </p>
             <p>
               If the button does not work for any reason, you can use this link to

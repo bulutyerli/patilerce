@@ -1,17 +1,27 @@
 'use client';
 
 import styles from './image-gallery.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 export default function ImageGallery({ images, breed }) {
-  const [mainImage, setMainImage] = useState(images[0]);
+  const [mainImage, setMainImage] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length > 0) {
+      setMainImage(images[0]);
+    }
+  }, []);
 
   const mainImageHandler = (index) => {
     setMainImage(images[index]);
     setActiveIndex(index);
   };
+
+  if (!images || !Array.isArray(images) || images.length === 0) {
+    return null;
+  }
 
   return (
     <div className={styles.container}>

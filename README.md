@@ -1,6 +1,6 @@
-# Tailwish
+# Patilerce
 
-Tailwish is a platform where people can adopt pets or offer their pets for adoption. It provides a community-driven space for pet lovers to connect, ask questions, and share their knowledge about pet care.
+Patilerce is a platform where people can adopt pets or offer their pets for adoption. It provides a community-driven space for pet lovers to connect, ask questions, and share their knowledge about pet care.
 
 ## Features
 
@@ -27,4 +27,4 @@ All rights reserved. This project and its source code are the intellectual prope
 
 ## Visit Website
 
-For more information about Tailwish and to explore the platform, please visit website: [Patilerce Website](https://patilerce.com/)
+For more information about Patilerce and to explore the platform, please visit website: [Patilerce Website](https://patilerce.com/)

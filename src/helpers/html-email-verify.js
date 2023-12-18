@@ -18,7 +18,7 @@ export function htmlEmail(verificationLink) {
           >
             <p>Hi there,</p>
             <p>
-              Thank you for signing up to Tailwish.com. To complete your
+              Thank you for signing up to Patilerce.com. To complete your
               registration, please click the button below to verify your email
               address:
             </p>
@@ -40,7 +40,7 @@ export function htmlEmail(verificationLink) {
           <p>
             Thank you,
             <br />
-            Tailwish.com
+            patilerce.com
           </p>
           <p>
             If the button does not work for any reason, you can use this link to

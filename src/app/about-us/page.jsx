@@ -10,7 +10,7 @@ export default function AboutUsPage() {
     <section className={styles.container}>
       <h1>About Us</h1>
       <p>
-        At Tailwish, our mission is simple: we&apos;re here to help animals in
+        At Patilerce, our mission is simple: we&apos;re here to help animals in
         need. Whether they&apos;re stray animals without a home or pets that
         people can&apos;t care for anymore, we want to find them loving new
         homes instead of letting them roam the streets.
@@ -30,7 +30,7 @@ export default function AboutUsPage() {
       </p>
       <p>
         Join us in this mission to give every animal a chance for a happy
-        ending. Thank you for being part of the Tailwish family, where every
+        ending. Thank you for being part of the Patilerce family, where every
         tail has a story, and every story deserves a happy ending.
       </p>
     </section>

@@ -8,7 +8,7 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 
 export const metadata = {
   title: 'Ask Questions About Pets',
-  description: 'Tailwish.com community Q&A section.',
+  description: 'Patilerce.com community Q&A section.',
 };
 
 export default async function Community({ searchParams }) {

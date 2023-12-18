@@ -17,13 +17,11 @@ export default async function QuestionCard({ data }) {
   if (wordCount < 50 && lineCount < 7) {
     formattedQuestion = data.question;
   } else {
-    // Truncate based on word count if word count is too high
     if (wordCount > 50) {
       formattedQuestion = data.question.split(' ').slice(0, 50).join(' ');
       longQuestion = true;
     }
 
-    // Truncate based on line count if line count is too high
     if (lineCount > 6) {
       formattedQuestion = data.question.split('\n').slice(0, 6).join('\n');
       longQuestion = true;

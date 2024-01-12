@@ -10,6 +10,7 @@ const nextConfig = {
       'lh3.googleusercontent.com',
       'tailwish-pets.s3.eu-central-1.amazonaws.com',
     ],
+    formats: ['image/avif', 'image/webp'],
   },
 };
 

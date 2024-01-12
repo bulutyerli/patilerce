@@ -8,6 +8,7 @@ import styles from './password-change.module.scss';
 import Image from 'next/image';
 import { checkValidPassword } from '@/helpers/check-valid-password';
 import { useRouter } from 'next/navigation';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function PasswordChangePage() {
   const [token, setToken] = useState('');
@@ -71,6 +72,7 @@ export default function PasswordChangePage() {
             </Link>
           </div>
           <Image
+            loader={imageKitLoader}
             className={styles.image}
             src="/images/verifiedemailDog.png"
             alt="dog with a party hat"
@@ -128,6 +130,7 @@ export default function PasswordChangePage() {
           </form>
 
           <Image
+            loader={imageKitLoader}
             className={styles.image}
             src="/images/catPassword.png"
             height={300}

@@ -1,6 +1,7 @@
 import styles from '../styles/not-found.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function NotFound() {
   return (
@@ -11,6 +12,7 @@ export default function NotFound() {
         <Link href="/">Return to Home</Link>
       </div>
       <Image
+        loader={imageKitLoader}
         className={styles.image}
         src="/images/notfound-dog.png"
         width={300}

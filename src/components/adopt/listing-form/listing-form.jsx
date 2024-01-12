@@ -9,6 +9,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function ListingForm({ petData, isEdit, adoptId }) {
   const [formData, setFormData] = useState(petData);
@@ -88,6 +89,7 @@ export default function ListingForm({ petData, isEdit, adoptId }) {
     <div className={styles.container}>
       <form className={styles.formContainer}>
         <Image
+          loader={imageKitLoader}
           className={styles.dogsImage}
           src="/images/dogs.svg"
           alt="dogs"

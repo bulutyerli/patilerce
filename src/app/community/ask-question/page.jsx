@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function AskQuestion() {
   const [title, setTitle] = useState('');
@@ -50,6 +51,7 @@ export default function AskQuestion() {
       <h1 className={styles.title}>Ask to Community</h1>
       <div className={styles.pageContainer}>
         <Image
+          loader={imageKitLoader}
           className={styles.image}
           src="/images/addquestionDogImage.png"
           width={300}

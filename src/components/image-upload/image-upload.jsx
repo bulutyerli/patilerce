@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import { PiTrash } from 'react-icons/pi';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function ImageUpload({ onImageChange, profile, images }) {
   const [imageList, setImageList] = useState(images);
@@ -90,7 +91,13 @@ export default function ImageUpload({ onImageChange, profile, images }) {
               const url = image.toString();
               return (
                 <div className={styles.images} key={index}>
-                  <Image src={url} alt="images" width={50} height={50}></Image>
+                  <Image
+                    loader={imageKitLoader}
+                    src={url}
+                    alt="images"
+                    width={50}
+                    height={50}
+                  ></Image>
                   <div
                     onClick={() => {
                       removeImage(index);

@@ -6,6 +6,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
 import { DeletePosts } from '@/lib/delete-posts/delete-posts';
 import { PiTrash } from 'react-icons/pi';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default async function AnswerCard({ answer, searchParams }) {
   const image = answer?.user?.image;
@@ -19,6 +20,7 @@ export default async function AnswerCard({ answer, searchParams }) {
     <article className={styles.container}>
       <div className={styles.imageContainer}>
         <Image
+          loader={imageKitLoader}
           className={styles.image}
           src={image}
           alt="profile picture"

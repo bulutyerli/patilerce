@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'; // Import useState
 import Image from 'next/image';
 import CustomButton from '@/components/custom-button/custom-button';
 import { toast } from 'react-toastify';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
@@ -50,6 +51,7 @@ export default function UsersPage() {
                 <div className={styles.user}>
                   <dl>
                     <Image
+                      loader={imageKitLoader}
                       className={styles.userImage}
                       src={user.image}
                       alt="profile picture"

@@ -5,6 +5,7 @@ import { dateConverter } from '@/helpers/date-converter';
 import Link from 'next/link';
 import { PiChatCircleBold } from 'react-icons/pi';
 import { getAnswersCount } from '@/lib/community/get-answers';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default async function QuestionCard({ data }) {
   const image = data?.user?.image ?? catImage;
@@ -37,6 +38,7 @@ export default async function QuestionCard({ data }) {
       </h2>
       <div className={styles.imageContainer}>
         <Image
+          loader={imageKitLoader}
           className={styles.image}
           src={image}
           alt="profile picture"

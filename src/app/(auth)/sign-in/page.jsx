@@ -10,6 +10,7 @@ import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import checkValidEmail from '@/helpers/check-valid-email';
 import { useRouter } from 'next/navigation';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function SignInPage() {
   const [userEmail, setUserEmail] = useState('');
@@ -109,6 +110,7 @@ export default function SignInPage() {
         </form>
       </div>
       <Image
+        loader={imageKitLoader}
         className={styles.catsImage}
         src="/images/cats-login-page.png"
         alt="Cats in basket"

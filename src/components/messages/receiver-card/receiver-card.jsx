@@ -1,10 +1,12 @@
 import styles from './receiver-card.module.scss';
 import Image from 'next/image';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function ReceiverCard({ otherUser }) {
   return otherUser ? (
     <div className={styles.container}>
       <Image
+        loader={imageKitLoader}
         className={styles.image}
         src={otherUser.image}
         alt="profile picture"

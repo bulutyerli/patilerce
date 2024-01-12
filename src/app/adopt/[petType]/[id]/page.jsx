@@ -9,6 +9,7 @@ import { PiTrash, PiPencil } from 'react-icons/pi';
 import Link from 'next/link';
 import { DeletePosts } from '@/lib/delete-posts/delete-posts';
 import AddFavorite from '@/lib/adopt/add-favorite';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default async function AdoptDetails({ params, searchParams }) {
   try {
@@ -60,6 +61,7 @@ export default async function AdoptDetails({ params, searchParams }) {
             <div className={styles.userInfo}>
               <div className={styles.infoPair}>
                 <Image
+                  loader={imageKitLoader}
                   className={styles.userImage}
                   src={adopt?.user.image}
                   alt="Profile Image"

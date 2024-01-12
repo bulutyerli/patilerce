@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { DeletePosts } from '@/lib/delete-posts/delete-posts';
 import { PiTrash } from 'react-icons/pi';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function MessageCard({
   message,
@@ -25,6 +26,7 @@ export default function MessageCard({
         <div className={styles.card}>
           <div className={styles.sender}>
             <Image
+              loader={imageKitLoader}
               className={styles.image}
               src={sender.image}
               alt="profile picture"

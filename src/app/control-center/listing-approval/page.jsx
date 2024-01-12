@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'; // Import useState
 import Image from 'next/image';
 import CustomButton from '@/components/custom-button/custom-button';
 import { toast } from 'react-toastify';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function ListingApprovalPage() {
   const [adopts, setAdopts] = useState([]);
@@ -70,6 +71,7 @@ export default function ListingApprovalPage() {
                       return (
                         <div className={styles.images} key={index}>
                           <Image
+                            loader={imageKitLoader}
                             src={image}
                             alt="pet image"
                             width={40}

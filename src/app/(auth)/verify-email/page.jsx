@@ -8,6 +8,7 @@ import styles from './verify-email.module.scss';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function VerifyEmailPage() {
   const [token, setToken] = useState('');
@@ -49,6 +50,7 @@ export default function VerifyEmailPage() {
             <p>Congratulations! </p> <p>Your email has been verified.</p>
           </h1>
           <Image
+            loader={imageKitLoader}
             className={styles.image}
             src="/images/verifiedemailDog.png"
             alt="dog with a party hat"

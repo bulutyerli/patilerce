@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getQuestions } from '@/lib/community/get-questions';
 import CustomButton from '@/components/custom-button/custom-button';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default async function Home() {
   const limit = 10;
@@ -22,6 +23,7 @@ export default async function Home() {
             </Link>
           </span>
           <Image
+            loader={imageKitLoader}
             className={styles.breedImages}
             src={'/images/cat-breeds.png'}
             alt="group of cats"
@@ -36,6 +38,7 @@ export default async function Home() {
             </Link>
           </span>
           <Image
+            loader={imageKitLoader}
             className={styles.breedImages}
             src={'/images/dog-breeds.png'}
             alt="group of cats"
@@ -46,6 +49,7 @@ export default async function Home() {
       </section>
       <section className={styles.catAdopts}>
         <Image
+          loader={imageKitLoader}
           className={styles.catsImage}
           src={'/images/cats-peeking.png'}
           alt="cats peeking"
@@ -72,6 +76,7 @@ export default async function Home() {
       </section>
       <section className={styles.dogAdopts}>
         <Image
+          loader={imageKitLoader}
           className={styles.dogsImage}
           src={'/images/dogs-peeking.png'}
           alt="dogs peeking"
@@ -101,6 +106,7 @@ export default async function Home() {
           <h2>Latest questions asked by our users</h2>
           <div className={styles.imageContainer}>
             <Image
+              loader={imageKitLoader}
               className={styles.questionCatImages}
               src={'/images/curiouscat-2.png'}
               width={100}
@@ -115,6 +121,7 @@ export default async function Home() {
             <div className={styles.questionCard} key={index}>
               <Link href={`/community/${question._id}`}>
                 <Image
+                  loader={imageKitLoader}
                   className={styles.questionImage}
                   src={question.user.image}
                   alt="profile image"

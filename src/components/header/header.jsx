@@ -14,6 +14,7 @@ import Nav from './nav';
 import DesktopNav from './desktop-nav';
 import UserNav from './user-nav';
 import { useSession } from 'next-auth/react';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function Header({ messageCount }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -82,6 +83,7 @@ export default function Header({ messageCount }) {
       <nav className={styles.navContainer}>
         <Link href={'/'}>
           <Image
+            loader={imageKitLoader}
             className={styles.logo}
             src="/images/logo.png"
             width={200}

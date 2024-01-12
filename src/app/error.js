@@ -5,11 +5,13 @@ import Image from 'next/image';
 import styles from '../styles/error.module.scss';
 import CustomButton from '../components/custom-button/custom-button';
 import Link from 'next/link';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function Error({ error, reset }) {
   return (
     <div className={styles.container}>
       <Image
+        loader={imageKitLoader}
         className={styles.image}
         src={errorImage}
         alt="error dog"

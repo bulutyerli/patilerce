@@ -12,6 +12,7 @@ import AnswerHandler from '@/lib/community/answer-handler/answer-handler';
 import AnswerCard from '@/components/community/answer-card/answer-card';
 import { PiChatCircleBold, PiTrash, PiPencil } from 'react-icons/pi';
 import EditForm from '@/lib/community/edit-form/edit-form';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default async function QuestionDetails({ params, searchParams }) {
   try {
@@ -35,6 +36,7 @@ export default async function QuestionDetails({ params, searchParams }) {
           <h2 className={styles.title}>{question.title}</h2>
           <div className={styles.imageContainer}>
             <Image
+              loader={imageKitLoader}
               className={styles.image}
               src={image}
               alt="profile picture"

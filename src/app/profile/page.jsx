@@ -11,6 +11,7 @@ import axios from 'axios';
 import ImageUpload from '@/components/image-upload/image-upload';
 import checkValidImageUrl from '@/helpers/check-valid-image-url';
 import { toast } from 'react-toastify';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function ProfilePage() {
   const { data: session } = useSession();
@@ -176,6 +177,7 @@ export default function ProfilePage() {
         <div>
           {isImageValid || !imageLoading ? (
             <Image
+              loader={imageKitLoader}
               className={styles.profileImage}
               src={imageUrl.length < 1 ? image : imageUrl}
               alt="profile image"

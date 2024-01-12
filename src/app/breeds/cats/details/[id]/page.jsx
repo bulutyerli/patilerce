@@ -4,6 +4,7 @@ import { FaWikipediaW } from 'react-icons/fa';
 import styles from './cat-details.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export async function getImages(id) {
   try {
@@ -69,7 +70,13 @@ export default async function CatDetailsPage({ params }) {
       </div>
       <div className={styles.title}>
         <h1>{breedInfo.name}</h1>
-        <Image src={country} alt="country flag" width={20} height={15}></Image>
+        <Image
+          loader={imageKitLoader}
+          src={country}
+          alt="country flag"
+          width={20}
+          height={15}
+        ></Image>
       </div>
 
       <p className={styles.description}>

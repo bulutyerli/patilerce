@@ -3,6 +3,7 @@
 import styles from './image-gallery.module.scss';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function ImageGallery({ images, breed }) {
   const [mainImage, setMainImage] = useState([]);
@@ -26,13 +27,20 @@ export default function ImageGallery({ images, breed }) {
   return (
     <div className={styles.container}>
       <div className={styles.mainImage}>
-        <Image src={mainImage} alt={breed} width={300} height={225}></Image>
+        <Image
+          loader={imageKitLoader}
+          src={mainImage}
+          alt={breed}
+          width={300}
+          height={225}
+        ></Image>
       </div>
       <div className={styles.imageThumbnails}>
         {images.map((image, index) => {
           const isActive = activeIndex === index;
           return (
             <Image
+              loader={imageKitLoader}
               onClick={() => {
                 mainImageHandler(index);
               }}

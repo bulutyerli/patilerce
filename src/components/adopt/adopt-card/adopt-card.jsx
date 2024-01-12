@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { dateConverter } from '@/helpers/date-converter';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { PiHeart, PiHeartFill } from 'react-icons/pi';
+import { PiHeartFill } from 'react-icons/pi';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default async function AdoptCard({ data, homepage }) {
   const session = await getServerSession(authOptions);
@@ -14,6 +15,7 @@ export default async function AdoptCard({ data, homepage }) {
       <div>{isFav ? <PiHeartFill className={styles.heart} /> : ''}</div>
       <div>
         <Image
+          loader={imageKitLoader}
           className={styles.image}
           src={data.images[0]}
           alt={`${data.breed} image`}

@@ -4,6 +4,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
 import styles from './image-slider.module.scss';
 import Autoplay from 'embla-carousel-autoplay';
+import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function ImageSlider({ imageList, petName }) {
   const [imageRef] = useEmblaCarousel({ loop: false }, [Autoplay()]);
@@ -15,6 +16,7 @@ export default function ImageSlider({ imageList, petName }) {
           return (
             <div key={index}>
               <Image
+                loader={imageKitLoader}
                 className={styles.image}
                 src={image}
                 alt={petName}

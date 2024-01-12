@@ -83,7 +83,7 @@ export default function Header({ messageCount }) {
       <nav className={styles.navContainer}>
         <Link href={'/'}>
           <Image
-            loader={imageKitLoader}
+            unoptimized
             className={styles.logo}
             src="/images/logo.png"
             width={200}

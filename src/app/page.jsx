@@ -23,7 +23,6 @@ export default async function Home() {
             </Link>
           </span>
           <Image
-            loader={imageKitLoader}
             className={styles.breedImages}
             src={'/images/cat-breeds.png'}
             alt="group of cats"
@@ -38,7 +37,6 @@ export default async function Home() {
             </Link>
           </span>
           <Image
-            loader={imageKitLoader}
             className={styles.breedImages}
             src={'/images/dog-breeds.png'}
             alt="group of cats"
@@ -49,7 +47,7 @@ export default async function Home() {
       </section>
       <section className={styles.catAdopts}>
         <Image
-          loader={imageKitLoader}
+          unoptimized
           className={styles.catsImage}
           src={'/images/cats-peeking.png'}
           alt="cats peeking"
@@ -76,7 +74,7 @@ export default async function Home() {
       </section>
       <section className={styles.dogAdopts}>
         <Image
-          loader={imageKitLoader}
+          unoptimized
           className={styles.dogsImage}
           src={'/images/dogs-peeking.png'}
           alt="dogs peeking"
@@ -106,7 +104,6 @@ export default async function Home() {
           <h2>Latest questions asked by our users</h2>
           <div className={styles.imageContainer}>
             <Image
-              loader={imageKitLoader}
               className={styles.questionCatImages}
               src={'/images/curiouscat-2.png'}
               width={100}

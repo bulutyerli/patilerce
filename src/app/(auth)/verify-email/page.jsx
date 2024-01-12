@@ -50,7 +50,6 @@ export default function VerifyEmailPage() {
             <p>Congratulations! </p> <p>Your email has been verified.</p>
           </h1>
           <Image
-            loader={imageKitLoader}
             className={styles.image}
             src="/images/verifiedemailDog.png"
             alt="dog with a party hat"

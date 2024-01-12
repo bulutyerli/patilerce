@@ -1,14 +1,13 @@
 import Image from 'next/image';
 import styles from './loading-spinner.module.scss';
-import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
+import loadingIcon from '../../../public/images/loading.svg';
 
 export default function LoadingSpinner() {
   return (
     <div className={styles.container}>
       <div className={styles.spinner}>
         <Image
-          loader={imageKitLoader}
-          src="images/loading.svg"
+          src={loadingIcon}
           alt="loading animation"
           width={100}
           height={100}

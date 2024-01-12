@@ -9,6 +9,7 @@ const nextConfig = {
       'flagcdn.com',
       'lh3.googleusercontent.com',
       'tailwish-pets.s3.eu-central-1.amazonaws.com',
+      'ik.imagekit.io',
     ],
     formats: ['image/avif', 'image/webp'],
   },

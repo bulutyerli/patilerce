@@ -12,7 +12,6 @@ export default function NotFound() {
         <Link href="/">Return to Home</Link>
       </div>
       <Image
-        loader={imageKitLoader}
         className={styles.image}
         src="/images/notfound-dog.png"
         width={300}

@@ -13,7 +13,6 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import imageKitLoader from '@/lib/imageKitLoader/imageLoader';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -77,7 +76,6 @@ export default function SignUpPage() {
     <section>
       <div className={styles.container}>
         <Image
-          loader={imageKitLoader}
           className={styles.image}
           src="/images/signupPagePets.png"
           alt="happy pets"

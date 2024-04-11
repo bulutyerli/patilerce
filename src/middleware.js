@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
+import { notFound } from 'next/navigation';
 
 export default async function middleware(req) {
   const token = await getToken({ req });
@@ -22,6 +23,12 @@ export default async function middleware(req) {
 
   if (pathname.startsWith('/control-center')) {
     if (!isAdmin) {
+      return NextResponse.redirect(new URL('/', req.url));
+    }
+  }
+
+  if (pathname.startsWith('/banned')) {
+    if (!isBanned) {
       return NextResponse.redirect(new URL('/', req.url));
     }
   }

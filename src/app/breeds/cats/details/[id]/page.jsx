@@ -70,13 +70,7 @@ export default async function CatDetailsPage({ params }) {
       </div>
       <div className={styles.title}>
         <h1>{breedInfo.name}</h1>
-        <Image
-          loader={imageKitLoader}
-          src={country}
-          alt="country flag"
-          width={20}
-          height={15}
-        ></Image>
+        <Image src={country} alt="country flag" width={20} height={15}></Image>
       </div>
 
       <p className={styles.description}>

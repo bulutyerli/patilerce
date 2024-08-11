@@ -65,8 +65,8 @@ export default async function AdoptDetails({ params, searchParams }) {
                   className={styles.userImage}
                   src={adopt?.user.image}
                   alt="Profile Image"
-                  width={30}
-                  height={30}
+                  width={300}
+                  height={300}
                 />
                 <span className={styles.info}>{adopt?.user.name}</span>
               </div>

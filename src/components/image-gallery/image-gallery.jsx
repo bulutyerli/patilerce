@@ -24,8 +24,9 @@ export default function ImageGallery({ images, breed }) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.mainImage}>
+      <div className={styles.mainImageContainer}>
         <Image
+          className={styles.mainImage}
           loader={imageKitLoader}
           src={images[activeIndex]}
           alt={breed}
@@ -42,8 +43,8 @@ export default function ImageGallery({ images, breed }) {
             className={`${styles.imageThumbnail} ${
               activeIndex === index ? styles.activeImage : ''
             }`}
-            height={50}
-            width={50}
+            height={75}
+            width={75}
             alt={breed}
             src={image}
           />

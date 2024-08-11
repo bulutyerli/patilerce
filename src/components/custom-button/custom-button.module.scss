@@ -5,13 +5,23 @@
   height: 1.5rem;
   font-size: 0.9rem;
   background-color: $gray-1;
-  border-radius: 2rem;
+  border-radius: 0.4rem;
   padding: 0 1rem;
   cursor: pointer;
+  box-shadow: $shadow;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
 }
+
 .default {
   color: $accent-color;
-  border: 1px solid $accent-color;
+  border: 0.1rem solid rgba($accent-color, 0.2);
 
   &:hover {
     background-color: $accent-color;
@@ -23,12 +33,11 @@
   min-width: 4rem;
   height: 1.3rem;
   font-size: 0.7rem;
-  min-width: 4rem;
 }
 
 .primary {
   color: $primary-color;
-  border: 1px solid $primary-color;
+  border: 0.1rem solid rgba($primary-color, 0.2);
 
   &:hover {
     background-color: $primary-color;
@@ -38,7 +47,7 @@
 
 .secondary {
   color: $secondary-color;
-  border: 1px solid $secondary-color;
+  border: 0.1rem solid rgba($secondary-color, 0.2);
 
   &:hover {
     background-color: $secondary-color;
@@ -58,13 +67,16 @@
 .loading:after {
   content: ' ';
   display: block;
-  width: 2px;
-  height: 4px;
+  width: 16px;
+  height: 16px;
   margin: auto;
   border-radius: 50%;
-  border: 6px solid #fff;
+  border: 3px solid $accent-color;
   border-color: $accent-color transparent $accent-color transparent;
   animation: loading 1.2s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 

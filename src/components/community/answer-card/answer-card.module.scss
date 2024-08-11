@@ -1,7 +1,6 @@
 @use '/src/styles/variables.module' as *;
 
 .container {
-  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
   background-color: $gray-1;
   min-height: 13rem;
@@ -13,7 +12,7 @@
   grid-gap: 0.5rem;
   padding: 1rem;
   margin-bottom: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: $shadow;
 
   .imageContainer {
     grid-column: 1/2;

@@ -1,7 +1,6 @@
 @use '/src/styles/variables.module' as *;
 
 .container {
-  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
   background-color: $gray-1;
   min-height: 10rem;
@@ -11,7 +10,7 @@
   grid-gap: 1rem;
   padding: 1rem;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: $shadow-solid;
 
   .imageContainer {
     grid-column: 1/2;
@@ -50,8 +49,9 @@
     grid-column: 1/-1;
     grid-row: 5/11;
     padding-top: 1rem;
-    border-top: 2px solid rgba(0, 0, 0, 0.2);
+    border-top: 2px solid rgba($gray-5, 0.2);
     white-space: pre-wrap;
+    color: $gray-7;
 
     .readMore {
       color: $secondary-color;
@@ -67,7 +67,7 @@
 
     a {
       text-decoration: none;
-      color: $gray-7;
+      color: $gray-6;
     }
 
     .icon {

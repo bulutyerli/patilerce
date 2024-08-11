@@ -13,14 +13,14 @@ export default async function AdoptCard({ data, homepage }) {
   return (
     <div className={`${styles.container} ${homepage ? styles.homepage : ''}`}>
       <div>{isFav ? <PiHeartFill className={styles.heart} /> : ''}</div>
-      <div>
+      <div className={styles.imageContainer}>
         <Image
           loader={imageKitLoader}
           className={styles.image}
           src={data.images[0]}
           alt={`${data.breed} image`}
-          width={100}
-          height={75}
+          width={300}
+          height={300}
         ></Image>
       </div>
       <div className={styles.info}>

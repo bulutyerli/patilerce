@@ -6,13 +6,14 @@
   position: relative;
   flex-direction: column;
   gap: 0.25rem;
-  border: 2px solid $gray-4;
+  border: 2px solid $gray-1-2;
+  border-radius: 1rem;
   padding: 0.5rem 0.5rem;
   width: 9rem;
   height: 14rem;
   background-color: $gray-1;
   align-items: center;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow;
 
   .heart {
     fill: $primary-color;
@@ -24,6 +25,8 @@
   .image {
     width: 125px;
     height: 93.75px;
+    border-radius: 1rem;
+    box-shadow: $shadow;
   }
 
   .info {

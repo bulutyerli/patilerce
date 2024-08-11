@@ -17,6 +17,10 @@ $medium-screen: 850px;
 $large-screen: 992px;
 $xl-screen: 1200px;
 
+$shadow:
+  0 4px 6px rgba(0, 0, 0, 0.1),
+  0 1px 3px rgba(0, 0, 0, 0.08);
+
 @mixin submenu-styles {
   display: flex;
   flex-direction: column;

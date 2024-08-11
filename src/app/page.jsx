@@ -122,9 +122,9 @@ export default async function Home() {
                   className={styles.questionImage}
                   src={question.user.image}
                   alt="profile image"
-                  width={50}
-                  height={50}
-                ></Image>{' '}
+                  width={300}
+                  height={300}
+                ></Image>
               </Link>
 
               <div className={styles.details}>

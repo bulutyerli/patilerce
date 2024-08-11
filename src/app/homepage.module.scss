@@ -107,9 +107,10 @@
     gap: 1rem;
     width: 100%;
     align-self: flex-start;
-    border: 2px solid $gray-5;
     background-color: $gray-1-2;
     padding: 1rem 1rem;
+    box-shadow: $shadow;
+    border-radius: 1rem;
 
     h2 {
       color: $secondary-color;
@@ -145,14 +146,15 @@
       .questionImage {
         height: 5rem;
         width: auto;
-        box-shadow: $shadow;
+        box-shadow: $shadow-solid;
         border-radius: 1rem;
+        border: 1px solid $gray-5;
       }
 
       .details {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        flex-direction: column-reverse;
+        justify-content: center;
 
         .username {
           color: $gray-6;
@@ -189,6 +191,7 @@
 
 @media (min-width: $medium-screen) {
   .container {
+    gap: 10rem;
     .breedsContainer {
       display: flex;
       justify-content: space-between;
@@ -197,13 +200,13 @@
 
       .dogBreeds,
       .catBreeds {
-        border: 2px solid $gray-5;
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 50%;
         background-color: #d86271;
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+        box-shadow: $shadow-solid;
+        border-radius: 1rem;
 
         span {
           letter-spacing: 0.05rem;

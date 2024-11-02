@@ -1,5 +1,7 @@
 export function dateConverter(input) {
   const date = input instanceof Date ? input : new Date(input);
+  if (isNaN(date)) return 'Invalid date';
+
   const formatter = new Intl.RelativeTimeFormat('en');
   const ranges = {
     years: 3600 * 24 * 365,
@@ -17,4 +19,5 @@ export function dateConverter(input) {
       return formatter.format(Math.round(delta), key);
     }
   }
+  return 'just now';
 }

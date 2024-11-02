@@ -3,5 +3,5 @@ export default function checkValidEmail(email) {
     email
   );
 
-  if (validEmail) return true;
+  return validEmail;
 }

@@ -131,7 +131,7 @@ export async function PUT(req) {
       userId.toString() === adopt.user._id.toString() ||
       session?.user?.isAdmin
     ) {
-      const updatedAdopt = await Adopt.findByIdAndUpdate(adoptId, formData, {
+      await Adopt.findByIdAndUpdate(adoptId, formData, {
         new: true,
       });
 

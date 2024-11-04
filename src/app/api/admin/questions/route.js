@@ -8,8 +8,9 @@ import { authOptions } from '../../auth/[...nextauth]/route';
 connectDB();
 
 export async function GET() {
+  const session = await getServerSession(authOptions);
+
   try {
-    const session = await getServerSession(authOptions);
     const isAdmin = session?.user?.isAdmin;
 
     if (!isAdmin) {
@@ -29,7 +30,15 @@ export async function GET() {
 }
 
 export async function PUT(req) {
+  const session = await getServerSession(authOptions);
+
   try {
+    const isAdmin = session?.user?.isAdmin;
+
+    if (!isAdmin) {
+      return NextResponse.json({ error: 'Forbidden' });
+    }
+
     const reqBody = await req.json();
     const { questionId, action } = reqBody;
 

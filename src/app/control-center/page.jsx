@@ -2,7 +2,7 @@
 
 import styles from './users.module.scss';
 import axios from 'axios';
-import { useEffect, useState } from 'react'; // Import useState
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import CustomButton from '@/components/custom-button/custom-button';
 import { toast } from 'react-toastify';
@@ -36,7 +36,6 @@ export default function UsersPage() {
       toast.success('Successful');
     } catch (error) {
       console.log(error);
-    } finally {
     }
   };
 

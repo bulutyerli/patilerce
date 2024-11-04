@@ -127,5 +127,6 @@ export async function PUT(req) {
     }
   } catch (error) {
     console.log(error.message);
+    return NextResponse.json({ error, success: false });
   }
 }

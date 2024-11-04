@@ -71,5 +71,6 @@ export async function GET() {
     return NextResponse.json({ success: true, image });
   } catch (error) {
     console.log(error);
+    return NextResponse.json({ error, success: false });
   }
 }

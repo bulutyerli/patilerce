@@ -71,5 +71,6 @@ export async function GET(req) {
     } else return null;
   } catch (error) {
     console.error(error);
+    return NextResponse.json({ error, success: false });
   }
 }

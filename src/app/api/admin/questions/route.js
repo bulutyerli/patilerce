@@ -24,6 +24,7 @@ export async function GET() {
     return NextResponse.json({ questions, success: true });
   } catch (error) {
     console.log(error);
+    return NextResponse.json({ error, success: false });
   }
 }
 

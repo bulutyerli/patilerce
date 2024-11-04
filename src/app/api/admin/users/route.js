@@ -20,6 +20,7 @@ export async function GET() {
     return NextResponse.json({ users, success: true });
   } catch (error) {
     console.log(error);
+    return NextResponse.json({ error, success: false });
   }
 }
 
